@@ -10,7 +10,29 @@ const output = {
     },
     register: (req, res) => {
         res.render("home/register");
-    }
+    },
+
+    products: (req, res) => {
+        res.render("home/products");
+    },
+    inbound: (req, res) => {
+        res.render("home/inbound");
+    },
+    adjustment: (req, res) => {
+        res.render("home/adjustment");
+    },
+    sellLog: (req, res) => {
+        res.render("home/sellLog");
+    },
+    stockLog: (req, res) => {
+        res.render("home/stockLog");
+    },
+    analysis: (req, res) => {
+        res.render("home/analysis");
+    },
+    setting: (req, res) => {
+        res.render("home/setting");
+    },
 };
 
 
