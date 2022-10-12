@@ -25,6 +25,16 @@ class User {
     async register(){
         const client = this.body;
         try{
+            const user = await UserStorage.getUserInfo(client.id);
+            if(user){
+                if(user.id === client.id){
+                    return {sucess : false,msg:"중복되는 아이디가 존재합니다."};
+                }
+            }
+        }catch(err){
+            return { success: false , msg: err};
+        }
+        try{
             const response = await UserStorage.save(client);
             return response;
         }
