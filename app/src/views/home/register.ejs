@@ -97,30 +97,29 @@
 
                   <form class="row g-3 needs-validation" novalidate>
                     <div class="col-12">
-                      <label for="yourName" class="form-label">Your Name</label>
+                      <label for="name" class="form-label">이름</label>
                       <input type="text" name="name" class="form-control" id="name" required>
                       <div class="invalid-feedback">Please, enter your name!</div>
                     </div>
 
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
+                      <label for="id" class="form-label">아이디</label>
                       <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
                         <input type="text" name="username" class="form-control" id="id" required>
                         <div class="invalid-feedback">Please choose a username.</div>
                       </div>
                     </div>
 
                     <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password</label>
+                      <label for="psword" class="form-label">비밀번호</label>
                       <input type="password" name="password" class="form-control" id="psword" required>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
 
                     <div class="col-12">
-                      <label for="yourEmail" class="form-label">Your Email</label>
-                      <input type="email" name="email" class="form-control" id="id" required>
-                      <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                      <label for="confirm-psword" class="form-label">비밀번호 확인</label>
+                      <input type="password" name="email" class="form-control" id="confirm-psword" required>
+                      <div class="invalid-feedback">Please enter your password!</div>
                     </div>
 
                     <div class="col-12">
@@ -131,7 +130,7 @@
                       </div>
                     </div>
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                      <p id="button" class="btn btn-primary w-100" type="submit">SIGN UP</p>
                     </div>
                     <div class="col-12">
                       <p class="small mb-0">Already have an account? <a href="/login">Log in</a></p>
