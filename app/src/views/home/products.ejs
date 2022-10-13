@@ -26,31 +26,164 @@
             </nav>
         </div><!-- End Page Title -->
         
-        <section class="section">
+        <section class="section dashboard">
             <div class="row">
-            <div class="col-lg-6">
-        
-                <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Example Card</h5>
-                    <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+            
+            <!-- Top Selling -->
+            <div class="col-lg-12">
+                <div class="card top-selling overflow-auto">
+  
+                  <div class="filter">
+                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                      <li class="dropdown-header text-start">
+                        <h6>설정</h6>
+                      </li>
+  
+                      <li><a class="dropdown-item" href="#">새로고침</a></li>
+                      <li><a class="dropdown-item" href="#">제품 추가</a></li>
+                    </ul>
+                  </div>
+  
+                  <div class="card-body pb-0">
+                    <h5 class="card-title">제품 목록 <span>| Today</span></h5>
+  
+                    <table class="table table-borderless">
+                      <thead>
+                        <tr>
+                          <th scope="col">이미지</th>
+                          <th scope="col">상품이름</th>
+                          <th scope="col">가격</th>
+                          <th scope="col">Sold</th>
+                          <th scope="col">Revenue</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row"><a href="#"><img src="assets/img/product-1.jpg" alt=""></a></th>
+                          <td>
+                            <!-- Modal 링크 -->
+                            <a href="#" class="text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#ExtralargeModal">
+                                여기 누르면 modal 나옴
+                            </a>
+                          </td>
+                          <td>$64</td>
+                          <td class="fw-bold">124</td>
+                          <td>$5,828</td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><a href="#"><img src="assets/img/product-2.jpg" alt=""></a></th>
+                          <td><a href="#" class="text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#ExtralargeModal">Exercitationem similique doloremque</a></td>
+                          <td>$46</td>
+                          <td class="fw-bold">98</td>
+                          <td>$4,508</td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><a href="#"><img src="assets/img/product-3.jpg" alt=""></a></th>
+                          <td><a href="#" class="text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#ExtralargeModal">Doloribus nisi exercitationem</a></td>
+                          <td>$59</td>
+                          <td class="fw-bold">74</td>
+                          <td>$4,366</td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><a href="#"><img src="assets/img/product-4.jpg" alt=""></a></th>
+                          <td><a href="#" class="text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#ExtralargeModal">Officiis quaerat sint rerum error</a></td>
+                          <td>$32</td>
+                          <td class="fw-bold">63</td>
+                          <td>$2,016</td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><a href="#"><img src="assets/img/product-5.jpg" alt=""></a></th>
+                          <td><a href="#" class="text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#ExtralargeModal">Sit unde debitis delectus repellendus</a></td>
+                          <td>$79</td>
+                          <td class="fw-bold">41</td>
+                          <td>$3,239</td>
+                        </tr>
+                      </tbody>
+                    </table>
+  
+                  </div>
+  
                 </div>
-                </div>
-        
-            </div>
-        
-            <div class="col-lg-6">
-        
-                <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Example Card</h5>
-                    <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
-                </div>
-                </div>
-        
-            </div>
+              </div><!-- End Top Selling -->
             </div>
         </section>
+
+        <!-- Modal 창 부분 -->
+        <!-- Extra Large Modal -->
+        <div class="modal fade" id="ExtralargeModal" tabindex="-1">
+            <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">제품 상세정보</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body profile">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="card profile-card">
+                                <div class="card-body pt-4 d-flex flex-column align-items-center">
+                                    <img src="assets/img/product-1.jpg" alt="image" class="rounded-circle">
+                                    <h5 class="card-title">신발</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="card profile-overview">
+                                <div class="card-body">
+                                    <h5 class="card-title">About</h5>
+                                    <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p>
+
+                                    <h5 class="card-title">Profile Details</h5>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label ">이름</div>
+                                        <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Company</div>
+                                        <div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and Leuschke</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Job</div>
+                                        <div class="col-lg-9 col-md-8">Web Designer</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Country</div>
+                                        <div class="col-lg-9 col-md-8">USA</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Address</div>
+                                        <div class="col-lg-9 col-md-8">A108 Adam Street, New York, NY 535022</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Phone</div>
+                                        <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Email</div>
+                                        <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            </div>
+        </div><!-- End Extra Large Modal-->
         
         </main><!-- End #main -->
 
@@ -58,3 +191,4 @@
 </body>
 
 </html>
+
