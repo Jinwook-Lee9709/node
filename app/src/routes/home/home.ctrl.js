@@ -15,6 +15,9 @@ const output = {
     products: (req, res) => {
         res.render("home/products");
     },
+    ingredient: (req, res) => {
+        res.render("home/ingredient");
+    },
     inbound: (req, res) => {
         res.render("home/inbound");
     },
