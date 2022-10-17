@@ -15,9 +15,9 @@ class User {
                 if(user.id === client.id && user.psword == client.psword){
                     return {success: true};
                 }
-                return {sucess : false,msg:"비밀번호가 틀렸습니다."};
+                return {success : false,msg:"비밀번호가 틀렸습니다."};
             }
-            return { sucess : false, msg:"존재하지 않는 아이디입니다."};
+            return { success : false, msg:"존재하지 않는 아이디입니다."};
         }catch(err){
             return { success: false , msg: err};
         }
@@ -29,7 +29,7 @@ class User {
             const user = await UserStorage.getUserInfo(client.id);
             if(user){
                 if(user.id === client.id){
-                    return {sucess : false,msg:"중복되는 아이디가 존재합니다."};
+                    return {success : false,msg:"중복되는 아이디가 존재합니다."};
                 }
             }
         }catch(err){

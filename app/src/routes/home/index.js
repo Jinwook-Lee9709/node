@@ -9,6 +9,7 @@ router.get("/login", ctrl.output.login);
 router.get("/register", ctrl.output.register);
 
 router.get("/products", ctrl.output.products);
+router.get("/ingredient", ctrl.output.ingredient);
 router.get("/inbound", ctrl.output.inbound);
 router.get("/adjustment", ctrl.output.adjustment);
 router.get("/sellLog", ctrl.output.sellLog);

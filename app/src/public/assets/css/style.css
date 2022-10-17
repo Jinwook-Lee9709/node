@@ -251,7 +251,7 @@ h6 {
 .card-title {
   padding: 20px 0 15px 0;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
   color: #012970;
   font-family: "Poppins", sans-serif;
 }
@@ -306,7 +306,7 @@ h6 {
   padding: 15px 0;
   background: none;
   border: 0;
-}
+}sans-serif
 
 .accordion-flush .accordion-button:not(.collapsed) {
   box-shadow: none;

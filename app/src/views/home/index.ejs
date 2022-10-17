@@ -28,31 +28,76 @@
         
         <section class="section">
             <div class="row">
-            <div class="col-lg-6">
-        
-                <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Example Card</h5>
-                    <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+                <div class="col-lg-6">
+            
+                    <div class="card">
+                    <div class="card-body">
+                        <!-- Line Chart -->
+                        <h5 class="card-title">최근 일주일 매출</h5>
+                        <div id="lineChart"></div>
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", () => {
+                            new ApexCharts(document.querySelector("#lineChart"), {
+                                series: [{
+                                name: "멍멍이",
+                                data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                                }, {
+                                name: "고양이",
+                                data: [20, 51, 5, 30, 62, 69, 9, 14, 155]
+                                }],
+                                chart: {
+                                height: 350,
+                                type: 'line',
+                                zoom: {
+                                    enabled: false
+                                }
+                                },
+                                markers: {
+                                size: 5
+                                },
+                                dataLabels: {
+                                enabled: false
+                                },
+                                stroke: {
+                                curve: 'straight',
+                                width: 4
+                                },
+                                grid: {
+                                row: {
+                                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                                    opacity: 0.5
+                                },
+                                },
+                                xaxis: {
+                                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                                }
+                            }).render();
+                            });
+                        </script>
+                        <!-- End Line Chart -->
+                    </div>
+                    </div>
+            
                 </div>
+            
+                <div class="col-lg-6">
+            
+                    <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Example Card</h5>
+                        <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+                    </div>
+                    </div>
+            
                 </div>
-        
-            </div>
-        
-            <div class="col-lg-6">
-        
-                <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Example Card</h5>
-                    <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
-                </div>
-                </div>
-        
-            </div>
             </div>
         </section>
         
-        </main><!-- End #main -->
+    </main><!-- End #main -->
+
+
+
 
     <%-include('./template/footer') %><!-- footer.ejs -->
 </body>
