@@ -2,7 +2,13 @@ const User = require("../../models/User")
 
 const output = {
     home: (req, res) => {
-        res.render("home/index");
+        const user = req.session.user;
+        if(user !== undefined){
+            res.render("home/index");
+        }else{
+            res.render("home/login");
+        }
+        
     },
     
     login: (req, res) => {
@@ -41,6 +47,10 @@ const process = {
     login: async (req, res) => {
         const user = new User(req.body);
         const response = await user.login();
+        if(response.success){
+            req.session.user = user;
+            console.log(req.session);
+        }
         return res.json(response);
     },
     register: async (req, res) => {
