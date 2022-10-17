@@ -4,7 +4,11 @@ const output = {
     home: (req, res) => {
         const user = req.session.user;
         if(user !== undefined){
-            res.render("home/index");
+            console.log(user);
+            data = {
+                name: user.body.name
+            }
+            res.render("home/index",{data});
         }else{
             res.render("home/login");
         }
@@ -51,8 +55,8 @@ const process = {
         const user = new User(req.body);
         const response = await user.login();
         if(response.success){
+            user.body.name = response.name;
             req.session.user = user;
-            console.log(req.session);
         }
         return res.json(response);
     },

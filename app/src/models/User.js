@@ -10,10 +10,9 @@ class User {
         const client = this.body;
         try{
             const user = await UserStorage.getUserInfo(client.id);
-            
             if(user){
                 if(user.id === client.id && user.psword == client.psword){
-                    return {success: true};
+                    return {success: true, name : user.name};
                 }
                 return {success : false,msg:"비밀번호가 틀렸습니다."};
             }
