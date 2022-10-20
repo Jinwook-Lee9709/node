@@ -1,5 +1,16 @@
 const User = require("../../models/User")
 
+function RenderIfNotLogin(req, res, path){
+    if(req.session.user !== undefined){
+        res.render(path);
+    }
+    else{
+        //res.render("home/login");
+        res.redirect("login");
+    }
+    
+}
+
 const output = {
     home: (req, res) => {
         const user = req.session.user;
@@ -23,28 +34,29 @@ const output = {
     },
 
     products: (req, res) => {
-        res.render("home/products");
+        //res.render("home/products");
+        RenderIfNotLogin(req, res, "home/products");
     },
     ingredient: (req, res) => {
-        res.render("home/ingredient");
+        RenderIfNotLogin(req, res, "home/ingredient");
     },
     inbound: (req, res) => {
-        res.render("home/inbound");
+        RenderIfNotLogin(req, res, "home/inbound");
     },
     adjustment: (req, res) => {
-        res.render("home/adjustment");
+        RenderIfNotLogin(req, res, "home/adjustment");
     },
     sellLog: (req, res) => {
-        res.render("home/sellLog");
+        RenderIfNotLogin(req, res, "home/sellLog");
     },
     stockLog: (req, res) => {
-        res.render("home/stockLog");
+        RenderIfNotLogin(req, res, "home/stockLog");
     },
     analysis: (req, res) => {
-        res.render("home/analysis");
+        RenderIfNotLogin(req, res, "home/analysis");
     },
     setting: (req, res) => {
-        res.render("home/setting");
+        RenderIfNotLogin(req, res, "home/setting");
     },
 };
 
@@ -64,6 +76,22 @@ const process = {
         const user = new User(req.body);
         const response = await user.register();
         return res.json(response);
+    },
+    logout: async (req, res) => {
+        try {
+            if (req.session.user) { //세션정보가 존재하는 경우
+                await req.session.destroy(function (err) {
+                    if (err)
+                        console.log(err);
+                    else {
+                        res.redirect('login');
+                    }
+                })
+            }
+        }
+        catch (err) {
+            console.log(err)
+        }
     }
 };
 

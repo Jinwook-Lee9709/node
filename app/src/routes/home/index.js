@@ -19,5 +19,6 @@ router.get("/setting", ctrl.output.setting);
 
 router.post("/login", ctrl.process.login);
 router.post("/register", ctrl.process.register);
+router.get("/logout", ctrl.process.logout)
 
 module.exports = router; 
