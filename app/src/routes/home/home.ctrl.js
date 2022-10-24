@@ -33,9 +33,42 @@ const output = {
         res.render("home/register");
     },
 
-    products: (req, res) => {
-        //res.render("home/products");
-        RenderIfNotLogin(req, res, "home/products");
+    products:  (req, res) => {
+        const user = req.session.user;
+        if(user !== undefined){
+            console.log(user);
+            data = {
+                name: user.body.name,
+                products: [{
+                    name: "아메리카노", 
+                    price: 3000,
+                    description: "그냥 아메리카노다."
+                },
+                {
+                    name: "카페라떼",
+                    price: 4000,
+                    description: "우유를 섞은 커피다."
+                },
+                {
+                    name: "카라멜 마끼아또",
+                    price: 4500,
+                    description: "카라멜을 섞은 커피다."
+                },
+                {
+                    name: "카페모카",
+                    price: 4500,
+                    description: "초코를 섞은 커피다."
+                },
+                {
+                    name: "아이스티",
+                    price: 3000,
+                    description: "편의점 아이스티다."
+                }]
+            }
+            res.render("home/products",{data});
+        }else{
+            res.render("home/login");
+        }
     },
     ingredient: (req, res) => {
         RenderIfNotLogin(req, res, "home/ingredient");

@@ -59,18 +59,22 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <!-- 상품 불러와서 목록 만드는 부분 -->
+                        <% for(let i = 0; i < data.products.length; i++){ %>
                         <tr>
-                          <th scope="row"><a href="#"><img src="assets/img/product-1.jpg" alt=""></a></th>
+                          <th scope="row"><a href="#"><img src="assets/img/No-image-available.png" alt=""></a></th>
                           <td>
                             <!-- Modal 링크 -->
-                            <a href="#" class="text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#ExtralargeModal">
-                                여기 누르면 modal 나옴
+                            <a href="#" class="text-primary fw-bold" data-bs-toggle="modal" data-bs-target=<%= "#ExtralargeModal"+i %> >
+                                <%= data.products[i].name %>
                             </a>
                           </td>
-                          <td>$64</td>
+                          <td><%= data.products[i].price %> 원</td>
                           <td class="fw-bold">124</td>
                           <td>$5,828</td>
                         </tr>
+                        <% } %>
+
                         <tr>
                           <th scope="row"><a href="#"><img src="assets/img/product-2.jpg" alt=""></a></th>
                           <td><a href="#" class="text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#ExtralargeModal">Exercitationem similique doloremque</a></td>
@@ -111,7 +115,8 @@
 
         <!-- Modal 창 부분 -->
         <!-- Extra Large Modal -->
-        <div class="modal fade" id="ExtralargeModal" tabindex="-1">
+        <% for(let i = 0; i < data.products.length; i++){ %>
+        <div class="modal fade" id= <%="ExtralargeModal"+i %> tabindex="-1">
             <div class="modal-dialog modal-xl">
             <div class="modal-content">
 
@@ -125,8 +130,8 @@
                         <div class="col-lg-4">
                             <div class="card profile-card">
                                 <div class="card-body pt-4 d-flex flex-column align-items-center">
-                                    <img src="assets/img/product-1.jpg" alt="image" class="rounded-circle">
-                                    <h5 class="card-title">신발맛 아메리카노</h5>
+                                    <img src="assets/img/No-image-available.png" alt="image" class="rounded-circle">
+                                    <h5 class="card-title"><%= data.products[i].name %></h5>
                                 </div>
                             </div>
                         </div>
@@ -134,18 +139,18 @@
                             <div class="card profile-overview">
                                 <div class="card-body">
                                     <h5 class="card-title">제품 설명</h5>
-                                    <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p>
+                                    <p class="small fst-italic"><%= data.products[i].description %></p>
 
                                     <h5 class="card-title">제품 정보</h5>
 
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label ">이름</div>
-                                        <div class="col-lg-9 col-md-8">신발맛 아메리카노</div>
+                                        <div class="col-lg-9 col-md-8"><%= data.products[i].name %></div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">가격</div>
-                                        <div class="col-lg-9 col-md-8">6600 원</div>
+                                        <div class="col-lg-9 col-md-8"><%= data.products[i].price %> 원</div>
                                     </div>
 
                                     <div class="row">
@@ -162,16 +167,6 @@
                                         <div class="col-lg-3 col-md-4 label">Address</div>
                                         <div class="col-lg-9 col-md-8">A108 Adam Street, New York, NY 535022</div>
                                     </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Phone</div>
-                                        <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Email</div>
-                                        <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -184,6 +179,7 @@
             </div>
             </div>
         </div><!-- End Extra Large Modal-->
+        <% } %>
         
         </main><!-- End #main -->
 
