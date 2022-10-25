@@ -7,7 +7,7 @@ const app = express();
 dotenv.config();
 
 //오브젝트 설정
-const maxAge = 1000 * 60 * 5;
+const maxAge = 1000 * 60 * 60;
 
 const sessionObj = {
   secret: 'wegf6124@#$@#!',

@@ -4,7 +4,8 @@ const id = document.querySelector("#id"),
     psword = document.querySelector("#psword"),
     loginBtn = document.querySelector("#button");
 
-loginBtn.addEventListener("click", login);
+//loginBtn.addEventListener("click", login);
+
 
 function login(){
     const req = {
@@ -30,4 +31,10 @@ function login(){
     .catch((err) => {
         console.error(new Error("로그인중 에러 발생"));
     });
+}
+
+function onEnterLogin(){
+    if (window.event.keyCode == 13) { //엔테키 이면
+        login();
+    }
 }

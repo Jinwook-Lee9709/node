@@ -16,19 +16,14 @@
     <main id="main" class="main"><!-- Main -->
 
         <div class="pagetitle">
-            <h1>대시보드</h1>
-            <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item">Pages</li>
-                <li class="breadcrumb-item active">Blank</li>
-            </ol>
-            </nav>
+            <h1 class="pb-3">대시보드</h1>
+            
         </div><!-- End Page Title -->
         
         <section class="section">
             <div class="row">
-                <div class="col-lg-6">
+                <!-- 그래프 부분 -->
+                <div class="col-lg-12">
             
                     <div class="card">
                     <div class="card-body">
@@ -81,16 +76,97 @@
             
                 </div>
             
-                <div class="col-lg-6">
-            
-                    <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Example Card</h5>
-                        <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+                <!-- 제품 목록 -->
+                <div class="col-lg-6 dashboard">
+                <div class="card top-selling overflow-auto">
+  
+                  <div class="filter">
+                    <a class="icon" href="/products">더 보기</a>
+                  </div>
+  
+                  <div class="card-body pb-0">
+                    <h5 class="card-title">제품 목록 <span>| Today</span></h5>
+
+                    <div style="overflow:scroll; height:430px">
+                        <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                            <th scope="col">이미지</th>
+                            <th scope="col">상품이름</th>
+                            <th scope="col">가격</th>
+                            <th scope="col">Sold</th>
+                            <th scope="col">Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 상품 불러와서 목록 만드는 부분 -->
+                            <% for(let i = 0; i < data.products.length; i++){ %>
+                            <tr>
+                            <th scope="row"><a href="#"><img src="assets/img/No-image-available.png" alt=""></a></th>
+                            <td>
+                                <!-- Modal 링크 -->
+                                <a class="text-dark fw-bold">
+                                    <%= data.products[i].name %>
+                                </a>
+                            </td>
+                            <td><%= data.products[i].price %> 원</td>
+                            <td class="fw-bold">124</td>
+                            <td>$5,828</td>
+                            </tr>
+                            <% } %>
+
+                        </tbody>
+                        </table>
                     </div>
-                    </div>
-            
+                  </div>
+  
                 </div>
+                </div><!-- 제품 목록 끝 -->
+
+                <!-- 재료 목록 -->
+                <div class="col-lg-6 dashboard">
+                    <div class="card top-selling overflow-auto">
+    
+                    <div class="filter">
+                        <a class="icon" href="/ingredient">더 보기</a>
+                    </div>
+    
+                    <div class="card-body pb-0">
+                        <h5 class="card-title">재료 목록 <span>| Today</span></h5>
+    
+                        <div style="overflow:scroll; height:430px">
+                            <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                <th scope="col">이미지</th>
+                                <th scope="col">상품이름</th>
+                                <th scope="col">남은 재고</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- 상품 불러와서 목록 만드는 부분 -->
+                                <% for(let i = 0; i < data.products.length; i++){ %>
+                                <tr>
+                                <th scope="row"><a href="#"><img src="assets/img/No-image-available.png" alt=""></a></th>
+                                <td>
+                                    <!-- Modal 링크 -->
+                                    <a class="text-dark fw-bold" >
+                                        <%= data.ingredient[i].name %>
+                                    </a>
+                                </td>
+                                <td class="fw-bold"><%= data.ingredient[i].stock %></td>
+                                </tr>
+                                <% } %>
+
+                            </tbody>
+                            </table>
+                        </div>
+    
+                    </div>
+    
+                    </div>
+                </div><!-- 재료 목록 끝 -->
+
             </div>
         </section>
         

@@ -16,14 +16,7 @@
     <main id="main" class="main"><!-- Main -->
 
         <div class="pagetitle">
-            <h1>제품 목록 & 관리</h1>
-            <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item">Pages</li>
-                <li class="breadcrumb-item active">Blank</li>
-            </ol>
-            </nav>
+            <h1 class="pb-3">제품 목록 & 관리</h1>
         </div><!-- End Page Title -->
         
         <section class="section dashboard">
@@ -75,34 +68,6 @@
                         </tr>
                         <% } %>
 
-                        <tr>
-                          <th scope="row"><a href="#"><img src="assets/img/product-2.jpg" alt=""></a></th>
-                          <td><a href="#" class="text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#ExtralargeModal">Exercitationem similique doloremque</a></td>
-                          <td>$46</td>
-                          <td class="fw-bold">98</td>
-                          <td>$4,508</td>
-                        </tr>
-                        <tr>
-                          <th scope="row"><a href="#"><img src="assets/img/product-3.jpg" alt=""></a></th>
-                          <td><a href="#" class="text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#ExtralargeModal">Doloribus nisi exercitationem</a></td>
-                          <td>$59</td>
-                          <td class="fw-bold">74</td>
-                          <td>$4,366</td>
-                        </tr>
-                        <tr>
-                          <th scope="row"><a href="#"><img src="assets/img/product-4.jpg" alt=""></a></th>
-                          <td><a href="#" class="text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#ExtralargeModal">Officiis quaerat sint rerum error</a></td>
-                          <td>$32</td>
-                          <td class="fw-bold">63</td>
-                          <td>$2,016</td>
-                        </tr>
-                        <tr>
-                          <th scope="row"><a href="#"><img src="assets/img/product-5.jpg" alt=""></a></th>
-                          <td><a href="#" class="text-primary fw-bold" data-bs-toggle="modal" data-bs-target="#ExtralargeModal">Sit unde debitis delectus repellendus</a></td>
-                          <td>$79</td>
-                          <td class="fw-bold">41</td>
-                          <td>$3,239</td>
-                        </tr>
                       </tbody>
                     </table>
   
@@ -136,45 +101,105 @@
                             </div>
                         </div>
                         <div class="col-lg-8">
-                            <div class="card profile-overview">
-                                <div class="card-body">
-                                    <h5 class="card-title">제품 설명</h5>
-                                    <p class="small fst-italic"><%= data.products[i].description %></p>
+                            <!-- Bordered Tabs -->
+                            <ul class="nav nav-tabs nav-tabs-bordered">
 
-                                    <h5 class="card-title">제품 정보</h5>
+                              <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target=<%="#product-info"+i %>>상세정보</button>
+                              </li>
 
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label ">이름</div>
-                                        <div class="col-lg-9 col-md-8"><%= data.products[i].name %></div>
-                                    </div>
+                              <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target=<%="#product-change"+i %>>정보수정</button>
+                              </li>
 
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">가격</div>
-                                        <div class="col-lg-9 col-md-8"><%= data.products[i].price %> 원</div>
-                                    </div>
+                              <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target=<%="#product-settings"+i %>>설정</button>
+                              </li>
 
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">카테고리</div>
-                                        <div class="col-lg-9 col-md-8">음료</div>
-                                    </div>
+                            </ul>
+                            <div class="tab-content pt-2">
+                              <div class="tab-pane profile-overview fade show active" id= <%="product-info"+i %> >
+                                  <div>
+                                      <h5 class="card-title">제품 설명</h5>
+                                      <p class="small fst-italic"><%= data.products[i].description %></p>
 
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">필요한 재료</div>
-                                        <div class="col-lg-9 col-md-8">???????</div>
-                                    </div>
+                                      <h5 class="card-title">제품 정보</h5>
 
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Address</div>
-                                        <div class="col-lg-9 col-md-8">A108 Adam Street, New York, NY 535022</div>
-                                    </div>
+                                      <div class="row">
+                                          <div class="col-lg-3 col-md-4 label ">이름</div>
+                                          <div class="col-lg-9 col-md-8"><%= data.products[i].name %></div>
+                                      </div>
+
+                                      <div class="row">
+                                          <div class="col-lg-3 col-md-4 label">가격</div>
+                                          <div class="col-lg-9 col-md-8"><%= data.products[i].price %> 원</div>
+                                      </div>
+
+                                      <div class="row">
+                                          <div class="col-lg-3 col-md-4 label">카테고리</div>
+                                          <div class="col-lg-9 col-md-8">음료</div>
+                                      </div>
+
+                                      <div class="row">
+                                          <div class="col-lg-3 col-md-4 label">필요한 재료</div>
+                                          <div class="col-lg-9 col-md-8">???????</div>
+                                      </div>
+
+                                  </div>
+                              </div>
+
+                              <div class="tab-pane profile-overview fade" id=<%="product-change"+i %>>
+                                <div>
+                                  <h5 class="card-title">제품 설명</h5>
+                                  <textarea class="form-control" style="height: 100px; resize: none"><%= data.products[i].description %></textarea>
+
+                                  <h5 class="card-title">제품 정보</h5>
+
+                                  <div class="row">
+                                      <div class="col-lg-3 col-md-4 label ">이름</div>
+                                      <div class="col-lg-9 col-md-8">
+                                        <input type="text" class="form-control" value="<%= data.products[i].name %>" >
+                                      </div>
+                                  </div>
+
+                                  <div class="row">
+                                      <div class="col-lg-3 col-md-4 label">가격</div>
+                                      <div class="col-lg-9 col-md-8">
+                                        <input type="number" class="form-control" value=<%= data.products[i].price %> >
+                                      </div>
+                                  </div>
+
+                                  <div class="row">
+                                      <div class="col-lg-3 col-md-4 label">카테고리</div>
+                                      <div class="col-lg-9 col-md-8">
+                                        <input type="text" class="form-control" value="음료" >
+                                      </div>
+                                  </div>
+
+                                  <div class="row">
+                                      <div class="col-lg-3 col-md-4 label">필요한 재료</div>
+                                      <div class="col-lg-9 col-md-8">???????</div>
+                                  </div>
+                                  <div class="text-center">
+                                    <button id="save-button" type="button" class="btn btn-primary">Save changes</button>
+                                  </div>
+
                                 </div>
+
+                              </div>
+
+                              <div class="tab-pane fade" id=<%="product-settings"+i %>>
+                                <div class="pt-3">
+                                  <button id="save-button" type="button" class="btn btn-primary">삭제하기</button>
+                                </div>
+                              </div>
+                              
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                 </div>
             </div>
             </div>

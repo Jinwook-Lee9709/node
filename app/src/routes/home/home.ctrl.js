@@ -17,27 +17,6 @@ const output = {
         if(user !== undefined){
             console.log(user);
             data = {
-                name: user.body.name
-            }
-            res.render("home/index",{data});
-        }else{
-            res.render("home/login");
-        }
-        
-    },
-    
-    login: (req, res) => {
-        res.render("home/login");
-    },
-    register: (req, res) => {
-        res.render("home/register");
-    },
-
-    products:  (req, res) => {
-        const user = req.session.user;
-        if(user !== undefined){
-            console.log(user);
-            data = {
                 name: user.body.name,
                 products: [{
                     name: "아메리카노", 
@@ -63,12 +42,56 @@ const output = {
                     name: "아이스티",
                     price: 3000,
                     description: "편의점 아이스티다."
-                }]
+                }],
+                ingredient: [
+                    {
+                        name: "원두/생두(g)",
+                        stock: 5000,
+                        description: "그냥 원두다."
+                    },
+                    {
+                        name: "우유(L)",
+                        stock: 20,
+                        description: "맛있는 우유다."
+                    },
+                    {
+                        name: "플라스틱 컵(개)",
+                        stock: 1500,
+                        description: "음료를 담는 플라스틱 통."
+                    },
+                    {
+                        name: "플라스틱 뚜껑(개)",
+                        stock: 1500,
+                        description: "플라스틱 컵을 닫는 뚜껑."
+                    },
+                    {
+                        name: "플라스틱 빨대(개)",
+                        stock: 2000,
+                        description: "빨대."
+                    },
+                    {
+                        name: "초콜릿(g)",
+                        stock: 500,
+                        description: "카페모카에 들어가는 초코."
+                    }
+                ]
             }
-            res.render("home/products",{data});
+            res.render("home/index",{data});
         }else{
             res.render("home/login");
         }
+        
+    },
+    
+    login: (req, res) => {
+        res.render("home/login");
+    },
+    register: (req, res) => {
+        res.render("home/register");
+    },
+
+    products:  (req, res) => {
+        RenderIfNotLogin(req, res, "home/products");
     },
     ingredient: (req, res) => {
         RenderIfNotLogin(req, res, "home/ingredient");
