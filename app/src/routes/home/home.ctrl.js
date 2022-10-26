@@ -21,7 +21,7 @@ const output = {
                 products: [{
                     name: "아메리카노", 
                     price: 3000,
-                    description: "그냥 아메리카노다."
+                    description: "아메리카노."
                 },
                 {
                     name: "카페라떼",
@@ -47,7 +47,7 @@ const output = {
                     {
                         name: "원두/생두(g)",
                         stock: 5000,
-                        description: "그냥 원두다."
+                        description: "커피 원두."
                     },
                     {
                         name: "우유(L)",
