@@ -15,7 +15,7 @@ const output = {
     home: (req, res) => {
         const user = req.session.user;
         if(user !== undefined){
-            console.log(user);
+            // console.log(user);
             data = {
                 name: user.body.name,
                 products: [{
@@ -114,6 +114,9 @@ const output = {
     setting: (req, res) => {
         RenderIfNotLogin(req, res, "home/setting");
     },
+    test: (req, res) =>{
+        RenderIfNotLogin(req, res, "home/test");
+    }
 };
 
 
@@ -124,7 +127,8 @@ const process = {
         const response = await user.login();
         if(response.success){
             user.body.name = response.name;
-            req.session.user = user;
+            user.body.cafe_id = response.cafe_id;
+            req.session.user = user; 
         }
         return res.json(response);
     },
@@ -133,6 +137,22 @@ const process = {
         const response = await user.register();
         return res.json(response);
     },
+    cafe_register: async (req, res) =>{
+        const user = new User(req.body);
+        console.log(req.session.user)
+        user.body.id = (req.session.user.body.id)
+        console.log(user)
+        const response = await user.cafe_register();
+        if (response.success){
+            const response1 =  await user.cafe_update();
+            console.log(response1);
+            req.session.cafe = true;
+        }else{
+            response.success = false
+        }
+        return res.json(response)
+    }
+    ,
     logout: async (req, res) => {
         try {
             if (req.session.user) { //세션정보가 존재하는 경우
