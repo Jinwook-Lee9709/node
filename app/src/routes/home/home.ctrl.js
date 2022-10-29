@@ -1,4 +1,6 @@
-const User = require("../../models/User")
+const Cafe = require("../../models/Cafe");
+const User = require("../../models/User");
+const UserStorage = require("../../models/UserStorage");
 
 function RenderIfNotLogin(req, res, path){
     if(req.session.user !== undefined){
@@ -125,11 +127,22 @@ const process = {
     login: async (req, res) => {
         const user = new User(req.body);
         const response = await user.login();
-        if(response.success){
-            user.body.name = response.name;
-            user.body.cafe_id = response.cafe_id;
-            req.session.user = user; 
+        if (response.cafe){
+            const response1 = await user.cafe_find();
+            if(response.success && response1.success){
+                user.body.name = response.name;
+                user.body.cafe = response.cafe;
+                user.body.cafe_id = response1.cafe_id;
+                req.session.user = user; 
+            }
+        }else{
+            if(response.success){
+                user.body.name = response.name;
+                user.body.cafe = response.cafe;
+                req.session.user = user; 
+            }
         }
+        console.log(req.session.user)
         return res.json(response);
     },
     register: async (req, res) => {
@@ -139,9 +152,7 @@ const process = {
     },
     cafe_register: async (req, res) =>{
         const user = new User(req.body);
-        console.log(req.session.user)
         user.body.id = (req.session.user.body.id)
-        console.log(user)
         const response = await user.cafe_register();
         if (response.success){
             const response1 =  await user.cafe_update();
@@ -153,6 +164,11 @@ const process = {
         return res.json(response)
     }
     ,
+    material_register: async (req, res)=>{
+        const cafe = new Cafe(req.body);
+        
+
+    },
     logout: async (req, res) => {
         try {
             if (req.session.user) { //세션정보가 존재하는 경우

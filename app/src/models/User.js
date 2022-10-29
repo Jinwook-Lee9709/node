@@ -12,7 +12,7 @@ class User {
             const user = await UserStorage.getUserInfo(client.id);
             if(user){
                 if(user.id === client.id && user.psword == client.psword){
-                    return {success: true, name : user.name, cafe_id : user.cafe_id};
+                    return {success: true, name : user.name, cafe : user.cafe};
                 }
                 return {success : false,msg:"비밀번호가 틀렸습니다."};
             }
@@ -43,6 +43,7 @@ class User {
             return a;
         }
     }
+    //cafe 테이블에 등록
     async cafe_register(){
         const client = this.body;
         try{
@@ -54,11 +55,28 @@ class User {
             return a;
         }
     }
+    //user 테이블의 cafe값 True로 변경
     async cafe_update(){
         const client = this.body;
         try{
             const response = await UserStorage.cafe_update(client);
             return response;
+        }
+        catch (err){
+            const a = { success:false, msg: err};
+            return a;
+        }
+    }
+    async cafe_find(){
+        const client = this.body;
+        try{
+            const user = await UserStorage.cafe_find(client.id);
+            if(user){
+                if(user.cafe_id){
+                    return {success: true, cafe_id: user.cafe_id};
+                }
+                return {success : false,msg:"카페 연동에 오류 발생"};
+            }
         }
         catch (err){
             const a = { success:false, msg: err};

@@ -57,6 +57,17 @@ class UserStorage{
             });
         });
     }
+    static async cafe_find(id){
+        return new Promise((resolve, reject)=>{  
+            const query = "SELECT * FROM cafe WHERE owner_id = ?;"
+            db.query(query,
+                [id],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve(data[0]);
+            });
+        });
+    }
 }
 
 module.exports = UserStorage;
