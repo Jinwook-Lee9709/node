@@ -14,10 +14,13 @@ function RenderIfNotLogin(req, res, path){
 }
 
 const output = {
-    home: (req, res) => {
+    home: async(req, res) => {
         const user = req.session.user;
         if(user !== undefined){
             // console.log(user);
+            const cafe = new Cafe(req.body);
+            cafe.body.cafe_id = req.session.user.body.cafe_id
+            const product = await cafe.product_get();
             data = {
                 name: user.body.name,
                 products: [{
@@ -78,6 +81,7 @@ const output = {
                     }
                 ]
             }
+            data.products = product;
             res.render("home/index",{data});
         }else{
             res.render("home/login");

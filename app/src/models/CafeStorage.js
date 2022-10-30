@@ -14,6 +14,31 @@ class CafeStorage{
             });
         });
     }
+    static get_m_id(client){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "SELECT m_id FROM material WHERE cafe_id = ? AND m_name = ?;";
+            db.query(query,
+                [client.cafe_id, client.m_name],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve(data[0]);
+            });
+        });
+    }
+    static stock_init(client){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "INSERT INTO stock(cafe_id, m_id, quantity) VALUES(?, ?, ?);";
+            db.query(query,
+                [client.cafe_id, client.m_id, 0],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+
+                resolve({success: true});
+            });
+        });
+    }
 
     static material_dupcheck(client){
         return new Promise((resolve, reject)=>{
@@ -21,6 +46,18 @@ class CafeStorage{
             "SELECT * FROM material WHERE m_name = ? AND cafe_id = ?";
             db.query(query,
                 [client.m_name, client.cafe_id],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve(data[0]);
+            });
+        });
+    }
+    static material_get(client){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "SELECT * FROM material WHERE cafe_id = ?";
+            db.query(query,
+                [client.cafe_id],
                 (err,data)=>{
                 if (err) reject(`${err}`);
                 resolve(data[0]);
@@ -48,6 +85,18 @@ class CafeStorage{
                 (err,data)=>{
                 if (err) reject(`${err}`);
                 resolve(data[0]);
+            });
+        });
+    }
+    static product_get(product){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "SELECT * FROM product WHERE cafe_id = ?";
+            db.query(query,
+                [product.cafe_id],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve(data);
             });
         });
     }

@@ -5,7 +5,7 @@ unit = document.querySelector("#unit"),
 desc = document.querySelector("#desc")
 
 function material_register(){
-if(!m_name.value) return alert("제품 이름를 입력해주십시요.");
+if(!m_name.value) return alert("재료명을 입력해주십시요.");
 if(!unit.value) return alert("단위를 입력해주십시요.");
 if(!desc.value) return alert("설명을 입력해주십시요.");
 const req = {

@@ -7,6 +7,7 @@ class Cafe{
     //재료를 등록
     async material_register(){
         const client = this.body;
+        console.log('flag');
         try{
             const material = await CafeStorage.material_dupcheck(client);
             if(material){
@@ -19,11 +20,25 @@ class Cafe{
         }
         try{
             const response = await CafeStorage.material_register(client);
+            const m_id = await CafeStorage.get_m_id(client);
+            client.m_id = m_id.m_id
+            const stock = await CafeStorage.stock_init(client);  
             return response;
         }catch(err){
             return {success: false, msg:err};
         }
+        
     
+    }
+    async material_get(){
+        const client = this.body;
+        console.log(client);
+        try{
+            const material = await CafeStorage.material_get(client);
+            return material
+        }catch(err){
+            return {success: false, msg:err};
+        }
     }
     async product_register(){
         const client = this.body;
@@ -40,10 +55,18 @@ class Cafe{
             return {success:false, msg:err};
         }try{
             const response = await CafeStorage.product_register(client);
-            console.log("flag");
             return response;
         }catch(err){
             return {success:false, msg:err};
+        }
+    }
+    async product_get(){
+        const client = this.body;
+        try{
+            const product = await CafeStorage.product_get(client);
+            return product;
+        }catch(err){
+            return {success: false, msg:err};
         }
     }
 
