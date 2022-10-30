@@ -1,6 +1,6 @@
-const Cafe = require("../../models/Cafe");
 const User = require("../../models/User");
-const UserStorage = require("../../models/UserStorage");
+const Cafe = require("../../models/Cafe");
+
 
 function RenderIfNotLogin(req, res, path){
     if(req.session.user !== undefined){
@@ -159,15 +159,17 @@ const process = {
             console.log(response1);
             req.session.cafe = true;
         }else{
-            response.success = false
+            response.success = false;
         }
-        return res.json(response)
+        return res.json(response);
     }
     ,
     material_register: async (req, res)=>{
         const cafe = new Cafe(req.body);
-        
-
+        cafe.body.cafe_id = req.session.user.body.cafe_id
+        const response = await cafe.material_register();
+        console.log(response);
+        return res.json(response);
     },
     logout: async (req, res) => {
         try {

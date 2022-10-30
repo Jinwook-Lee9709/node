@@ -1,12 +1,12 @@
 const db = require("../config/db");
 
 class CafeStorage{
-    static material_register(mat){
+    static material_register(client){
         return new Promise((resolve, reject)=>{
             const query = 
-            "INSERT INTO material(cafe_id, m_name, unit, desc) VALUES(?, ?, ?, ?);";
+            "INSERT INTO material(cafe_id, m_name, unit, des) VALUES(?, ?, ?, ?);";
             db.query(query,
-                [cafe_id, m_name,unit,desc],
+                [client.cafe_id, client.m_name,client.unit,client.desc],
                 (err,data)=>{
                 if (err) reject(`${err}`);
 
@@ -15,17 +15,18 @@ class CafeStorage{
         });
     }
 
-    static material_dupcheck(mat){
+    static material_dupcheck(client){
         return new Promise((resolve, reject)=>{
             const query = 
-            "SELECT * FROM material WHERE m_name = ?";
+            "SELECT * FROM material WHERE m_name = ? AND cafe_id = ?";
             db.query(query,
-                [m_name],
+                [client.m_name, client.cafe_id],
                 (err,data)=>{
                 if (err) reject(`${err}`);
-
-                resolve({success: true});
+                resolve(data[0]);
             });
         });
     }
 }
+
+module.exports = CafeStorage;

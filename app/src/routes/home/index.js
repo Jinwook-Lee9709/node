@@ -20,7 +20,8 @@ router.get("/test",ctrl.output.test);
 
 router.post("/login", ctrl.process.login);
 router.post("/register", ctrl.process.register);
-router.post("/cafe_register", ctrl.process.cafe_register)
+router.post("/cafe_register", ctrl.process.cafe_register);
+router.post("/material_register", ctrl.process.material_register);
 
 router.get("/logout", ctrl.process.logout)
 
