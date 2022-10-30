@@ -168,9 +168,16 @@ const process = {
         const cafe = new Cafe(req.body);
         cafe.body.cafe_id = req.session.user.body.cafe_id
         const response = await cafe.material_register();
-        console.log(response);
         return res.json(response);
     },
+    product_register: async (req, res) =>{
+        const cafe = new Cafe(req.body);
+        cafe.body.cafe_id = req.session.user.body.cafe_id
+        const response = await cafe.product_register();
+        console.log(response);
+        return res.json(response);
+    }
+    ,
     logout: async (req, res) => {
         try {
             if (req.session.user) { //세션정보가 존재하는 경우
