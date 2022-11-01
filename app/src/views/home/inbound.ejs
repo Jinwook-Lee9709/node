@@ -13,38 +13,101 @@
 <body>
     <%-include('./template/header') %><!-- header.ejs -->
 
-    <main id="main" class="main"><!-- Main -->
+    <main id="main" class="main"><!-- Main -->  
 
         <div class="pagetitle">
-            <h1>입고</h1>
-            <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item">Pages</li>
-                <li class="breadcrumb-item active">Blank</li>
-            </ol>
-            </nav>
+            <h1 class="pb-3">입고</h1>
         </div><!-- End Page Title -->
         
-        <section class="section">
+        <section class="section dashboard">
             <div class="row">
             <div class="col-lg-6">
-        
-                <div class="card">
+                
+                <!--왼쪽 재료 선택 부분-->
+                <div class="card top-selling overflow-auto">
                 <div class="card-body">
-                    <h5 class="card-title">Example Card</h5>
-                    <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+                    <h5 class="card-title">재료 선택</h5>
+                    
+                    <div class="col-sm-12 pb-3 d-flex align-items-center">
+                        <input type="text" class="form-control" placeholder="검색">
+                        <a style="margin-left: -30px; color: #012970;"><i class="bi bi-search"></i></a>
+                    </div>
+
+                    <div style="overflow:scroll; height:500px">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                <th scope="col">이미지</th>
+                                <th scope="col">재료이름</th>
+                                <th scope="col">보유 재고</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(let i = 0; i < data.products.length; i++){ %>
+                                <tr>
+                                    <th scope="row"><img src="assets/img/No-image-available.png"></a></th>
+                                    <td class="fw-bold">
+                                        <%= data.ingredient[i].name %>
+                                    </td>
+                                    <td class="fw-bold">10</td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 </div>
-        
             </div>
         
+
+            <!--오른쪽 입고 재료 부분-->
             <div class="col-lg-6">
-        
-                <div class="card">
+                <div class="card top-selling overflow-auto">
                 <div class="card-body">
-                    <h5 class="card-title">Example Card</h5>
-                    <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+                    <h5 class="card-title">입고 재료</h5>
+                    <div style="overflow:scroll; height:500px">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                <th scope="col">이미지</th>
+                                <th scope="col">재료이름</th>
+                                <th scope="col">추가 재고</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--이 아래부터 반복되어야함-->
+                                <tr>
+                                    <th scope="row"><img src="assets/img/No-image-available.png"></a></th>
+                                    <td class="fw-bold">
+                                        원두/생두(g)
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control" value=0 style="width:130px">
+                                    </td>
+                                    <td>
+                                        <a href="#" style="color:red"><i class="ri-delete-back-2-fill" style="font-size: 25px"></i></a>
+                                    </td>
+                                </tr>
+                                <!--여기까지 반복되어야함-->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 p-4">
+                            <h5>Total</h5>
+                        </div>
+                        <div class="col-lg-5 p-4">
+                            <h5>품목 수 : 1</h5>
+                        </div>
+                        <div class="col-lg-5 p-4 pe-5 text-end">
+                            <h5>총 수량 : <span style="color:#012970">+5</span></h5>
+                        </div>
+                    </div>
+
+                    <div class="text-end">
+                        <button type="button" class="btn btn-primary me-3 px-4">입고</button>
+                    </div>
+
                 </div>
                 </div>
         
