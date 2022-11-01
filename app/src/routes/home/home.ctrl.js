@@ -23,31 +23,6 @@ const output = {
             const product = await cafe.product_get();
             data = {
                 name: user.body.name,
-                products: [{
-                    name: "아메리카노", 
-                    price: 3000,
-                    description: "아메리카노."
-                },
-                {
-                    name: "카페라떼",
-                    price: 4000,
-                    description: "우유를 섞은 커피다."
-                },
-                {
-                    name: "카라멜 마끼아또",
-                    price: 4500,
-                    description: "카라멜을 섞은 커피다."
-                },
-                {
-                    name: "카페모카",
-                    price: 4500,
-                    description: "초코를 섞은 커피다."
-                },
-                {
-                    name: "아이스티",
-                    price: 3000,
-                    description: "편의점 아이스티다."
-                }],
                 ingredient: [
                     {
                         name: "원두/생두(g)",

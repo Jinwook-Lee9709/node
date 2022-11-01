@@ -34,13 +34,13 @@
                         <h6>설정</h6>
                       </li>
   
-                      <li><a class="dropdown-item" href="#">새로고침</a></li>
-                      <li><a class="dropdown-item" href="#">재료 추가</a></li>
+                      <li><a class="dropdown-item" href="/ingredient">새로고침</a></li>
+                      <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#AddIngredientModal">재료 추가</a></li>
                     </ul>
                   </div>
   
                   <div class="card-body pb-0">
-                    <h5 class="card-title">재료 목록 <span>| Today</span></h5>
+                    <h5 class="card-title">재료 목록</h5>
   
                     <table class="table table-borderless">
                       <thead>
@@ -48,6 +48,7 @@
                           <th scope="col">이미지</th>
                           <th scope="col">상품이름</th>
                           <th scope="col">남은 재고</th>
+                          <th scope="col">안전 재고</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -132,6 +133,11 @@
                                           <div class="col-lg-9 col-md-8"><%= data.ingredient[i].stock %></div>
                                       </div>
 
+                                      <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">안전 재고</div>
+                                        <div class="col-lg-9 col-md-8">10(임시)</div>
+                                    </div>
+
                                   </div>
                               </div>
 
@@ -150,9 +156,23 @@
                                   </div>
 
                                   <div class="row">
+                                    <div class="col-lg-3 col-md-4 label ">수량 단위(g, kg, ml등)</div>
+                                    <div class="col-lg-9 col-md-8">
+                                      <input type="text" class="form-control" value="" >
+                                    </div>
+                                  </div>
+
+                                  <div class="row">
                                       <div class="col-lg-3 col-md-4 label">남은 재고</div>
                                       <div class="col-lg-9 col-md-8"><%= data.ingredient[i].stock %></div>
                                   </div>
+
+                                  <div class="row">
+                                    <div class="col-lg-3 col-md-4 label ">안전 재고</div>
+                                    <div class="col-lg-9 col-md-8">
+                                      <input type="number" class="form-control" value="">
+                                    </div>
+                                </div>
 
                                   <div class="text-center">
                                     <button id="save-button" type="button" class="btn btn-primary">Save changes</button>
@@ -179,6 +199,68 @@
             </div>
         </div><!-- End Extra Large Modal-->
         <% } %>
+
+        <!-- 재료 추가 Modal 창 부분-->
+        <div class="modal fade" id="AddIngredientModal" tabindex="-1">
+          <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+
+              <div class="modal-header">
+                  <h5 class="modal-title">재료 추가</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+              <div class="modal-body profile">
+                  <div class="row">
+                      <div class="col-lg-4">
+                          <div class="card profile-card">
+                              <div class="card-body pt-4 d-flex flex-column align-items-center">
+                                  <img src="assets/img/No-image-available.png" alt="image" class="rounded-circle">
+                                  <div class="text-center">
+                                    <button id="save-button" type="button" class="btn btn-primary">이미지 변경/추가</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-lg-8">
+                          <div class="profile-overview">
+                            <div>
+                              <h5 class="card-title">재료 설명</h5>
+                              <textarea class="form-control" style="height: 100px; resize: none"></textarea>
+
+                              <h5 class="card-title">재료 정보</h5  >
+
+                              <div class="row">
+                                  <div class="col-lg-3 col-md-4 label ">이름</div>
+                                  <div class="col-lg-9 col-md-8">
+                                    <input type="text" class="form-control" >
+                                  </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-lg-3 col-md-4 label ">수량 단위(g, kg, ml 등)</div>
+                                <div class="col-lg-9 col-md-8">
+                                  <input type="text" class="form-control" >
+                                </div>
+                            </div>
+
+                              <div class="text-center">
+                                <button id="save-button" type="button" class="btn btn-primary">재료 등록</button>
+                              </div>
+
+                            </div>
+
+                          </div>
+
+                      </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+              </div>
+          </div>
+          </div>
+      </div><!-- End Extra Large Modal-->
         
         </main><!-- End #main -->
 

@@ -33,13 +33,13 @@
                         <h6>설정</h6>
                       </li>
   
-                      <li><a class="dropdown-item" href="#">새로고침</a></li>
-                      <li><a class="dropdown-item" href="#">제품 추가</a></li>
+                      <li><a class="dropdown-item" href="/products">새로고침</a></li>
+                      <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#AddProductModal">제품 추가</a></li>
                     </ul>
                   </div>
   
                   <div class="card-body pb-0">
-                    <h5 class="card-title">제품 목록 <span>| Today</span></h5>
+                    <h5 class="card-title">제품 목록</h5>
   
                     <table class="table table-borderless">
                       <thead>
@@ -142,7 +142,7 @@
                               <div class="tab-pane profile-overview fade" id=<%="product-change"+i %>>
                                 <div>
                                   <h5 class="card-title">제품 설명</h5>
-                                  <textarea class="form-control" style="height: 100px; resize: none"><%= data.products[i].description %></textarea>
+                                  <textarea class="form-control" style="height: 100px; resize: none"><%= data.products[i].des %></textarea>
 
                                   <h5 class="card-title">제품 정보</h5>
 
@@ -192,6 +192,76 @@
             </div>
         </div><!-- End Extra Large Modal-->
         <% } %>
+
+
+        <!-- 제품 추가 Modal 창 부분-->
+        <div class="modal fade" id="AddProductModal" tabindex="-1">
+          <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+
+              <div class="modal-header">
+                  <h5 class="modal-title">제품 추가</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+              <div class="modal-body profile">
+                  <div class="row">
+                      <div class="col-lg-4">
+                          <div class="card profile-card">
+                              <div class="card-body pt-4 d-flex flex-column align-items-center">
+                                  <img src="assets/img/No-image-available.png" alt="image" class="rounded-circle">
+                                  <div class="text-center">
+                                    <button id="save-button" type="button" class="btn btn-primary">이미지 변경/추가</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-lg-8">
+                          <div class="profile-overview">
+                            <div>
+                              <h5 class="card-title">제품 설명</h5>
+                              <textarea class="form-control" style="height: 100px; resize: none"></textarea>
+
+                              <h5 class="card-title">제품 정보</h5>
+
+                              <div class="row">
+                                  <div class="col-lg-3 col-md-4 label ">이름</div>
+                                  <div class="col-lg-9 col-md-8">
+                                    <input type="text" class="form-control" >
+                                  </div>
+                              </div>
+
+                              <div class="row">
+                                  <div class="col-lg-3 col-md-4 label">가격</div>
+                                  <div class="col-lg-9 col-md-8">
+                                    <input type="number" class="form-control" >
+                                  </div>
+                              </div>
+
+                              <div class="row">
+                                  <div class="col-lg-3 col-md-4 label">카테고리</div>
+                                  <div class="col-lg-9 col-md-8">
+                                    <input type="text" class="form-control" >
+                                  </div>
+                              </div>
+
+                              <div class="text-center">
+                                <button id="save-button" type="button" class="btn btn-primary">제품 등록</button>
+                              </div>
+
+                            </div>
+
+                          </div>
+
+                      </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+              </div>
+          </div>
+          </div>
+      </div><!-- End Extra Large Modal-->
         
         </main><!-- End #main -->
 
