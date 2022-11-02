@@ -44,9 +44,9 @@
                             </thead>
                             <tbody>
                                 <% for(let i = 0; i < data.material.length; i++){ %>
-                                <tr>
+                                <tr onclick="ingredientSelect()">
                                     <th scope="row"><img src="assets/img/No-image-available.png"></a></th>
-                                    <td class="fw-bold">
+                                    <td class="fw-bold" id=<%= "ingredientName"+i %>>
                                         <%= data.material[i].m_name %>
                                     </td>
                                     <td class="fw-bold">
@@ -120,6 +120,8 @@
         </main><!-- End #main -->
 
     <%-include('./template/footer') %><!-- footer.ejs -->
+
+    <script src="js/home/inbound.js"></script>
 </body>
 
 </html>
