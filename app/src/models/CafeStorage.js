@@ -55,7 +55,7 @@ class CafeStorage{
     static material_get(client){
         return new Promise((resolve, reject)=>{
             const query = 
-            "SELECT DISTINCT * FROM material m, stock s WHERE m.cafe_id = s.cafe_id AND m.m_id = s.m_id;";
+            "SELECT DISTINCT * FROM material m, stock s WHERE m.cafe_id = s.cafe_id AND m.m_id = s.m_id AND m.cafe_id = ?;";
             db.query(query,
                 [client.cafe_id],
                 (err,data)=>{
@@ -103,9 +103,9 @@ class CafeStorage{
     static ingredient_dupcheck(ingredient){{
         return new Promise((resolve, reject)=>{
             const query = 
-            "SELECT * FROM ingredient WHERE p_id = ? AND m_id = ?";
+            "SELECT * FROM ingredient WHERE cafe_id = ? AND p_name = ? AND m_name = ?";
             db.query(query,
-                [ingredient.p_id,ingredient.m_id],
+                [ingredient.cafe_id,ingredient.p_name,ingredient.m_name],
                 (err,data)=>{
                 if (err) reject(`${err}`);
                 resolve(data);
@@ -115,9 +115,9 @@ class CafeStorage{
     static ingredient_register(ingredient){
         return new Promise((resolve, reject)=>{
             const query = 
-            "INSERT INTO ingredient(p_id, m_id, amount) VALUES(?, ?, ?);";
+            "INSERT INTO ingredient(cafe_id, p_name, m_name, amount) VALUES(?, ?, ?, ?);";
             db.query(query,
-                [ingredient.p_id,ingredient.m_id,ingredient.amount],
+                [ingredient.cafe_id, ingredient.p_name,ingredient.m_name,ingredient.amount],
                 (err)=>{
                 if (err) reject(`${err}`);
                 resolve({success: true});
