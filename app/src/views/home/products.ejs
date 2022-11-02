@@ -175,27 +175,17 @@
                                   <div class="row">
                                     <div class="col-lg-3 col-md-4 label">필요한 재료</div>
                                     <div class="col-lg-9 col-md-8">
-                                      <div id="ingredientSelect">
-                                        <!--선택된 재료들-->
+                                      <div>
                                         <table class="table">
-                                          <tbody>
-                                            <tr>
-                                              <td class="fw-bold">
-                                                원두
-                                              </td>
-                                              <td>
-                                                <input type="number" class="form-control" value=1 style="width:130px">
-                                              </td>
-                                              <td>
-                                                <a href="#"><i class="ri-delete-back-2-fill pt-0" style="font-size: 20px; color:red;"></i></a>
-                                              </td>
-                                            </tr>
+                                          <tbody id="ingredientSelect">
+                                            <!--선택된 재료들-->
+                                            
                                           </tbody>
                                         </table>
                                       </div>
                                       <select class="form-select" size="5" onclick="ingredientSelect(this)">
                                         <% for(let i=0; i< data.material.length; i++){ %>
-                                        <option value="<%= data.material[i].m_name%>" hidden><%= data.material[i].m_name%></option>
+                                        <option value="<%= i %>"><%= data.material[i].m_name%></option>
                                         <% } %>
                                       </select>
                                     </div>
