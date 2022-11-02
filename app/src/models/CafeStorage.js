@@ -52,6 +52,31 @@ class CafeStorage{
             });
         });
     }
+    static stock_inbound(client){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "UPDATE product quantity = quantity + ? WHERE cafe_id = ? AND m_id = ?;";
+            db.query(query,
+                [client.quantity, client.cafe_id, client.m_id],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+
+                resolve({success: true});
+            });
+        });
+    }
+    static stock_get(client){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "SELECT DISTINCT * FROM material m, stock s WHERE m.cafe_id = s.cafe_id AND m.m_id = s.m_id AND m.cafe_id = ?; AND m.m_name = ?";
+            db.query(query,
+                [client.cafe_id, client.m_name],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve(data[0]);
+            });
+        });
+    }
 
     static material_dupcheck(client){
         return new Promise((resolve, reject)=>{
@@ -73,7 +98,7 @@ class CafeStorage{
                 [client.cafe_id],
                 (err,data)=>{
                 if (err) reject(`${err}`);
-                resolve(data[0]);
+                resolve(data);
             });
         });
     }

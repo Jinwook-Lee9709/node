@@ -111,7 +111,15 @@ class Cafe{
             return {success:false, msg:err};
         }
     }
-    
+    async ingredient_get(){
+        const client = this.body;
+        try{
+            const product = await CafeStorage.ingredient_dupcheck(client);
+            return product;
+        }catch(err){
+            return {success: false, msg:err};
+        }
+    }
     async stock_modify(){
         const client = this.body;
         try{
