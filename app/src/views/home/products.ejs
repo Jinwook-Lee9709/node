@@ -147,28 +147,28 @@
                               <div class="tab-pane profile-overview fade" id=<%="product-change"+i %>>
                                 <div>
                                   <h5 class="card-title">제품 설명</h5>
-                                  <textarea class="form-control" style="height: 100px; resize: none"><%= data.products[i].des %></textarea>
+                                  <textarea id= "<%="des"+i %>" class="form-control" style="height: 100px; resize: none"><%= data.products[i].des %></textarea>
 
                                   <h5 class="card-title">제품 정보</h5>
 
                                   <div class="row">
                                       <div class="col-lg-3 col-md-4 label ">이름</div>
                                       <div class="col-lg-9 col-md-8">
-                                        <input id="p_name" type="text" class="form-control" value="<%= data.products[i].p_name %>" >
+                                        <input id="<%="p_name" + i %>" type="text" class="form-control" value="<%= data.products[i].p_name %>" >
                                       </div>
                                   </div>
 
                                   <div class="row">
                                       <div class="col-lg-3 col-md-4 label">가격</div>
                                       <div class="col-lg-9 col-md-8">
-                                        <input type="number" class="form-control" value=<%= data.products[i].price %> >
+                                        <input id= "<%="i_price"+i %>" type="number" class="form-control" value=<%= data.products[i].price %> >
                                       </div>
                                   </div>
 
                                   <div class="row">
                                       <div class="col-lg-3 col-md-4 label">카테고리</div>
                                       <div class="col-lg-9 col-md-8">
-                                        <input type="text" class="form-control" value="음료" >
+                                        <input id= "<%="category"+i %>" type="text" class="form-control" value="음료" >
                                       </div>
                                   </div>
 
@@ -192,7 +192,7 @@
                                   </div>
 
                                   <div class="text-center">
-                                    <button id="save-button" type="button" class="btn btn-primary" onclick="ingredient_register()">Save changes</button>
+                                    <button id="save-button" type="button" class="btn btn-primary" onclick= <%="ingredientRegister("+i+")" %>>Save changes</button>
                                   </div>
 
                                 </div>

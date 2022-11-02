@@ -7,13 +7,13 @@ const ingredientSelect = (target, i) => {
         let new_tag = `
         <tr id="ingredient${value}-${i}">
             <td class="fw-bold">
-                <p class="m_name">${text}</p>
+                <p class="m_name${i}">${text}</p>
             </td>
             <td>
                 X
             </td>
             <td>
-                <input type="number" class="form-control amount" value=1 style="width:130px">
+                <input type="number" class="form-control amount${i}" value=1 style="width:130px">
             </td>
             <td>
                 <a href="#" onclick="ingredientDelete(${value},${i})"><i class="ri-delete-back-2-fill pt-0" style="font-size: 20px; color:red;"></i></a>
