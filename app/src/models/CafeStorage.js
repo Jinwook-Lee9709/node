@@ -55,12 +55,12 @@ class CafeStorage{
     static material_get(client){
         return new Promise((resolve, reject)=>{
             const query = 
-            "SELECT * FROM material WHERE cafe_id = ?";
+            "SELECT DISTINCT * FROM material m, stock s WHERE m.cafe_id = s.cafe_id AND m.m_id = s.m_id;";
             db.query(query,
                 [client.cafe_id],
                 (err,data)=>{
                 if (err) reject(`${err}`);
-                resolve(data[0]);
+                resolve(data);
             });
         });
     }

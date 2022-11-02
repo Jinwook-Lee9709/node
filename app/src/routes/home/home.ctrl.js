@@ -21,6 +21,7 @@ const output = {
             const cafe = new Cafe(req.body);
             cafe.body.cafe_id = req.session.user.body.cafe_id
             const product = await cafe.product_get();
+            const material = await cafe.material_get();
             data = {
                 name: user.body.name,
                 products: [{
@@ -48,7 +49,7 @@ const output = {
                     price: 3000,
                     description: "편의점 아이스티다."
                 }],
-                ingredient: [
+                material: [
                     {
                         name: "원두/생두(g)",
                         stock: 5000,
@@ -82,6 +83,7 @@ const output = {
                 ]
             }
             data.products = product;
+            data.material = material;
             res.render("home/index",{data});
         }else{
             res.render("home/login");
