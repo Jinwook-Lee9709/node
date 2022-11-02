@@ -77,10 +77,10 @@ class Cafe{
         const client = this.body;
         try{
             console.log(client);
-            const register = await CafeStorage.ingredient_dupcheck(client);
+            const dupcheck = await CafeStorage.ingredient_dupcheck(client);
             
-            if(product){
-                if(register.p_id == register.p_id && register.m_id == register.m_id){
+            if(dupcheck){
+                if(dupcheck.p_id == dupcheck.p_id && dupcheck.m_id == dupcheck.m_id){
                     return {success:false, msg:"중복되는 제품이 존재합니다."};
                 }
             }

@@ -10,7 +10,6 @@ function RenderIfNotLogin(req, res, path){
         //res.render("home/login");
         res.redirect("login");
     }
-    
 }
 
 const output = {
@@ -157,8 +156,14 @@ const process = {
         const response = await cafe.product_register();
         console.log(response);
         return res.json(response);
-    }
-    ,
+    },
+    ingredient_register: async (req, res) => {
+        console.log("flag");
+        const cafe = new Cafe(req, res);
+        cafe.body = req.session.user.body;
+        const response = await cafe.ingredient_register();
+        return res.json(response);
+    },
     logout: async (req, res) => {
         try {
             if (req.session.user) { //세션정보가 존재하는 경우

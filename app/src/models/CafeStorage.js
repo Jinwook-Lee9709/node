@@ -29,9 +29,9 @@ class CafeStorage{
     static stock_init(client){
         return new Promise((resolve, reject)=>{
             const query = 
-            "INSERT INTO stock(cafe_id, m_id, quantity) VALUES(?, ?, ?);";
+            "INSERT INTO stock(cafe_id, m_id, quantity, safe_quantity) VALUES(?, ?, ?, ?);";
             db.query(query,
-                [client.cafe_id, client.m_id, 0],
+                [client.cafe_id, client.m_id, 0, 0],
                 (err,data)=>{
                 if (err) reject(`${err}`);
 
