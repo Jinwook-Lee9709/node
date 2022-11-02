@@ -1,18 +1,21 @@
-const p_name = document.querySelector("#p_name"),
-m_name = document.querySelectorAll(".m_name"),
-amount = document.querySelectorAll('.amount');
 
-function ingredient_register(){
-if(!p_name.value) return alert("제품 이름를 입력해주십시요.");
-if(!m_name[0].value) return alert("재료명을 입력해주십시요.");
+
+function ingredient_register(i){
+
+const pr_name = document.querySelector("#p_name");
+let m_name = document.getElementsByClassName("m_name");
+let amount = document.getElementsByClassName('amount');
+
+if(!pr_name.value) return alert("제품 이름를 입력해주십시요.");
+if(!m_name[0]) return alert("재료명을 입력해주십시요.");
 if(!amount[0].value) return alert("재료량을 입력해주십시요.");
 var namelist = [];
 var amountlist = [];
-m_name.forEach(element => namelist.push(element.value));
-amount.forEach(element => amountlist.push(element.value));
+Array.from(m_name).forEach(element => namelist.push(element.innerText));
+Array.from(amount).forEach(element => amountlist.push(element.value));
 
 const req = {
-    p_name: p_name.value,
+    p_name: pr_name.value,
     m_name: namelist,
     amount: amountlist
 };
@@ -27,7 +30,9 @@ fetch("/ingredient_register", {
 .then((res) => res.json())
 .then((res) => {
     if(res.success){
-        return alert("저장 성공.");
+        alert("저장 성공.");
+        location.replace("/products")
+        return;
     }else{
         alert(JSON.stringify(res.msg));
     }

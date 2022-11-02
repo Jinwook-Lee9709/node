@@ -154,7 +154,7 @@
                                   <div class="row">
                                       <div class="col-lg-3 col-md-4 label ">이름</div>
                                       <div class="col-lg-9 col-md-8">
-                                        <input type="text" class="form-control" value="<%= data.products[i].p_name %>" >
+                                        <input id="p_name" type="text" class="form-control" value="<%= data.products[i].p_name %>" >
                                       </div>
                                   </div>
 
@@ -177,22 +177,22 @@
                                     <div class="col-lg-9 col-md-8">
                                       <div>
                                         <table class="table">
-                                          <tbody id="ingredientSelect">
+                                          <tbody id= <%="ingredientSelect"+i %>>
                                             <!--선택된 재료들-->
                                             
                                           </tbody>
                                         </table>
                                       </div>
-                                      <select class="form-select" size="5" onclick="ingredientSelect(this)">
-                                        <% for(let i=0; i< data.material.length; i++){ %>
-                                        <option value="<%= i %>"><%= data.material[i].m_name%></option>
+                                      <select class="form-select" size="5" onclick= <%="ingredientSelect(this,"+i+")" %>>
+                                        <% for(let j=0; j< data.material.length; j++){ %>
+                                        <option value="<%= j %>"><%= data.material[j].m_name%></option>
                                         <% } %>
                                       </select>
                                     </div>
                                   </div>
 
                                   <div class="text-center">
-                                    <button id="save-button" type="button" class="btn btn-primary">Save changes</button>
+                                    <button id="save-button" type="button" class="btn btn-primary" onclick="ingredient_register()">Save changes</button>
                                   </div>
 
                                 </div>
@@ -292,6 +292,7 @@
     <%-include('./template/footer') %><!-- footer.ejs -->
 
     <script src="js/home/product_register.js"></script>
+    <script src="js/home/ingredient_register.js"></script>
     <script src="js/home/products.js"></script>
 </body>
 
