@@ -46,7 +46,6 @@ class Cafe{
     async product_register(){
         const client = this.body;
         try{
-            console.log(client);
             const product = await CafeStorage.product_dupcheck(client);
             
             if(product){
@@ -108,6 +107,36 @@ class Cafe{
                 }
             });
             return {success:true};
+        }catch(err){
+            return {success:false, msg:err};
+        }
+    }
+    
+    async stock_modify(){
+        const client = this.body;
+        try{
+            const stock = await CafeStorage.stock_get(client);
+            if(stock){
+                if(stock.m_name == client.m_name){
+                    response = await CafeStorage.stock_modify(stock);
+                }
+            }else{
+                return {success:false, msg:"재고 연동 오류"};
+            }
+        }catch(err){
+            return {success:false, msg:err};
+        }
+    }
+    async stock_inbound(){
+        try{
+            const stock = await CafeStorage.stock_get(client);
+            if(stock){
+                if(stock.m_name == client.m_name){
+                    response = await CafeStorage.stock_inbound(stock);
+                }
+            }else{
+                return {success:false, msg:"재고 연동 오류"};
+            }
         }catch(err){
             return {success:false, msg:err};
         }

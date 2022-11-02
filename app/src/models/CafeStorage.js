@@ -39,6 +39,19 @@ class CafeStorage{
             });
         });
     }
+    static stock_modify(client){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "UPDATE product quantity = ? WHERE cafe_id = ? AND m_id = ?;";
+            db.query(query,
+                [client.quantity, client.cafe_id, client.m_id],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+
+                resolve({success: true});
+            });
+        });
+    }
 
     static material_dupcheck(client){
         return new Promise((resolve, reject)=>{
@@ -60,7 +73,7 @@ class CafeStorage{
                 [client.cafe_id],
                 (err,data)=>{
                 if (err) reject(`${err}`);
-                resolve(data);
+                resolve(data[0]);
             });
         });
     }
