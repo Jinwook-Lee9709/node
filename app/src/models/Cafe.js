@@ -7,7 +7,6 @@ class Cafe{
     //재료를 등록
     async material_register(){
         const client = this.body;
-        console.log('flag');
         try{
             const material = await CafeStorage.material_dupcheck(client);
             if(material){
@@ -76,18 +75,39 @@ class Cafe{
     async ingredient_register(){
         const client = this.body;
         try{
-            console.log(client);
-            const dupcheck = await CafeStorage.ingredient_dupcheck(client);
-            
-            if(dupcheck){
-                if(dupcheck.p_id == dupcheck.p_id && dupcheck.m_id == dupcheck.m_id){
-                    return {success:false, msg:"중복되는 제품이 존재합니다."};
-                }
+            const buffer = []
+            for(var i=0; i<client.m_name.length; i++){
+                buffer.push({cafe_id: client.cafe_id, p_name:client.p_name, m_name: client.m_name[i]});
+                console.log(buffer);
             }
+            buffer.forEach(async element => {
+                try{
+                const dupcheck = await CafeStorage.ingredient_dupcheck(element);
+                    if(dupcheck){
+                        if(dupcheck.m_name == dupcheck.m_name){
+                            return {success:false, msg:"중복되는 제품-재료가 존재합니다."};
+                        }
+                    }
+                }catch(err){
+                    return {success: false, msg:err};
+                }
+            });
         }catch(err){
             return {success:false, msg:err};
         }try{
-            const response = await CafeStorage.ingredient_register(client);
+            const buffer = []
+            for(var i=0; i<client.m_name.length; i++){
+                buffer.push({cafe_id: client.cafe_id, p_name:client.p_name, m_name: client.m_name[i], amount: client.amount[i]});
+                console.log(buffer);
+            }
+            buffer.forEach(async element => {
+                try{
+                const response = await CafeStorage.ingredient_register(element);  
+                }catch(err){
+                    return {success: false, msg:err};
+                }
+            });
+            var response = {success:true};
             return response;
         }catch(err){
             return {success:false, msg:err};
