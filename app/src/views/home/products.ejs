@@ -154,7 +154,7 @@
                                   <div class="row">
                                       <div class="col-lg-3 col-md-4 label ">이름</div>
                                       <div class="col-lg-9 col-md-8">
-                                        <input type="text" class="form-control" value="<%= data.products[i].p_name %>" >
+                                        <input type="text" class="form-control" value="<%= data.products[i].p_name %>"id="p_name" >
                                       </div>
                                   </div>
 
@@ -192,7 +192,7 @@
                                   </div>
 
                                   <div class="text-center">
-                                    <button id="save-button" type="button" class="btn btn-primary">Save changes</button>
+                                    <button id="save-button" type="button" class="btn btn-primary" onclick="ingredient_register()">Save changes</button>
                                   </div>
 
                                 </div>
@@ -292,6 +292,7 @@
     <%-include('./template/footer') %><!-- footer.ejs -->
 
     <script src="js/home/product_register.js"></script>
+    <script src="js/home/ingredient_register.js"></script>
     <script src="js/home/products.js"></script>
 </body>
 

@@ -1,3 +1,4 @@
+const { json } = require("express");
 const CafeStorage = require("./CafeStorage");
 
 class Cafe{
@@ -9,6 +10,7 @@ class Cafe{
         const client = this.body;
         try{
             const material = await CafeStorage.material_dupcheck(client);
+            console.log(material);
             if(material){
                 if(material.m_name == client.m_name){
                     return {success:false, msg:"중복되는 재료가 존재합니다."};
@@ -77,38 +79,35 @@ class Cafe{
         try{
             const buffer = []
             for(var i=0; i<client.m_name.length; i++){
-                buffer.push({cafe_id: client.cafe_id, p_name:client.p_name, m_name: client.m_name[i]});
-                console.log(buffer);
+                buffer.push({cafe_id: client.cafe_id, pre_p_name: client.pre_p_name, des: client.des,
+                price: client.price, category: client.category, p_name:client.p_name, m_name: client.m_name[i], amount: client.amount[i]});
             }
             buffer.forEach(async element => {
                 try{
                 const dupcheck = await CafeStorage.ingredient_dupcheck(element);
                     if(dupcheck){
-                        if(dupcheck.m_name == dupcheck.m_name){
-                            return {success:false, msg:"중복되는 제품-재료가 존재합니다."};
+                        console.log(dupcheck);
+                        console.log('el:'+ element.m_name);
+                        console.log('du:'+ dupcheck.m_name);
+                        if(element.m_name == dupcheck.m_name){
+                            const register = await CafeStorage.ingredient_modify(element);
+                            const register1 = await CafeStorage.product_modify(element);
+                            console.log('flag1');
+                        }else{
+                            const response = await CafeStorage.ingredient_register(element);  
+                            const register1 = await CafeStorage.product_modify(element);
+                            console.log('flag2');
                         }
+                    }else{
+                        const response = await CafeStorage.ingredient_register(element);  
+                        const register1 = await CafeStorage.product_modify(element);
+                        console.log('flag3');
                     }
                 }catch(err){
                     return {success: false, msg:err};
                 }
             });
-        }catch(err){
-            return {success:false, msg:err};
-        }try{
-            const buffer = []
-            for(var i=0; i<client.m_name.length; i++){
-                buffer.push({cafe_id: client.cafe_id, p_name:client.p_name, m_name: client.m_name[i], amount: client.amount[i]});
-                console.log(buffer);
-            }
-            buffer.forEach(async element => {
-                try{
-                const response = await CafeStorage.ingredient_register(element);  
-                }catch(err){
-                    return {success: false, msg:err};
-                }
-            });
-            var response = {success:true};
-            return response;
+            return {success:true};
         }catch(err){
             return {success:false, msg:err};
         }
