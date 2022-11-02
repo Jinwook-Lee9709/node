@@ -88,6 +88,18 @@ class CafeStorage{
             });
         });
     }
+    static product_modify(product){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "UPDATE product SET p_name = ?, price = ?, des = ?, category = ? WHERE cafe_id = ? AND p_name = ?;";
+            db.query(query,
+                [product.p_name, product.price, product.des, product.category, product.cafe_id, product.pre_p_name],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve({success: true});
+            });
+        });
+    }
     static product_get(product){
         return new Promise((resolve, reject)=>{
             const query = 
@@ -108,7 +120,7 @@ class CafeStorage{
                 [ingredient.cafe_id,ingredient.p_name,ingredient.m_name],
                 (err,data)=>{
                 if (err) reject(`${err}`);
-                resolve(data);
+                resolve(data[0]);
             });
         });
     }}
@@ -119,6 +131,18 @@ class CafeStorage{
             db.query(query,
                 [ingredient.cafe_id, ingredient.p_name,ingredient.m_name,ingredient.amount],
                 (err)=>{
+                if (err) reject(`${err}`);
+                resolve({success: true});
+            });
+        });
+    }
+    static ingredient_modify(ingredient){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "UPDATE ingredient SET p_name = ?, m_name = ?, amount = ? WHERE cafe_id = ? AND p_name = ? AND m_name = ?;";
+            db.query(query,
+                [ingredient.p_name, ingredient.m_name, ingredient.amount, ingredient.cafe_id, ingredient.p_name, ingredient.m_name],
+                (err,data)=>{
                 if (err) reject(`${err}`);
                 resolve({success: true});
             });
