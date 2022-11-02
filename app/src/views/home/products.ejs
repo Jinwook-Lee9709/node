@@ -136,6 +136,11 @@
                                           <div class="col-lg-9 col-md-8">음료</div>
                                       </div>
 
+                                      <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">필요한 재료</div>
+                                        <div class="col-lg-9 col-md-8"></div>
+                                      </div>
+
                                   </div>
                               </div>
 
@@ -165,6 +170,25 @@
                                       <div class="col-lg-9 col-md-8">
                                         <input type="text" class="form-control" value="음료" >
                                       </div>
+                                  </div>
+
+                                  <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">필요한 재료</div>
+                                    <div class="col-lg-9 col-md-8">
+                                      <div>
+                                        <table class="table">
+                                          <tbody id="ingredientSelect">
+                                            <!--선택된 재료들-->
+                                            
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                      <select class="form-select" size="5" onclick="ingredientSelect(this)">
+                                        <% for(let i=0; i< data.material.length; i++){ %>
+                                        <option value="<%= i %>"><%= data.material[i].m_name%></option>
+                                        <% } %>
+                                      </select>
+                                    </div>
                                   </div>
 
                                   <div class="text-center">
@@ -220,33 +244,33 @@
                           <div class="profile-overview">
                             <div>
                               <h5 class="card-title">제품 설명</h5>
-                              <textarea class="form-control" style="height: 100px; resize: none"></textarea>
+                              <textarea id="desc" class="form-control" style="height: 100px; resize: none"></textarea>
 
                               <h5 class="card-title">제품 정보</h5>
 
                               <div class="row">
                                   <div class="col-lg-3 col-md-4 label ">이름</div>
                                   <div class="col-lg-9 col-md-8">
-                                    <input type="text" class="form-control" >
+                                    <input id="p_name" type="text" class="form-control" >
                                   </div>
                               </div>
 
                               <div class="row">
                                   <div class="col-lg-3 col-md-4 label">가격</div>
                                   <div class="col-lg-9 col-md-8">
-                                    <input type="number" class="form-control" >
+                                    <input id="price" type="number" class="form-control" >
                                   </div>
                               </div>
 
                               <div class="row">
                                   <div class="col-lg-3 col-md-4 label">카테고리</div>
                                   <div class="col-lg-9 col-md-8">
-                                    <input type="text" class="form-control" >
+                                    <input id="category" type="text" class="form-control" >
                                   </div>
                               </div>
 
                               <div class="text-center">
-                                <button id="save-button" type="button" class="btn btn-primary">제품 등록</button>
+                                <button id="save-button" type="button" class="btn btn-primary" onclick="product_register()">제품 등록</button>
                               </div>
 
                             </div>
@@ -266,6 +290,9 @@
         </main><!-- End #main -->
 
     <%-include('./template/footer') %><!-- footer.ejs -->
+
+    <script src="js/home/product_register.js"></script>
+    <script src="js/home/products.js"></script>
 </body>
 
 </html>

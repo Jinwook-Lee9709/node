@@ -2,67 +2,56 @@ const User = require("../../models/User");
 const Cafe = require("../../models/Cafe");
 
 
-function RenderIfNotLogin(req, res, path){
-    if(req.session.user !== undefined){
-        res.render(path);
-    }
-    else{
-        //res.render("home/login");
-        res.redirect("login");
+// function RenderIfNotLogin(req, res, path){
+//     if(req.session.user !== undefined){
+//         res.render(path);
+//     }
+//     else{
+//         //res.render("home/login");
+//         res.redirect("login");
+//     }
+// }
+
+async function RenderIfNotLogin(req, res, path){
+    const user = req.session.user;
+    if(user !== undefined){
+        // console.log(user);
+        const cafe = new Cafe(req.body);
+        cafe.body.cafe_id = req.session.user.body.cafe_id
+        const product = await cafe.product_get();
+        const material = await cafe.material_get();
+        data = {
+            name: user.body.name
+        }
+        data.products = product;
+        data.material = material;
+        
+        res.render(path,{data});
+    }else{
+        res.render("home/login");
     }
 }
 
 const output = {
     home: async(req, res) => {
-        const user = req.session.user;
-        if(user !== undefined){
-            // console.log(user);
-            const cafe = new Cafe(req.body);
-            cafe.body.cafe_id = req.session.user.body.cafe_id
-            const product = await cafe.product_get();
-            const material = await cafe.material_get();
-            data = {
-                name: user.body.name,
-                ingredient: [
-                    {
-                        name: "원두/생두(g)",
-                        stock: 5000,
-                        description: "커피 원두."
-                    },
-                    {
-                        name: "우유(L)",
-                        stock: 20,
-                        description: "맛있는 우유다."
-                    },
-                    {
-                        name: "플라스틱 컵(개)",
-                        stock: 1500,
-                        description: "음료를 담는 플라스틱 통."
-                    },
-                    {
-                        name: "플라스틱 뚜껑(개)",
-                        stock: 1500,
-                        description: "플라스틱 컵을 닫는 뚜껑."
-                    },
-                    {
-                        name: "플라스틱 빨대(개)",
-                        stock: 2000,
-                        description: "빨대."
-                    },
-                    {
-                        name: "초콜릿(g)",
-                        stock: 500,
-                        description: "카페모카에 들어가는 초코."
-                    }
-                ]
-            }
-            data.products = product;
-            data.material = material;
-            res.render("home/index",{data});
-        }else{
-            res.render("home/login");
-        }
-        
+        // const user = req.session.user;
+        // if(user !== undefined){
+        //     // console.log(user);
+        //     const cafe = new Cafe(req.body);
+        //     cafe.body.cafe_id = req.session.user.body.cafe_id
+        //     const product = await cafe.product_get();
+        //     const material = await cafe.material_get();
+        //     data = {
+        //         name: user.body.name
+        //     }
+        //     data.products = product;
+        //     data.material = material;
+            
+        //     res.render("home/index",{data});
+        // }else{
+        //     res.render("home/login");
+        // }
+        RenderIfNotLogin(req, res, "home/index");
     },
     
     login: (req, res) => {

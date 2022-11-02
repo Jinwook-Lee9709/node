@@ -28,7 +28,9 @@ fetch("/product_register", {
 .then((res) => res.json())
 .then((res) => {
     if(res.success){
-        return alert("저장 성공.");
+        alert("저장 성공.");
+        location.replace("/products")
+        return;
     }else{
         alert(res.msg);
     }

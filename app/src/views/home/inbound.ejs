@@ -43,13 +43,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <% for(let i = 0; i < data.products.length; i++){ %>
+                                <% for(let i = 0; i < data.material.length; i++){ %>
                                 <tr>
                                     <th scope="row"><img src="assets/img/No-image-available.png"></a></th>
                                     <td class="fw-bold">
-                                        <%= data.ingredient[i].name %>
+                                        <%= data.material[i].m_name %>
                                     </td>
-                                    <td class="fw-bold">10</td>
+                                    <td class="fw-bold">
+                                        <%= data.material[i].quantity %>
+                                    </td>
                                 </tr>
                                 <% } %>
                             </tbody>
