@@ -2,36 +2,56 @@ const User = require("../../models/User");
 const Cafe = require("../../models/Cafe");
 
 
-function RenderIfNotLogin(req, res, path){
-    if(req.session.user !== undefined){
-        res.render(path);
-    }
-    else{
-        //res.render("home/login");
-        res.redirect("login");
+// function RenderIfNotLogin(req, res, path){
+//     if(req.session.user !== undefined){
+//         res.render(path);
+//     }
+//     else{
+//         //res.render("home/login");
+//         res.redirect("login");
+//     }
+// }
+
+async function RenderIfNotLogin(req, res, path){
+    const user = req.session.user;
+    if(user !== undefined){
+        // console.log(user);
+        const cafe = new Cafe(req.body);
+        cafe.body.cafe_id = req.session.user.body.cafe_id
+        const product = await cafe.product_get();
+        const material = await cafe.material_get();
+        data = {
+            name: user.body.name
+        }
+        data.products = product;
+        data.material = material;
+        
+        res.render(path,{data});
+    }else{
+        res.render("home/login");
     }
 }
 
 const output = {
     home: async(req, res) => {
-        const user = req.session.user;
-        if(user !== undefined){
-            // console.log(user);
-            const cafe = new Cafe(req.body);
-            cafe.body.cafe_id = req.session.user.body.cafe_id
-            const product = await cafe.product_get();
-            const material = await cafe.material_get();
-            data = {
-                name: user.body.name
-            }
-            data.products = product;
-            data.material = material;
+        // const user = req.session.user;
+        // if(user !== undefined){
+        //     // console.log(user);
+        //     const cafe = new Cafe(req.body);
+        //     cafe.body.cafe_id = req.session.user.body.cafe_id
+        //     const product = await cafe.product_get();
+        //     const material = await cafe.material_get();
+        //     data = {
+        //         name: user.body.name
+        //     }
+        //     data.products = product;
+        //     data.material = material;
             
-            res.render("home/index",{data});
-        }else{
-            res.render("home/login");
-        }
-        
+        //     res.render("home/index",{data});
+        // }else{
+        //     res.render("home/login");
+        // }
+        RenderIfNotLogin(req, res, "home/index");
     },
     
     login: (req, res) => {
