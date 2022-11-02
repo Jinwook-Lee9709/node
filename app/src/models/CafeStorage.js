@@ -167,7 +167,7 @@ class CafeStorage{
             const query = 
             "SELECT * FROM ingredient WHERE cafe_id = ?";
             db.query(query,
-                [ingredient.cafe_id],
+                [client.cafe_id],
                 (err,data)=>{
                 if (err) reject(`${err}`);
                 resolve(data[0]);
