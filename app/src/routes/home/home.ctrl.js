@@ -20,12 +20,14 @@ async function RenderIfNotLogin(req, res, path){
         cafe.body.cafe_id = req.session.user.body.cafe_id
         const product = await cafe.product_get();
         const material = await cafe.material_get();
+        const ingredient = await cafe.ingredient_get();
         data = {
             name: user.body.name
         }
         data.products = product;
         data.material = material;
-        
+        data.ingredient = ingredient;
+        console.log(data);
         res.render(path,{data});
     }else{
         res.render("home/login");
@@ -72,9 +74,6 @@ const output = {
     },
     adjustment: (req, res) => {
         RenderIfNotLogin(req, res, "home/adjustment");
-    },
-    sellLog: (req, res) => {
-        RenderIfNotLogin(req, res, "home/sellLog");
     },
     stockLog: (req, res) => {
         RenderIfNotLogin(req, res, "home/stockLog");

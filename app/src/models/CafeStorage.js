@@ -170,7 +170,7 @@ class CafeStorage{
                 [client.cafe_id],
                 (err,data)=>{
                 if (err) reject(`${err}`);
-                resolve(data[0]);
+                resolve(data);
             });
         });
     }}
