@@ -100,6 +100,30 @@ class CafeStorage{
             });
         });
     }
+    static ingredient_dupcheck(ingredient){{
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "SELECT * FROM ingredient WHERE p_id = ? AND m_id = ?";
+            db.query(query,
+                [ingredient.p_id,ingredient.m_id],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve(data);
+            });
+        });
+    }}
+    static ingredient_register(ingredient){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "INSERT INTO ingredient(p_id, m_id, amount) VALUES(?, ?, ?);";
+            db.query(query,
+                [ingredient.p_id,ingredient.m_id,ingredient.amount],
+                (err)=>{
+                if (err) reject(`${err}`);
+                resolve({success: true});
+            });
+        });
+    }
 }
 
 module.exports = CafeStorage;

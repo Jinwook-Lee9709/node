@@ -30,6 +30,7 @@ class Cafe{
         
     
     }
+    //조인 문을 이용한 재고랑 같이 받아오는 함수 
     async material_get(){
         const client = this.body;
         console.log(client);
@@ -40,6 +41,7 @@ class Cafe{
             return {success: false, msg:err};
         }
     }
+    //제품 등록
     async product_register(){
         const client = this.body;
         try{
@@ -60,6 +62,7 @@ class Cafe{
             return {success:false, msg:err};
         }
     }
+    //제품 정보 가져오기
     async product_get(){
         const client = this.body;
         try{
@@ -67,6 +70,27 @@ class Cafe{
             return product;
         }catch(err){
             return {success: false, msg:err};
+        }
+    }
+    //제품 재료 연결
+    async ingredient_register(){
+        const client = this.body;
+        try{
+            console.log(client);
+            const register = await CafeStorage.ingredient_dupcheck(client);
+            
+            if(product){
+                if(register.p_id == register.p_id && register.m_id == register.m_id){
+                    return {success:false, msg:"중복되는 제품이 존재합니다."};
+                }
+            }
+        }catch(err){
+            return {success:false, msg:err};
+        }try{
+            const response = await CafeStorage.ingredient_register(client);
+            return response;
+        }catch(err){
+            return {success:false, msg:err};
         }
     }
 
