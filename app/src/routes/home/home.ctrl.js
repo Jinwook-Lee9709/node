@@ -22,42 +22,11 @@ const output = {
             const product = await cafe.product_get();
             const material = await cafe.material_get();
             data = {
-                name: user.body.name,
-                ingredient: [
-                    {
-                        name: "원두/생두(g)",
-                        stock: 5000,
-                        description: "커피 원두."
-                    },
-                    {
-                        name: "우유(L)",
-                        stock: 20,
-                        description: "맛있는 우유다."
-                    },
-                    {
-                        name: "플라스틱 컵(개)",
-                        stock: 1500,
-                        description: "음료를 담는 플라스틱 통."
-                    },
-                    {
-                        name: "플라스틱 뚜껑(개)",
-                        stock: 1500,
-                        description: "플라스틱 컵을 닫는 뚜껑."
-                    },
-                    {
-                        name: "플라스틱 빨대(개)",
-                        stock: 2000,
-                        description: "빨대."
-                    },
-                    {
-                        name: "초콜릿(g)",
-                        stock: 500,
-                        description: "카페모카에 들어가는 초코."
-                    }
-                ]
+                name: user.body.name
             }
             data.products = product;
             data.material = material;
+            
             res.render("home/index",{data});
         }else{
             res.render("home/login");

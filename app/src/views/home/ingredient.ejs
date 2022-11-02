@@ -53,16 +53,17 @@
                       </thead>
                       <tbody>
                         <!-- 상품 불러와서 목록 만드는 부분 -->
-                        <% for(let i = 0; i < data.products.length; i++){ %>
+                        <% for(let i = 0; i < data.material.length; i++){ %>
                         <tr>
                           <th scope="row"><a href="#"><img src="assets/img/No-image-available.png" alt=""></a></th>
                           <td>
                             <!-- Modal 링크 -->
                             <a href="#" class="text-primary fw-bold" data-bs-toggle="modal" data-bs-target=<%= "#ExtralargeModal"+i %> >
-                                <%= data.ingredient[i].name %>
+                                <%= data.material[i].m_name %>
                             </a>
                           </td>
-                          <td class="fw-bold"><%= data.ingredient[i].stock %></td>
+                          <td class="fw-bold"><%= data.material[i].quantity %></td>
+                          <td class="fw-bold"><%= data.material[i].safe_quantity%></td>
                         </tr>
                         <% } %>
 
@@ -78,7 +79,7 @@
 
         <!-- Modal 창 부분 -->
         <!-- Extra Large Modal -->
-        <% for(let i = 0; i < data.products.length; i++){ %>
+        <% for(let i = 0; i < data.material.length; i++){ %>
         <div class="modal fade" id= <%="ExtralargeModal"+i %> tabindex="-1">
             <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -94,7 +95,7 @@
                             <div class="card profile-card">
                                 <div class="card-body pt-4 d-flex flex-column align-items-center">
                                     <img src="assets/img/No-image-available.png" alt="image" class="rounded-circle">
-                                    <h5 class="card-title"><%= data.ingredient[i].name %></h5>
+                                    <h5 class="card-title"><%= data.material[i].m_name %></h5>
                                 </div>
                             </div>
                         </div>
@@ -119,23 +120,23 @@
                               <div class="tab-pane profile-overview fade show active" id=<%="product-info"+i %>>
                                   <div>
                                       <h5 class="card-title">재료 설명</h5>
-                                      <p class="small fst-italic"><%= data.ingredient[i].description %></p>
+                                      <p class="small fst-italic"><%= data.material[i].des %></p>
 
                                       <h5 class="card-title">제품 정보</h5>
 
                                       <div class="row">
                                           <div class="col-lg-3 col-md-4 label ">이름</div>
-                                          <div class="col-lg-9 col-md-8"><%= data.ingredient[i].name %></div>
+                                          <div class="col-lg-9 col-md-8"><%= data.material[i].m_name %></div>
                                       </div>
 
                                       <div class="row">
                                           <div class="col-lg-3 col-md-4 label">남은 재고</div>
-                                          <div class="col-lg-9 col-md-8"><%= data.ingredient[i].stock %></div>
+                                          <div class="col-lg-9 col-md-8"><%= data.material[i].quantity %> <%= data.material[i].unit%></div>
                                       </div>
 
                                       <div class="row">
                                         <div class="col-lg-3 col-md-4 label">안전 재고</div>
-                                        <div class="col-lg-9 col-md-8">10(임시)</div>
+                                        <div class="col-lg-9 col-md-8"><%= data.material[i].safe_quantity%></div>
                                     </div>
 
                                   </div>
@@ -144,33 +145,33 @@
                               <div class="tab-pane profile-overview fade" id=<%="product-change"+i %>>
                                 <div>
                                   <h5 class="card-title">재료 설명</h5>
-                                  <textarea class="form-control" style="height: 100px; resize: none"><%= data.ingredient[i].description %></textarea>
+                                  <textarea class="form-control" style="height: 100px; resize: none"><%= data.material[i].des %></textarea>
 
                                   <h5 class="card-title">재료 정보</h5>
 
                                   <div class="row">
                                       <div class="col-lg-3 col-md-4 label ">이름</div>
                                       <div class="col-lg-9 col-md-8">
-                                        <input type="text" class="form-control" value="<%= data.ingredient[i].name %>" >
+                                        <input type="text" class="form-control" value="<%= data.material[i].m_name %>" >
                                       </div>
                                   </div>
 
                                   <div class="row">
                                     <div class="col-lg-3 col-md-4 label ">수량 단위(g, kg, ml등)</div>
                                     <div class="col-lg-9 col-md-8">
-                                      <input type="text" class="form-control" value="" >
+                                      <input type="text" class="form-control" value="<%= data.material[i].unit %>" >
                                     </div>
                                   </div>
 
                                   <div class="row">
                                       <div class="col-lg-3 col-md-4 label">남은 재고</div>
-                                      <div class="col-lg-9 col-md-8"><%= data.ingredient[i].stock %></div>
+                                      <div class="col-lg-9 col-md-8"><%= data.material[i].quantity %></div>
                                   </div>
 
                                   <div class="row">
                                     <div class="col-lg-3 col-md-4 label ">안전 재고</div>
                                     <div class="col-lg-9 col-md-8">
-                                      <input type="number" class="form-control" value="">
+                                      <input type="number" class="form-control" value="<%= data.material[i].safe_quantity%>">
                                     </div>
                                 </div>
 
@@ -226,26 +227,26 @@
                           <div class="profile-overview">
                             <div>
                               <h5 class="card-title">재료 설명</h5>
-                              <textarea class="form-control" style="height: 100px; resize: none"></textarea>
+                              <textarea id="desc" class="form-control" style="height: 100px; resize: none"></textarea>
 
                               <h5 class="card-title">재료 정보</h5  >
 
                               <div class="row">
                                   <div class="col-lg-3 col-md-4 label ">이름</div>
                                   <div class="col-lg-9 col-md-8">
-                                    <input type="text" class="form-control" >
+                                    <input id="m_name" type="text" class="form-control" >
                                   </div>
                               </div>
 
                               <div class="row">
                                 <div class="col-lg-3 col-md-4 label ">수량 단위(g, kg, ml 등)</div>
                                 <div class="col-lg-9 col-md-8">
-                                  <input type="text" class="form-control" >
+                                  <input id="unit" type="text" class="form-control" >
                                 </div>
                             </div>
 
                               <div class="text-center">
-                                <button id="save-button" type="button" class="btn btn-primary">재료 등록</button>
+                                <button id="save-button" type="button" class="btn btn-primary" onclick="material_register()">재료 등록</button>
                               </div>
 
                             </div>
@@ -265,6 +266,8 @@
         </main><!-- End #main -->
 
     <%-include('./template/footer') %><!-- footer.ejs -->
+
+    <script src="js/home/material_register.js"></script>
 </body>
 
 </html>
