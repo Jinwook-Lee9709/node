@@ -162,6 +162,18 @@ class CafeStorage{
             });
         });
     }}
+    static ingredient_get(client){{
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "SELECT * FROM ingredient WHERE cafe_id = ?";
+            db.query(query,
+                [ingredient.cafe_id],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve(data[0]);
+            });
+        });
+    }}
     static ingredient_register(ingredient){
         return new Promise((resolve, reject)=>{
             const query = 

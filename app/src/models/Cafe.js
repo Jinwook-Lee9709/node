@@ -114,8 +114,8 @@ class Cafe{
     async ingredient_get(){
         const client = this.body;
         try{
-            const product = await CafeStorage.ingredient_dupcheck(client);
-            return product;
+            const ingredient = await CafeStorage.ingredient_dupcheck(client);
+            return ingredient;
         }catch(err){
             return {success: false, msg:err};
         }
