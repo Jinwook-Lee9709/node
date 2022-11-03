@@ -23,6 +23,7 @@ async function RenderIfNotLogin(req, res, path){
         const ingredient = await cafe.ingredient_get();
         const stocklog = await cafe.stock_log_get();
         const weeklog = await cafe.get_week_log();
+        const stockweeklog = await cafe.get_stock_week_log();
         data = {
             name: user.body.name
         }
@@ -31,6 +32,7 @@ async function RenderIfNotLogin(req, res, path){
         data.ingredient = ingredient;
         data.stocklog = stocklog;
         data.weeklog = weeklog
+        data.stockweeklog = stockweeklog;
         res.render(path,{data});
     }else{
         res.render("home/login");

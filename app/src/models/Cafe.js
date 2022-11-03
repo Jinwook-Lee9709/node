@@ -220,6 +220,22 @@ class Cafe{
             return {success: false, msg:err};
         }
     }
+    async get_stock_week_log(){
+        const client = this.body;
+        try{
+            const week_log = await CafeStorage.get_stock_week_log(client);
+            return week_log;
+        }catch(err){
+            return {success: false, msg:err};
+        }
+    }
+    async safe_stock_update(){
+        console.log('flag');
+        const log = CafeStorage.get_w_stock_week_log();
+        console.log('flag1');
+        return log;
+    }
+    
 
 }
 
