@@ -21,6 +21,7 @@ async function RenderIfNotLogin(req, res, path){
         const product = await cafe.product_get();
         const material = await cafe.material_get();
         const ingredient = await cafe.ingredient_get();
+        const stocklog = await cafe.stock_log_get();
         data = {
             name: user.body.name
         }

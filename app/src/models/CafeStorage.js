@@ -208,6 +208,19 @@ class CafeStorage{
             });
         });
     }
+
+    static get_stock_log(client){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "SELECT * FROM stock_log WHERE cafe_id = ?";
+            db.query(query,
+                [client.cafe_id],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve(data);
+            });
+        });
+    }
 }
 
 module.exports = CafeStorage;
