@@ -44,7 +44,7 @@
                             </thead>
                             <tbody>
                                 <% for(let i = 0; i < data.material.length; i++){ %>
-                                <tr onclick="ingredientSelect()">
+                                <tr onclick=<%= "ingredientSelect("+i+")" %> >
                                     <th scope="row"><img src="assets/img/No-image-available.png"></a></th>
                                     <td class="fw-bold" id=<%= "ingredientName"+i %>>
                                         <%= data.material[i].m_name %>
@@ -76,21 +76,9 @@
                                 <th scope="col">추가 재고</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <!--이 아래부터 반복되어야함-->
-                                <tr>
-                                    <th scope="row"><img src="assets/img/No-image-available.png"></a></th>
-                                    <td class="fw-bold">
-                                        원두/생두(g)
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" value=0 style="width:130px">
-                                    </td>
-                                    <td>
-                                        <a href="#" style="color:red"><i class="ri-delete-back-2-fill" style="font-size: 25px"></i></a>
-                                    </td>
-                                </tr>
-                                <!--여기까지 반복되어야함-->
+                            <tbody id="AddedIngredient">
+                                <!--여기에 추가되어야함-->
+                                
                             </tbody>
                         </table>
                     </div>
@@ -99,11 +87,9 @@
                             <h5>Total</h5>
                         </div>
                         <div class="col-lg-5 p-4">
-                            <h5>품목 수 : 1</h5>
+                            <h5 id="ingredientAmount">품목 수 : 0</h5>
                         </div>
-                        <div class="col-lg-5 p-4 pe-5 text-end">
-                            <h5>총 수량 : <span style="color:#012970">+5</span></h5>
-                        </div>
+                        
                     </div>
 
                     <div class="text-end">
