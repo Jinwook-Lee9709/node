@@ -66,14 +66,18 @@
                                 <% const prev_stock = data.stocklog[i].cu_quantity; %>
                                 <% const next_stock = data.stocklog[i].po_quantity; %>
                                 <% let v_amount = next_stock - prev_stock;%>
-                                <% if (v_amount >= 0) v_amount = "+" + v_amount; %>
+                                
 
                             <tr>
                                 <th scope="row"><%= year+"-"+month+"-"+day+"/"+hour+":"+minute+":"+second %></th>
                                 <td><a class="text-primary fw-bold"><%= data.stocklog[i].m_name%></a></td>
                                 <td><%= prev_stock %></td>
                                 <td class="fw-bold"><%=next_stock %></td>
-                                <td class="fw-bold text-primary"><%= v_amount %></td>
+                                <% if (v_amount >= 0) { %>
+                                    <td class="fw-bold text-primary">+<%= v_amount %></td>
+                                <% } else{ %>
+                                    <td class="fw-bold text-danger"><%= v_amount %></td>
+                                <% } %>
                             </tr>
                             <% } %>
                             

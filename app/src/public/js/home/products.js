@@ -13,7 +13,7 @@ const ingredientSelect = (target, i) => {
                 X
             </td>
             <td>
-                <input type="number" class="form-control amount${i}" value=0 style="width:130px">
+                <input type="number" class="form-control amount${i}" value=1 style="width:130px">
             </td>
             <td>
                 <a href="#" onclick="ingredientDelete(${value},${i})"><i class="ri-delete-back-2-fill pt-0" style="font-size: 20px; color:red;"></i></a>
