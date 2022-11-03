@@ -16,45 +16,45 @@
     <main id="main" class="main"><!-- Main -->
 
         <div class="pagetitle">
-            <h1>분석</h1>
-            <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item">Pages</li>
-                <li class="breadcrumb-item active">Blank</li>
-            </ol>
-            </nav>
+            <h1 class="pb-3">분석</h1>
         </div><!-- End Page Title -->
         
         <section class="section">
             <div class="row">
-            <div class="col-lg-6">
-        
-                <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Example Card</h5>
-                    <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+                <!-- 그래프 부분 -->
+                <div class="col-lg-6">
+            
+                    <div class="card">
+                    <div class="card-body">
+                        <!-- Line Chart -->
+                        <h5 class="card-title">최근 일주일 매출</h5>
+                        <div id="lineChart"></div>
+
+                        <!-- End Line Chart -->
+                    </div>
+                    </div>
+            
                 </div>
+            
+                <div class="col-lg-6">
+            
+                    <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Example Card</h5>
+                        <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+                    </div>
+                    </div>
+            
                 </div>
-        
-            </div>
-        
-            <div class="col-lg-6">
-        
-                <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Example Card</h5>
-                    <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
-                </div>
-                </div>
-        
-            </div>
             </div>
         </section>
         
         </main><!-- End #main -->
 
     <%-include('./template/footer') %><!-- footer.ejs -->
+
+    <input type="hidden" id="weekJsonData" value="<%=JSON.stringify(data.weeklog)%>" />
+    <script src="js/home/analysis.js"></script>
 </body>
 
 </html>

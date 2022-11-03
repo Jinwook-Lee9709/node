@@ -31,6 +31,7 @@ async function RenderIfNotLogin(req, res, path){
         data.ingredient = ingredient;
         data.stocklog = stocklog;
         data.weeklog = weeklog
+        console.log(data.weeklog);
         res.render(path,{data});
     }else{
         res.render("home/login");
