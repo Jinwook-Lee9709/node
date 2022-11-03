@@ -148,7 +148,7 @@ class Cafe{
                                 const stock1 = await CafeStorage.stock_get(element);
                                 stock.po_quantity = stock1.quantity;
                                 console.log(stock)
-                                const response1 = await CafeStorage.stock_logging(stock);
+                                const response1 = await CafeStorage.stock_logging3(stock);
                                 
                             }
                         }
@@ -181,9 +181,11 @@ class Cafe{
                         if(stock.m_name == element.m_name){
                             const response = await CafeStorage.stock_inbound(stock);
                             if(response.success){
+                                console.log('flag');
                                 const stock1 = await CafeStorage.stock_get(element);
                                 stock.po_quantity = stock1.quantity;
-                                const response1 = await CafeStorage.stock_logging(stock);
+                                console.log('flag1');
+                                const response1 = await CafeStorage.stock_logging2(stock);
                             }
                         }
                     

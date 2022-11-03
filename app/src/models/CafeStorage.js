@@ -63,12 +63,36 @@ class CafeStorage{
             });
         });
     }
-    static stock_logging(client){
+    static stock_log_get(client){
         return new Promise((resolve, reject)=>{
             const query = 
-            "INSERT INTO stock_log (cafe_id, m_name, cu_quantity, po_quantity) VALUES(?, ?, ?, ?);";
+            "SELECT * FROM stock_log WHERE cafe_id = ?";
             db.query(query,
-                [client.cafe_id, client.m_name, client.quantity, client.po_quantity],
+                [client.cafe_id],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve(data);
+            });
+        });
+    }
+    static stock_logging2(client){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "INSERT INTO stock_log (cafe_id, m_name, cu_quantity, po_quantity, flag) VALUES(?, ?, ?, ?, ?);";
+            db.query(query,
+                [client.cafe_id, client.m_name, client.quantity, client.po_quantity, 2],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve({success: true});
+            });
+        });
+    }
+    static stock_logging3(client){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "INSERT INTO stock_log (cafe_id, m_name, cu_quantity, po_quantity, flag) VALUES(?, ?, ?, ?, ?);";
+            db.query(query,
+                [client.cafe_id, client.m_name, client.quantity, client.po_quantity, 3],
                 (err,data)=>{
                 if (err) reject(`${err}`);
                 resolve({success: true});
@@ -258,18 +282,7 @@ class CafeStorage{
         });
     }
 
-    static stock_log_get(client){
-        return new Promise((resolve, reject)=>{
-            const query = 
-            "SELECT * FROM stock_log WHERE cafe_id = ?";
-            db.query(query,
-                [client.cafe_id],
-                (err,data)=>{
-                if (err) reject(`${err}`);
-                resolve(data);
-            });
-        });
-    }
+    
 }
 
 module.exports = CafeStorage;
