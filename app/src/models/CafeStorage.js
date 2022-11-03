@@ -305,10 +305,11 @@ class CafeStorage{
             });
         });
     }
+    //일주일 재고 소모량
     static get_stock_week_log(client){
         return new Promise((resolve, reject)=>{
             const query = 
-            "SELECT DISTINCT * FROM material m, stock_log s WHERE m.cafe_id = ?  AND s.flag = '1' AND m.cafe_id = m.cafe_id AND m.m_name = s.m_name AND s.in_date > date_add(now(),interval -7 day) AND s.in_date < date_add(now(),interval 0 day);";
+            "SELECT DISTINCT *, SUM(cu_quantity-po_quantity) AS SUM FROM material m, stock_log s WHERE m.cafe_id = ? AND s.flag = '1' AND m.cafe_id = m.cafe_id AND m.m_name = s.m_name AND s.in_date > date_add(now(),interval -7 day) AND s.in_date < date_add(now(),interval 0 day) GROUP BY m.m_name;";
             db.query(query,
                 [client.cafe_id],
                 (err,data)=>{
@@ -341,6 +342,7 @@ class CafeStorage{
             });
         });
     }
+    
 }
 
 module.exports = CafeStorage;

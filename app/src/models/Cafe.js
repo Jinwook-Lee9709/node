@@ -239,7 +239,7 @@ class Cafe{
         }
     }
     async safe_stock_update(){
-        const log = CafeStorage.get_w_stock_week_log();
+        const log = await CafeStorage.get_w_stock_week_log();
         console.log(log);
         return log;
     }
