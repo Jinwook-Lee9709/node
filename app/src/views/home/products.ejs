@@ -138,7 +138,22 @@
 
                                       <div class="row">
                                         <div class="col-lg-3 col-md-4 label">필요한 재료</div>
-                                        <div class="col-lg-9 col-md-8"></div>
+                                        <div class="col-lg-9 col-md-8">
+                                          <table class="table">
+                                            <tbody>
+                                              <% for(let j=0; j<data.ingredient.length; j++) {%>
+                                                <% const productName = data.products[i].p_name; %>
+                                                <% if(data.ingredient[j].p_name === productName) { %>
+                                                  <tr>
+                                                    <td class="fw-bold"><%= data.ingredient[j].m_name %></td>
+                                                    <td>X</td>
+                                                    <td class="fw-bold"><%= data.ingredient[j].amount %></td>
+                                                  </tr>
+                                                <% } %>
+                                              <% } %>
+                                            </tbody>
+                                          </table>
+                                        </div>
                                       </div>
 
                                   </div>
@@ -179,6 +194,29 @@
                                         <table class="table">
                                           <tbody id= <%="ingredientSelect"+i %>>
                                             <!--선택된 재료들-->
+                                            <% for(let j=0; j<data.ingredient.length; j++) {%>
+                                              <% const productName = data.products[i].p_name; %>
+                                              <% if(data.ingredient[j].p_name === productName) { %>
+                                                <% let value = 0; %>
+                                                <% for(let k=0; k < data.material.length; k++) { %>
+                                                  <% if(data.material[k].m_name === data.ingredient[j].m_name) {%>
+                                                    <% value = k; %>
+                                                    <% } %>
+                                                <% } %>
+                                                <tr id=<%="ingredient"+value+"-"+i%>>
+                                                  <td class="fw-bold">
+                                                      <p class=<%="m_name"+i%>><%=data.ingredient[j].m_name%></p>
+                                                  </td>
+                                                  <td>X</td>
+                                                  <td>
+                                                      <input type="number" class="<%="form-control amount"+i%>" value=<%= data.ingredient[j].amount %> style="width:130px">
+                                                  </td>
+                                                  <td>
+                                                      <a href="#" onclick=<%="ingredientDelete("+value+","+i+")"%>><i class="ri-delete-back-2-fill pt-0" style="font-size: 20px; color:red;"></i></a>
+                                                  </td>
+                                              </tr>
+                                              <% } %>
+                                            <% } %>
                                             
                                           </tbody>
                                         </table>

@@ -29,12 +29,10 @@
                         <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                         <li class="dropdown-header text-start">
-                            <h6>Filter</h6>
+                            <h6>설정</h6>
                         </li>
     
-                        <li><a class="dropdown-item" href="#">Today</a></li>
-                        <li><a class="dropdown-item" href="#">This Month</a></li>
-                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                        <li><a class="dropdown-item" href="#">설정</a></li>
                         </ul>
                     </div>
     
@@ -57,41 +55,28 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <% for(let i=data.stocklog.length -1; i>=0; i--) { %>
+                                <% const year = data.stocklog[i].in_date.getFullYear().toString(); %>
+                                <% const month = ("0" + (data.stocklog[i].in_date.getMonth()+1)).slice(-2); %>
+                                <% const day = ("0" + data.stocklog[i].in_date.getDate()).slice(-2); %>
+                                <% const hour = ("0" + data.stocklog[i].in_date.getHours()).slice(-2); %>
+                                <% const minute = ("0" + data.stocklog[i].in_date.getMinutes()).slice(-2); %>
+                                <% const second = ("0" + data.stocklog[i].in_date.getSeconds()).slice(-2); %>
+
+                                <% const prev_stock = data.stocklog[i].cu_quantity; %>
+                                <% const next_stock = data.stocklog[i].po_quantity; %>
+                                <% let v_amount = next_stock - prev_stock;%>
+                                <% if (v_amount >= 0) v_amount = "+" + v_amount; %>
+
                             <tr>
-                            <th scope="row">2022-11-03/12:00:00</th>
-                            <td><a href="#" class="text-primary fw-bold">재료1</a></td>
-                            <td>64</td>
-                            <td class="fw-bold">124</td>
-                            <td class="fw-bold text-primary">+60</td>
+                                <th scope="row"><%= year+"-"+month+"-"+day+"/"+hour+":"+minute+":"+second %></th>
+                                <td><a class="text-primary fw-bold"><%= data.stocklog[i].m_name%></a></td>
+                                <td><%= prev_stock %></td>
+                                <td class="fw-bold"><%=next_stock %></td>
+                                <td class="fw-bold text-primary"><%= v_amount %></td>
                             </tr>
-                            <tr>
-                            <th scope="row"><a href="#"><img src="assets/img/No-image-available.png" alt=""></a></th>
-                            <td><a href="#" class="text-primary fw-bold">재료2</a></td>
-                            <td>46</td>
-                            <td class="fw-bold">98</td>
-                            <td class="fw-bold text-primary">+52</td>
-                            </tr>
-                            <tr>
-                            <th scope="row"><a href="#"><img src="assets/img/No-image-available.png" alt=""></a></th>
-                            <td><a href="#" class="text-primary fw-bold">재료1</a></td>
-                            <td>59</td>
-                            <td class="fw-bold">74</td>
-                            <td class="fw-bold text-primary">+15</td>
-                            </tr>
-                            <tr>
-                            <th scope="row"><a href="#"><img src="assets/img/No-image-available.png" alt=""></a></th>
-                            <td><a href="#" class="text-primary fw-bold">재료1</a></td>
-                            <td>32</td>
-                            <td class="fw-bold">63</td>
-                            <td class="fw-bold text-primary">+31</td>
-                            </tr>
-                            <tr>
-                            <th scope="row"><a href="#"><img src="assets/img/No-image-available.png" alt=""></a></th>
-                            <td><a href="#" class="text-primary fw-bold">재료3</a></td>
-                            <td>79</td>
-                            <td class="fw-bold">41</td>
-                            <td class="fw-bold text-primary">-38</td>
-                            </tr>
+                            <% } %>
+                            
                         </tbody>
                         </table>
     

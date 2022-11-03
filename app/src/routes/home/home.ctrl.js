@@ -28,6 +28,7 @@ async function RenderIfNotLogin(req, res, path){
         data.products = product;
         data.material = material;
         data.ingredient = ingredient;
+        data.stocklog = stocklog;
         res.render(path,{data});
     }else{
         res.render("home/login");

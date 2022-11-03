@@ -196,7 +196,7 @@ class Cafe{
         const client = this.body;
         try{
             const stock_log = await CafeStorage.stock_log_get(client);
-            return ingredient;
+            return stock_log;
         }catch(err){
             return {success: false, msg:err};
         }

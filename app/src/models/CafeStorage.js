@@ -209,7 +209,7 @@ class CafeStorage{
         });
     }
 
-    static get_stock_log(client){
+    static stock_log_get(client){
         return new Promise((resolve, reject)=>{
             const query = 
             "SELECT * FROM stock_log WHERE cafe_id = ?";
