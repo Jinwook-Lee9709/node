@@ -9,8 +9,8 @@ function ingredientRegister(i){
         i_category = document.querySelector("#category" + i); //카테고리
 
 
-    if(!pre_p_name) return alert("바뀌귀 전 제품명 없음");
-    if(!pr_name.value) return alert("제품 이름를 입력해주십시요.");
+    if(!pre_p_name.innerText) return alert("바뀌귀 전 제품명 없음");
+    if(!pr_name.innerText) return alert("제품 이름를 입력해주십시요.");
     if(!des.value) return alert("제품 설명을 입력해주십시요.");
     if(!i_price.value) return alert("제품 가격을 입력해주십시요.");
     if(!i_category.value) return alert("카테고리를 입력해주십시요.");
@@ -22,8 +22,8 @@ function ingredientRegister(i){
     Array.from(amount).forEach(element => amountlist.push(element.value));
 
     const req = {
-        pre_p_name: pre_p_name.value,
-        p_name: pr_name.value,
+        pre_p_name: pre_p_name.innerText,
+        p_name: pr_name.innerText,
         des: des.value,
         price: i_price.value,
         category: i_category.value,

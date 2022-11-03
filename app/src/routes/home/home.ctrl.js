@@ -25,9 +25,8 @@ async function RenderIfNotLogin(req, res, path){
             name: user.body.name
         }
         data.products = product;
-        data.material = material
+        data.material = material;
         data.ingredient = ingredient;
-        
         res.render(path,{data});
     }else{
         res.render("home/login");
@@ -74,9 +73,6 @@ const output = {
     },
     adjustment: (req, res) => {
         RenderIfNotLogin(req, res, "home/adjustment");
-    },
-    sellLog: (req, res) => {
-        RenderIfNotLogin(req, res, "home/sellLog");
     },
     stockLog: (req, res) => {
         RenderIfNotLogin(req, res, "home/stockLog");

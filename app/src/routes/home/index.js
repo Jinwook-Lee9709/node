@@ -12,7 +12,6 @@ router.get("/products", ctrl.output.products);
 router.get("/ingredient", ctrl.output.ingredient);
 router.get("/inbound", ctrl.output.inbound);
 router.get("/adjustment", ctrl.output.adjustment);
-router.get("/sellLog", ctrl.output.sellLog);
 router.get("/stockLog", ctrl.output.stockLog);
 router.get("/analysis", ctrl.output.analysis);
 router.get("/setting", ctrl.output.setting);
