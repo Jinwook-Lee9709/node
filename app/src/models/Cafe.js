@@ -192,6 +192,15 @@ class Cafe{
             return {success:false, msg:err};
         }
     }
+    async stock_log_get(){
+        const client = this.body;
+        try{
+            const stock_log = await CafeStorage.stock_log_get(client);
+            return ingredient;
+        }catch(err){
+            return {success: false, msg:err};
+        }
+    }
 
 }
 
