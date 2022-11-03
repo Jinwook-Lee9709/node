@@ -24,16 +24,18 @@ async function RenderIfNotLogin(req, res, path){
         const stocklog = await cafe.stock_log_get();
         const weeklog = await cafe.get_week_log();
         const stockweeklog = await cafe.get_stock_week_log();
+        const weeksumlog = await cafe.get_week_sum_log();
         data = {
             name: user.body.name
         }
         data.products = product;
         data.material = material;
         data.ingredient = ingredient;
-        data.stocklog = stocklog;
-        data.weeklog = weeklog;
+        data.stocklog = stocklog; // 재고 변경 기록
+        data.weeklog = weeklog; // <분석> 각 상품 별, 일주일치 각 날짜당 판매량
         console.log(data.weeklog);
-        data.stockweeklog = stockweeklog;
+        data.stockweeklog = stockweeklog;  //
+        data.weeksumlog = weeksumlog; // 각 상품별, 일주일치 판매량 합 p_name, SUM(amount)
         res.render(path,{data});
     }else{
         res.render("home/login");
