@@ -112,6 +112,43 @@ class CafeStorage{
             });
         });
     }
+    static material_get2(client){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "SELECT DISTINCT * FROM material m, stock s WHERE m.cafe_id = s.cafe_id AND m.m_id = s.m_id AND m.cafe_id = ? AND m.m_name = ?;";
+            db.query(query,
+                [client.cafe_id, client.m_name],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve(data[0]);
+            });
+        });
+    }
+    static material_modify(material){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "UPDATE material SET unit = ?, des = ? WHERE cafe_id = ? AND m_name = ?;";
+            db.query(query,
+                [material.unit, material.des, material.cafe_id, material.m_name],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve({success: true});
+            });
+        });
+    }
+    static safe_quantity_modify(client){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "UPDATE stock SET safe_quantity = ? WHERE cafe_id = ? AND m_id = ?;";
+            db.query(query,
+                [client.safe_quantity, client.cafe_id, client.m_id],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve({success: true});
+            });
+        });
+    }
+
     static product_register(product){
         return new Promise((resolve, reject)=>{
             const query = 
