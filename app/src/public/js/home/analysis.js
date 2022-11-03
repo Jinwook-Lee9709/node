@@ -7,8 +7,6 @@ function test1(){
 test1();
 
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
     new ApexCharts(document.querySelector("#lineChart"), {
         series: [{

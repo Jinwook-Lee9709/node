@@ -32,10 +32,9 @@ async function RenderIfNotLogin(req, res, path){
         data.material = material;
         data.ingredient = ingredient;
         data.stocklog = stocklog; // 재고 변경 기록
-        data.weeklog = weeklog; // <분석> 각 상품 별, 일주일치 각 날짜당 판매량
-        console.log(data.weeklog);
+        data.weeklog = weeklog; // <분석> 각 상품 별, 일주일치 각 날짜당 판매량 p_name , in_date, SUM
         data.stockweeklog = stockweeklog;  //
-        data.weeksumlog = weeksumlog; // 각 상품별, 일주일치 판매량 합 p_name, SUM(amount)
+        data.weeksumlog = weeksumlog; // 각 상품별, 일주일치 판매량 합 p_name, SUM
         res.render(path,{data});
     }else{
         res.render("home/login");
