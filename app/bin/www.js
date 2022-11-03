@@ -11,7 +11,6 @@ app.listen(PORT, () =>{
     //     const cafe = new Cafe();
     //     const response = await cafe.safe_stock_update();
     //     console.log("코드실행");
-    //     console.log(response);
 
     // });
     console.log("서버 가동");
