@@ -240,10 +240,50 @@ class Cafe{
     }
     async safe_stock_update(){
         const log = await CafeStorage.get_w_stock_week_log();
-        console.log(log);
+        const buffer = []
+        for (var i = 0; i<log.length; i++){
+            buffer.push({m_id: log[i].m_id, safe_quantity: log[i].SUM})
+        }
+        buffer.forEach(async element  => {
+                try{
+                    const log2 = await CafeStorage.modify_safestock(element);
+                }catch(err){
+                    return {success: false, msg:err};
+                }
+            }
+        )
         return log;
     }
-    
+    async stock_update(){
+        console.log('전체 재고 조정');
+        const log = await CafeStorage.get_sell_log();
+        const buffer1 = []
+        for (var i = 0; i<log.length; i++){
+            buffer1.push({cafe_id: log[i].cafe_id, p_name: log[i].p_name, sum: log[i].SUM})
+        }
+        buffer1.forEach(async element  => {
+            try{
+                const log2 = await CafeStorage.get_ingredient(element);
+                const buffer2 = []
+                for (var i = 0; i<log2.length; i++){
+                    buffer2.push({cafe_id: log2[i].cafe_id, m_name: log2[i].m_name, amount: (-1)*log2[i].amount * element.sum})
+                }
+                buffer2.forEach(async element =>{
+                    const stock = await CafeStorage.stock_get(element)
+                    element.m_id = stock.m_id;
+                    element.quantity = stock.quantity;
+                    element.po_quantity = stock.quantity + element.amount;
+                    const response1 = await CafeStorage.stock_inbound(element)
+                    const response2 = await CafeStorage.stock_logging1(element)
+                })
+                
+            }catch(err){
+                return {success: false, msg:err};
+            }
+        }
+    )
+        return log;
+    }
 
 }
 

@@ -75,6 +75,18 @@ class CafeStorage{
             });
         });
     }
+    static stock_logging1(client){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "INSERT INTO stock_log (cafe_id, m_name, cu_quantity, po_quantity, flag) VALUES(?, ?, ?, ?, ?);";
+            db.query(query,
+                [client.cafe_id, client.m_name, client.quantity, client.po_quantity, 1],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve({success: true});
+            });
+        });
+    }
     static stock_logging2(client){
         return new Promise((resolve, reject)=>{
             const query = 
@@ -336,6 +348,42 @@ class CafeStorage{
             "SELECT DISTINCT *, FLOOR (SUM(cu_quantity-po_quantity)/7*1.2) AS SUM FROM material m, stock_log s WHERE s.flag = '1' AND m.cafe_id = s.cafe_id AND m.m_name = s.m_name AND s.in_date > date_add(now(),interval -7 day) AND s.in_date < date_add(now(),interval 0 day) GROUP BY m.m_name;";
             db.query(query,
                 [],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve(data);
+            });
+        });
+    }
+    static modify_safestock(client){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "UPDATE stock SET safe_quantity = ? WHERE m_id = ?;";
+            db.query(query,
+                [client.safe_quantity, client.m_id],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve(data);
+            });
+        });
+    }
+    static get_sell_log(){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "SELECT DISTINCT p.cafe_id, p.p_name, SUM(amount) AS SUM FROM product p, sell_log s WHERE p.cafe_id = s.cafe_id AND p.p_id = s.p_id AND s.in_date > date_add(now(),interval -1 day) AND s.in_date < date_add(now(),interval 0 day) GROUP BY p.cafe_id, p.p_name;";
+            db.query(query,
+                [],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve(data);
+            });
+        });
+    }
+    static get_ingredient(client){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "SELECT * FROM ingredient WHERE cafe_id = ? AND p_name = ?;";
+            db.query(query,
+                [client.cafe_id, client.p_name],
                 (err,data)=>{
                 if (err) reject(`${err}`);
                 resolve(data);
