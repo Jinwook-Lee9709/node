@@ -211,6 +211,15 @@ class Cafe{
             return {success: false, msg:err};
         }
     }
+    async get_week_log(){
+        const client = this.body;
+        try{
+            const week_log = await CafeStorage.get_week_log(client);
+            return week_log;
+        }catch(err){
+            return {success: false, msg:err};
+        }
+    }
 
 }
 
