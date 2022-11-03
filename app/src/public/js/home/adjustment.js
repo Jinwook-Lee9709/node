@@ -1,5 +1,5 @@
 
-let amount = 0;
+let totalAmount = 0;
 
 function ingredientSelect(i){
     if(!document.querySelector("#ingredient"+i)){
@@ -7,11 +7,11 @@ function ingredientSelect(i){
         const new_tag = `
         <tr id="ingredient${i}">
             <th scope="row"><img src="assets/img/No-image-available.png"></a></th>
-            <td class="fw-bold">
+            <td class="fw-bold m_name">
                 ${name}
             </td>
             <td>
-                <input type="number" class="form-control" value=1 style="width:130px">
+                <input type="number" class="form-control amount" value=1 style="width:130px">
             </td>
             <td>
                 <a href="#" style="color:red" onclick="ingredientDelete(${i})"><i class="ri-delete-back-2-fill" style="font-size: 25px"></i></a>
@@ -21,16 +21,16 @@ function ingredientSelect(i){
     
         document.querySelector("#AddedIngredient").innerHTML += new_tag;
 
-        amount++;
-        amountTag = document.querySelector("#ingredientAmount");
-        amountTag.innerText = `품목 수 : ${amount}`;
+        totalAmount++;
+        totalAmountTag = document.querySelector("#ingredientAmount");
+        totalAmountTag.innerText = `품목 수 : ${totalAmount}`;
     }
 }
 
 function ingredientDelete(i){
     tag = document.querySelector("#ingredient"+i);
     tag.remove();
-    amount--;
-    amountTag = document.querySelector("#ingredientAmount");
-    amountTag.innerText = `품목 수 : ${amount}`;
+    totalAmount--;
+    totalAmountTag = document.querySelector("#ingredientAmount");
+    totalAmountTag.innerText = `품목 수 : ${totalAmount}`;
 }
