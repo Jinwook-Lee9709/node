@@ -97,19 +97,13 @@ class Cafe{
             }
             buffer.forEach(async element => {
                 try{
+                const del = await CafeStorage.ingredient_delete(element);
                 const dupcheck = await CafeStorage.ingredient_dupcheck(element);
                     if(dupcheck){
-                        console.log(dupcheck);
-                        console.log('el:'+ element.m_name);
-                        console.log('du:'+ dupcheck.m_name);
                         if(element.m_name == dupcheck.m_name){
                             const register = await CafeStorage.ingredient_modify(element);
                             const register1 = await CafeStorage.product_modify(element);
                             console.log('flag1');
-                        }else{
-                            const response = await CafeStorage.ingredient_register(element);  
-                            const register1 = await CafeStorage.product_modify(element);
-                            console.log('flag2');
                         }
                     }else{
                         const response = await CafeStorage.ingredient_register(element);  

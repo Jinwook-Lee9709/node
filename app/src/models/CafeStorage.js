@@ -233,6 +233,18 @@ class CafeStorage{
             });
         });
     }
+    static ingredient_delete(ingredient){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "DELETE FROM ingredient WHERE cafe_id = ? AND p_name = ?;";
+            db.query(query,
+                [ingredient.cafe_id, ingredient.p_name,ingredient.m_name],
+                (err)=>{
+                if (err) reject(`${err}`);
+                resolve({success: true});
+            });
+        });
+    }
     static ingredient_modify(ingredient){
         return new Promise((resolve, reject)=>{
             const query = 
