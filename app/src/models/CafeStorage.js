@@ -42,12 +42,11 @@ class CafeStorage{
     static stock_modify(client){
         return new Promise((resolve, reject)=>{
             const query = 
-            "UPDATE product quantity = ? WHERE cafe_id = ? AND m_id = ?;";
+            "UPDATE stock SET quantity = ? WHERE cafe_id = ? AND m_id = ?;";
             db.query(query,
-                [client.quantity, client.cafe_id, client.m_id],
+                [client.amount, client.cafe_id, client.m_id],
                 (err,data)=>{
                 if (err) reject(`${err}`);
-
                 resolve({success: true});
             });
         });
