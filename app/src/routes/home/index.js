@@ -25,6 +25,7 @@ router.post("/product_register", ctrl.process.product_register);
 router.post("/ingredient_register", ctrl.process.ingredient_register);
 router.post("/stock_inbound", ctrl.process.stock_inbound);
 router.post("/stock_modify", ctrl.process.stock_modify);
+router.post("/material_modify", ctrl.process.material_modify);
 
 router.get("/logout", ctrl.process.logout)
 

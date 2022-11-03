@@ -34,10 +34,24 @@ class Cafe{
     //조인 문을 이용한 재고랑 같이 받아오는 함수 
     async material_get(){
         const client = this.body;
-        console.log(client);
         try{
             const material = await CafeStorage.material_get(client);
             return material
+        }catch(err){
+            return {success: false, msg:err};
+        }
+    }
+    async material_modify(){
+        const client = this.body;
+        try{
+            const material = await CafeStorage.material_get2(client);
+            if(material){{
+                console.log('flag');
+                client.m_id = material.m_id;
+                const response1 = await CafeStorage.material_modify(client);
+                const response2 = await CafeStorage.safe_quantity_modify(client);
+            }}
+            return {success: true}
         }catch(err){
             return {success: false, msg:err};
         }
@@ -196,7 +210,7 @@ class Cafe{
         const client = this.body;
         try{
             const stock_log = await CafeStorage.stock_log_get(client);
-            return ingredient;
+            return stock_log;
         }catch(err){
             return {success: false, msg:err};
         }
