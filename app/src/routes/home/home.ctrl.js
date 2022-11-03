@@ -20,11 +20,13 @@ async function RenderIfNotLogin(req, res, path){
         cafe.body.cafe_id = req.session.user.body.cafe_id
         const product = await cafe.product_get();
         const material = await cafe.material_get();
+        const ingredient = await cafe.ingredient_get();
         data = {
             name: user.body.name
         }
         data.products = product;
-        data.material = material;
+        data.material = material
+        data.ingredient = ingredient;
         
         res.render(path,{data});
     }else{
@@ -150,6 +152,12 @@ const process = {
         const cafe = new Cafe(req, res);
         cafe.body = Object.assign(cafe.body.body, req.session.user.body);
         const response = await cafe.ingredient_register();
+        return res.json(response);
+    },
+    stock_inbound: async (req, res) => {
+        const cafe = new Cafe(req, res);
+        cafe.body = Object.assign(cafe.body.body, req.session.user.body);
+        const response = await cafe.stock_inbound();
         return res.json(response);
     },
     logout: async (req, res) => {

@@ -1,4 +1,4 @@
-const { json } = require("express");
+const { json, response } = require("express");
 const CafeStorage = require("./CafeStorage");
 
 class Cafe{
@@ -114,7 +114,7 @@ class Cafe{
     async ingredient_get(){
         const client = this.body;
         try{
-            const ingredient = await CafeStorage.ingredient_dupcheck(client);
+            const ingredient = await CafeStorage.ingredient_get(client);
             return ingredient;
         }catch(err){
             return {success: false, msg:err};
@@ -136,15 +136,35 @@ class Cafe{
         }
     }
     async stock_inbound(){
+        const client = this.body;
         try{
-            const stock = await CafeStorage.stock_get(client);
-            if(stock){
-                if(stock.m_name == client.m_name){
-                    response = await CafeStorage.stock_inbound(stock);
-                }
-            }else{
-                return {success:false, msg:"재고 연동 오류"};
+            const buffer = []
+            for (var i = 0; i<client.m_name.length; i++){
+                buffer.push({cafe_id: client.cafe_id, m_name: client.m_name[i], amount: client.amount[i]})
             }
+            buffer.forEach(async element=> {
+                try{
+                    const stock = await CafeStorage.stock_get(element);
+                    stock.amount = element.amount;
+                    if(stock){
+                        if(stock.m_name == element.m_name){
+                            const response = await CafeStorage.stock_inbound(stock);
+                            if(response.success){
+                                const stock1 = await CafeStorage.stock_get(element);
+                                stock.po_quantity = stock1.quantity;
+                                const response1 = await CafeStorage.stock_logging(stock);
+                            }
+                        }
+                    
+                    }else{
+                        return {success:false, msg:"재고 연동 오류"};
+                    }
+                }catch(err){
+                    return {success:false, msg:err};
+                }
+            })
+            return {success:true};
+           
         }catch(err){
             return {success:false, msg:err};
         }

@@ -55,12 +55,23 @@ class CafeStorage{
     static stock_inbound(client){
         return new Promise((resolve, reject)=>{
             const query = 
-            "UPDATE product quantity = quantity + ? WHERE cafe_id = ? AND m_id = ?;";
+            "UPDATE stock SET quantity = quantity + ? WHERE cafe_id = ? AND m_id = ?;";
             db.query(query,
-                [client.quantity, client.cafe_id, client.m_id],
+                [client.amount, client.cafe_id, client.m_id],
                 (err,data)=>{
                 if (err) reject(`${err}`);
-
+                resolve({success: true});
+            });
+        });
+    }
+    static stock_logging(client){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "INSERT INTO stock_log (cafe_id, m_name, cu_quantity, po_quantity) VALUES(?, ?, ?, ?);";
+            db.query(query,
+                [client.cafe_id, client.m_name, client.quantity, client.po_quantity],
+                (err,data)=>{
+                if (err) reject(`${err}`);
                 resolve({success: true});
             });
         });
@@ -68,7 +79,7 @@ class CafeStorage{
     static stock_get(client){
         return new Promise((resolve, reject)=>{
             const query = 
-            "SELECT DISTINCT * FROM material m, stock s WHERE m.cafe_id = s.cafe_id AND m.m_id = s.m_id AND m.cafe_id = ?; AND m.m_name = ?";
+            "SELECT DISTINCT * FROM material m, stock s WHERE m.cafe_id = s.cafe_id AND m.m_id = s.m_id AND m.cafe_id = ? AND m.m_name = ? ";
             db.query(query,
                 [client.cafe_id, client.m_name],
                 (err,data)=>{
@@ -170,7 +181,7 @@ class CafeStorage{
                 [client.cafe_id],
                 (err,data)=>{
                 if (err) reject(`${err}`);
-                resolve(data[0]);
+                resolve(data);
             });
         });
     }}
