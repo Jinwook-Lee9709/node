@@ -45,6 +45,9 @@ function test1(){
 test1();
 
 
+
+// ------------  일주일간 총 매출 ------------------
+
 document.addEventListener("DOMContentLoaded", () => {
     new ApexCharts(document.querySelector("#weekTotalSalesChart"), {
         series: [{
@@ -105,3 +108,69 @@ document.addEventListener("DOMContentLoaded", () => {
       labels: productNames
     }).render();
 });
+
+
+
+// -----------일주일간 상품별 판매량-----------
+
+let weekProductSales = new Object();
+calWeekProductSales(weekData, weekForm, weekProductSales);
+console.log(weekProductSales);
+
+function calWeekProductSales(weekData, weekForm, weekProductSales){
+    for(let i = 0; i < weekData.length; i++){
+        const productName = weekData[i].p_name;
+        if(!weekProductSales[productName]){
+            weekProductSales[productName] = [0,0,0,0,0,0,0];
+        }
+        //날짜 변환 like this -> '11-4'
+        let date = new Date(Date.parse(weekData[i].in_date));
+        date = (date.getMonth()+1).toString() + "-" + date.getDate().toString();
+        for(let j = 0; j < weekForm.length; j++){
+            if(weekForm[j] === date){
+                weekProductSales[productName][j] = weekData[i].SUM;
+            }
+        }
+    }
+}
+
+
+
+function productClick(i){
+    const productName = document.querySelector("#productName"+i).innerText;
+    const weekProductSalesId = document.querySelector("#weekProductSalesChart");
+    weekProductSalesId.innerHTML = "";
+    const test = new ApexCharts(weekProductSalesId, {
+            series: [{
+            name: productName,
+            data: weekProductSales[productName]
+            }],
+            chart: {
+            height: 350,
+            type: 'line',
+            zoom: {
+                enabled: false
+            }
+            },
+            markers: {
+            size: 5
+            },
+            dataLabels: {
+            enabled: false
+            },
+            stroke: {
+            curve: 'straight',
+            width: 4
+            },
+            grid: {
+            row: {
+                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                opacity: 0.5
+            },
+            },
+            xaxis: {
+            categories: weekForm,
+            }
+        }).render();
+
+}
