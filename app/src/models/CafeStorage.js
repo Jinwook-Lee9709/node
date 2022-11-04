@@ -296,7 +296,7 @@ class CafeStorage{
     static get_week_log(client){
         return new Promise((resolve, reject)=>{
             const query = 
-            "SELECT DISTINCT p.p_name,s.in_date, SUM(amount) AS SUM FROM product p, sell_log s WHERE p.cafe_id = ? AND p.cafe_id = s.cafe_id AND p.p_id = s.p_id AND s.in_date > date_add(now(),interval -7 day) AND s.in_date < date_add(now(),interval 0 day) GROUP BY p.p_name, DATE(s.in_date);";
+            "SELECT DISTINCT p.p_name,s.in_date, p.price, SUM(amount) AS SUM FROM product p, sell_log s WHERE p.cafe_id = ? AND p.cafe_id = s.cafe_id AND p.p_id = s.p_id AND s.in_date > date_add(now(),interval -7 day) AND s.in_date < date_add(now(),interval 0 day) GROUP BY p.p_name, DATE(s.in_date);";
             db.query(query,
                 [client.cafe_id],
                 (err,data)=>{
@@ -308,7 +308,7 @@ class CafeStorage{
     static get_week_sum_log(client){
         return new Promise((resolve, reject)=>{
             const query = 
-            "SELECT DISTINCT p.p_name,SUM(amount) AS SUM FROM product p, sell_log s WHERE p.cafe_id = ? AND p.cafe_id = s.cafe_id AND p.p_id = s.p_id AND s.in_date > date_add(now(),interval -7 day) AND s.in_date < date_add(now(),interval 0 day) GROUP BY p.p_name;";
+            "SELECT DISTINCT p.p_name,p.price, SUM(amount) AS SUM FROM product p, sell_log s WHERE p.cafe_id = ? AND p.cafe_id = s.cafe_id AND p.p_id = s.p_id AND s.in_date > date_add(now(),interval -7 day) AND s.in_date < date_add(now(),interval 0 day) GROUP BY p.p_name;";
             db.query(query,
                 [client.cafe_id],
                 (err,data)=>{
