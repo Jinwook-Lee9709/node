@@ -42,7 +42,7 @@ async function RenderIfNotLogin(req, res, path){
             data.stockweeklog = stockweeklog;  //
             data.weeksumlog = weeksumlog; // 각 상품별, 일주일치 판매량 합 p_name, SUM
             data.info = info;
-            console.log(data.info);
+            console.log(data.material);
             res.render(path,{data});
         }else{
             res.redirect("/cafeLogin");

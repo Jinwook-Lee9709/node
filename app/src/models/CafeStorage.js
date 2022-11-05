@@ -403,7 +403,7 @@ class CafeStorage{
     static modify_safestock(client){
         return new Promise((resolve, reject)=>{
             const query = 
-            "UPDATE stock SET safe_quantity = ? WHERE m_id = ?;";
+            "UPDATE stock SET recommend_safe_quantity = ? WHERE m_id = ?;";
             db.query(query,
                 [client.safe_quantity, client.m_id],
                 (err,data)=>{

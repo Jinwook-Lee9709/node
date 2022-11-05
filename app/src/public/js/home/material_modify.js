@@ -8,7 +8,7 @@ function materialModify(i){
     if(!m_name.value) return alert("바뀌귀 전 제품명 없음");
     if(!des.value) return alert("제품 설명을 입력해주십시요.");
     if(!unit.value) return alert("제품 가격을 입력해주십시요.");
-    if(!safe_quantity.value) return alert("카테고리를 입력해주십시요.");
+    if(!safe_quantity.value) return alert("안전재고를 입력해주십시요.");
     
 
     const req = {
