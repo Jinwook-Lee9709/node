@@ -12,9 +12,9 @@ function productSelect(i){
                 ${name}
             </td>
             <td>
-                <input type="number" class="form-control amount" value=1 style="width:130px" onchange="changeInputValue()">
+                <input type="number" class="form-control amount" value=1 style="width:130px" onchange="changeInputValue(${i},${price})">
             </td>
-            <td class="fw-bold">
+            <td class="fw-bold price">
                 ${price}
             </td>
             <td>
@@ -28,6 +28,8 @@ function productSelect(i){
         totalAmount++;
         totalAmountTag = document.querySelector("#productAmount");
         totalAmountTag.innerText = `품목 수 : ${totalAmount}`;
+
+        changeTotalValue();
     }
 }
 
@@ -37,10 +39,25 @@ function productDelete(i){
     totalAmount--;
     totalAmountTag = document.querySelector("#productAmount");
     totalAmountTag.innerText = `품목 수 : ${totalAmount}`;
+    changeTotalValue();
 }
 
-function changeInputValue(){
+function changeInputValue(i, price){
+    productValue = document.querySelector("#product"+i+" .amount").value;
+    productPrice = document.querySelector("#product"+i+" .price");
+    productPrice.innerText = price * productValue;
+    changeTotalValue();
+}
 
+function changeTotalValue(){
+    productsPrice = document.querySelectorAll(".price")
+    let TotalPrice = 0;
+    for(let i = 0; i < productsPrice.length; i++){
+        TotalPrice += parseInt(productsPrice.item(i).innerText);
+    }
+
+    productTotalPrice = document.querySelector("#productTotalPrice");
+    productTotalPrice.innerText = "총 가격 : " + TotalPrice + " 원";
 }
     
 function sell_logging(){
