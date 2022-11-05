@@ -2,6 +2,7 @@
 
 const cafe_name = document.querySelector("#name");
 const cafe_code = document.querySelector("#code");
+const change_name = document.querySelector("#ch_name");
 function cafe_register(){
     if(!cafe_name.value) return alert("카페 이름를 입력해주십시요.");
     const req = {
@@ -55,4 +56,31 @@ function cafe_register_by_code(){
         console.error(new Error("일치하는 코드가 없습니다."));
     });
     
-    }
+}
+function change_cafe_name(){
+    if(!change_name.value) return alert("카페 이름를 입력해주십시요.");
+    const req = {
+        cafe_name: change_name.value
+    };
+    console.log(req);
+    
+    fetch("/cafe_register_by_code", {
+        method: "POST",
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(req)
+    })
+    .then((res) => res.json())
+    .then((res) => {
+        if(res.success){
+            location.href = "/";
+        }else{
+            alert(res.msg);
+        }
+    })
+    .catch((err) => {
+        console.error(new Error("일치하는 코드가 없습니다."));
+    });
+    
+}

@@ -103,6 +103,17 @@ class User {
             return a;
         }
     }
+    async change_cafe_name(){
+        const client = this.body;
+        try{
+            const user = await UserStorage.changeCafeName(client);
+            return user
+        }
+        catch (err){
+            const a = { success:false, msg: err};
+            return a;
+        }
+    }
 }
 
 module.exports = User;

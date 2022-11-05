@@ -179,6 +179,13 @@ const process = {
         }
         return res.json(response);
     },
+    change_cafe_name: async (req, res) => {
+        const user = new user(req, res);
+        user.body = (req.session.user.body)
+        const response = await user.change_cafe_name();
+        console.log(response);
+        return res.json(response);
+    },
     material_register: async (req, res)=>{
         const cafe = new Cafe(req.body);
         cafe.body.cafe_id = req.session.user.body.cafe_id

@@ -23,6 +23,7 @@ router.post("/login", ctrl.process.login);
 router.post("/register", ctrl.process.register);
 router.post("/cafe_register", ctrl.process.cafe_register);
 router.post("/cafe_register_by_code", ctrl.process.cafe_register_by_code);
+router.post("/change_cafe_name", ctrl.process.change_cafe_name);
 router.post("/material_register", ctrl.process.material_register);
 router.post("/product_register", ctrl.process.product_register);
 router.post("/ingredient_register", ctrl.process.ingredient_register);

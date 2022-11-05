@@ -117,6 +117,8 @@ class UserStorage{
                     });
                 });
             }
+        }else{
+            response.success = false;
         }
     }
     static async cafe_find(id){
@@ -127,6 +129,17 @@ class UserStorage{
                 (err,data)=>{
                 if (err) reject(`${err}`);
                 resolve(data[0]);
+            });
+        });
+    }
+    static async change_cafe_name(client){
+        return new Promise((resolve, reject)=>{  
+            const query = "UPDATE cafe SET cafe_name = ? WHERE cafe_id = ?"
+            db.query(query,
+                [client.cafe_name, client.cafe_id],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve({success:true});
             });
         });
     }
