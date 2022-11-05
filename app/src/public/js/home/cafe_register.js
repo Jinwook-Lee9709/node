@@ -96,7 +96,7 @@ function cafe_disconnect(){
     .then((res) => res.json())
     .then((res) => {
         if(res.success){
-            location.href = "/login";
+            location.href = "/logout";
         }else{
             alert(res.msg);
         }

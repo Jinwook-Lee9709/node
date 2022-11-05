@@ -54,23 +54,6 @@ async function RenderIfNotLogin(req, res, path){
 
 const output = {
     home: async(req, res) => {
-        // const user = req.session.user;
-        // if(user !== undefined){
-        //     // console.log(user);
-        //     const cafe = new Cafe(req.body);
-        //     cafe.body.cafe_id = req.session.user.body.cafe_id
-        //     const product = await cafe.product_get();
-        //     const material = await cafe.material_get();
-        //     data = {
-        //         name: user.body.name
-        //     }
-        //     data.products = product;
-        //     data.material = material;
-            
-        //     res.render("home/index",{data});
-        // }else{
-        //     res.render("home/login");
-        // }
         RenderIfNotLogin(req, res, "home/index");
     },
     
