@@ -161,7 +161,6 @@ const process = {
             if(response2){
                 req.session.user.body.cafe_id = response2.cafe_id; 
             }
-        
         }else{
             response.success = false;
         }
