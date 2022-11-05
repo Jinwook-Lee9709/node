@@ -22,6 +22,7 @@ router.get("/test",ctrl.output.test);
 router.post("/login", ctrl.process.login);
 router.post("/register", ctrl.process.register);
 router.post("/cafe_register", ctrl.process.cafe_register);
+router.post("/cafe_disconnect", ctrl.process.cafe_disconnect);
 router.post("/cafe_register_by_code", ctrl.process.cafe_register_by_code);
 router.post("/change_cafe_name", ctrl.process.change_cafe_name);
 router.post("/material_register", ctrl.process.material_register);
@@ -31,6 +32,7 @@ router.post("/stock_inbound", ctrl.process.stock_inbound);
 router.post("/stock_modify", ctrl.process.stock_modify);
 router.post("/material_modify", ctrl.process.material_modify);
 router.post("/delete_product", ctrl.process.delete_product);
+
 
 router.get("/logout", ctrl.process.logout)
 

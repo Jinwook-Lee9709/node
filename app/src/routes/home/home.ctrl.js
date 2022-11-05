@@ -179,6 +179,12 @@ const process = {
         }
         return res.json(response);
     },
+    cafe_disconnect: async (req, res) =>{
+        const user = new User(req.body);
+        user.body = (req.session.user.body)
+        const response = await user.cafe_disconnect();
+        return res.json(response);
+    },
     change_cafe_name: async (req, res) => {
         const user = new user(req, res);
         user.body = (req.session.user.body)

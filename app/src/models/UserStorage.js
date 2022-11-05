@@ -121,6 +121,28 @@ class UserStorage{
             response.success = false;
         }
     }
+    static async cafe_disconnect(client){
+        const response =  await new Promise ((resolve, reject)=>{  
+            const query = "DELETE FROM user_cafe WHERE cafe_id = ? AND user_id = ?"
+            db.query(query,
+                [client.cafe_id, client.id],
+                (err)=>{
+                if (err) reject(`${err}`);
+                resolve({success:true});
+            });
+        });
+        if (response.success){
+            return new Promise ((resolve, reject)=>{  
+                const query = "UPDATE users SET cafe = 0 WHERE  id = ?;"
+                db.query(query,
+                    [client.id],
+                    (err)=>{
+                    if (err) reject(`${err}`);
+                    resolve({success:true});
+                });
+            });
+        }
+    }
     static async cafe_find(id){
         return new Promise((resolve, reject)=>{  
             const query = "SELECT DISTINCT * FROM cafe c, user_cafe u WHERE c.cafe_id = u.cafe_id AND u.user_id = ?"

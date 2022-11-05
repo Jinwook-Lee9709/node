@@ -114,6 +114,17 @@ class User {
             return a;
         }
     }
+    async cafe_disconnect(){
+        const client = this.body;
+        try{
+            const response = await UserStorage.cafe_disconnect(client);
+            return response
+        }
+        catch (err){
+            const a = { success:false, msg: err};
+            return a;
+        }
+    }
 }
 
 module.exports = User;

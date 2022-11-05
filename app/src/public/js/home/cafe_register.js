@@ -82,5 +82,24 @@ function change_cafe_name(){
     .catch((err) => {
         console.error(new Error("일치하는 코드가 없습니다."));
     });
-    
+}
+function cafe_disconnect(){
+    fetch("/cafe_disconnect", {
+        method: "POST",
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body: null
+    })
+    .then((res) => res.json())
+    .then((res) => {
+        if(res.success){
+            location.href = "/login";
+        }else{
+            alert(res.msg);
+        }
+    })
+    .catch((err) => {
+        console.error(new Error("제거중 오류발생."));
+    });
 }
