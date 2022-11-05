@@ -32,7 +32,8 @@ async function RenderIfNotLogin(req, res, path){
             const weeksumlog = await cafe.get_week_sum_log();
             const info = await user1.get_cafe_info();
             data = {
-                name: user.body.name
+                name: user.body.name,
+                page: req.query.page
             }
             data.products = product;
             data.material = material;
@@ -42,6 +43,7 @@ async function RenderIfNotLogin(req, res, path){
             data.stockweeklog = stockweeklog;  //
             data.weeksumlog = weeksumlog; // 각 상품별, 일주일치 판매량 합 p_name, SUM
             data.info = info;
+            console.log(data.page);
             res.render(path,{data});
         }else{
             res.redirect("/cafeLogin");
