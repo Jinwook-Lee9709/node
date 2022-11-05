@@ -150,6 +150,10 @@ const process = {
             const response1 =  await user.cafe_update();
             console.log(response1);
             req.session.user.body.cafe = true;
+            const response2 = await user.cafe_find();
+            if(response2){
+                req.session.user.body.cafe_id = response2.cafe_id; 
+            }
         }else{
             response.success = false;
         }
