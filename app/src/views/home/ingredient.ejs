@@ -95,7 +95,7 @@
                             <div class="card profile-card">
                                 <div class="card-body pt-4 d-flex flex-column align-items-center">
                                     <img src="assets/img/No-image-available.png" alt="image" class="rounded-circle">
-                                    <h5 class="card-title"><%= data.material[i].m_name %></h5>
+                                    <h5 class="card-title" id="<%= "t_m_name" + i %>"><%= data.material[i].m_name %></h5>
                                 </div>
                             </div>
                         </div>
@@ -193,7 +193,7 @@
 
                               <div class="tab-pane fade" id=<%="product-settings"+i %>>
                                 <div class="pt-3">
-                                  <button id="save-button" type="button" class="btn btn-primary">삭제하기</button>
+                                  <button id="save-button" type="button" class="btn btn-primary" onclick= <%="delete_material("+i+")" %>>삭제하기</button>
                                 </div>
                               </div>
 

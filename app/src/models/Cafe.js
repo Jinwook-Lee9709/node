@@ -56,6 +56,17 @@ class Cafe{
             return {success: false, msg:err};
         }
     }
+    async material_delete(){
+        const client = this.body;
+        console.log(client);
+        try{
+            const response = await CafeStorage.material_delete(client);
+            console.log(response);
+            return response;
+        }catch(err){
+            return {success: false, msg:err};
+        }
+    }
     //제품 등록
     async product_register(){
         const client = this.body;
@@ -297,6 +308,70 @@ class Cafe{
         }
     )
         return log;
+    }
+    async stock_modify(){
+        const client = this.body;
+        try{
+            const buffer = []
+            for (var i = 0; i<client.m_name.length; i++){
+                buffer.push({cafe_id: client.cafe_id, m_name: client.m_name[i], amount: client.amount[i]})
+            }
+            buffer.forEach(async element=> {
+                try{
+                    
+                    const stock = await CafeStorage.stock_get(element);
+                    stock.amount = element.amount;
+                   
+                    if(stock){
+                        if(stock.m_name == element.m_name){
+                            const response = await CafeStorage.stock_modify(stock);
+                            if(response.success){
+                                const stock1 = await CafeStorage.stock_get(element);
+                                stock.po_quantity = stock1.quantity;
+                                console.log(stock)
+                                const response1 = await CafeStorage.stock_logging3(stock);
+                                
+                            }
+                        }
+                    
+                    }else{
+                        return {success:false, msg:"재고 연동 오류"};
+                    }
+                }catch(err){
+                    return {success:false, msg:err};
+                }
+            })
+            return {success:true};
+           
+        }catch(err){
+            return {success:false, msg:err};
+        }
+    }
+    async sell_logging(){
+        const client = this.body;
+        try{
+            const buffer = []
+            for (var i = 0; i<client.m_name.length; i++){
+                buffer.push({cafe_id: client.cafe_id, p_name: client.p_name[i], amount: client.amount[i]})
+            }
+            buffer.forEach(async element=> {
+                try{
+                    const mat = await CafeStorage.product_dupcheck(element);    
+                    if(mat){
+                        if(mat.p_name = element.p_name){
+                            mat.amount = element.amount;
+                            const response = await CafeStorage.sell_logging(mat);
+                        }
+                    }
+                }catch(err){
+                    return {success:false, msg:err};
+                }
+            })
+            return {success:true};
+           
+        }catch(err){
+            return {success:false, msg:err};
+        }
     }
 
 }

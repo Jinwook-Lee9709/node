@@ -1,4 +1,3 @@
-
 function materialModify(i){
     const m_name = document.querySelector("#m_name" + i), //바꿀 제품명
     des = document.querySelector("#des" + i), //재료 설명
@@ -38,4 +37,35 @@ function materialModify(i){
         console.error(new Error("제품 등록 중 에러 발생"));
     });
 
+}
+
+function delete_material(i){
+    const m_name = document.querySelector("#t_m_name" + i)
+    console.log(m_name);
+    if(!m_name.innerText) return alert("바뀌귀 전 제품명 없음");
+    const req = {
+        m_name: m_name.innerText,
+    };
+    console.log(req);
+
+    fetch("/delete_material", {
+        method: "POST",
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(req)
+    })
+    .then((res) => res.json())
+    .then((res) => {
+        if(res.success){
+            alert("삭제 성공.");
+            location.replace("/ingredient")
+            return;
+        }else{
+            alert(JSON.stringify(res.msg));
+        }
+    })
+    .catch((err) => {
+        console.error(new Error("제품 등록 중 에러 발생"));
+    });
 }
