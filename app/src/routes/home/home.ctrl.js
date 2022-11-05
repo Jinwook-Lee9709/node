@@ -178,10 +178,11 @@ const process = {
     change_cafe_name: async (req, res) => {
         const user = new User(req, res);
         user.body = user.body.body;
-        user.body.cafe_id = (req.session.user.body.cafe_id);
-        user.body.name = (req.session.user.body.name);
+        user.body.id = req.session.user.body.id
+        user.body.cafe_id = req.session.user.body.cafe_id;
+        user.body.name = req.session.user.body.name;
         const response = await user.change_cafe_name();
-        console.log(response);
+        req.session.user.body.name = user.body.user_name;
         return res.json(response);
     },
     material_register: async (req, res)=>{
