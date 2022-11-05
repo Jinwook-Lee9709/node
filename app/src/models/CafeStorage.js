@@ -66,7 +66,7 @@ class CafeStorage{
     static stock_log_get(client){
         return new Promise((resolve, reject)=>{
             const query = 
-            "SELECT * FROM stock_log WHERE cafe_id = ?";
+            "SELECT * FROM stock_log WHERE cafe_id = ? AND in_date < date_add(now(),interval 0 day) ORDER BY in_date desc;";
             db.query(query,
                 [client.cafe_id],
                 (err,data)=>{
