@@ -8,11 +8,11 @@ function productSelect(i){
         const new_tag = `
         <tr id="product${i}">
             <th scope="row"><img src="assets/img/No-image-available.png"></a></th>
-            <td class="fw-bold">
+            <td class="fw-bold p_name">
                 ${name}
             </td>
             <td>
-                <input type="number" class="form-control" value=1 style="width:130px" onchange="changeInputValue()">
+                <input type="number" class="form-control amount" value=1 style="width:130px" onchange="changeInputValue()">
             </td>
             <td class="fw-bold">
                 ${price}
@@ -40,7 +40,7 @@ function productDelete(i){
 }
 
 function changeInputValue(){
-    
+
 }
     
 function sell_logging(){
@@ -72,7 +72,7 @@ function sell_logging(){
     .then((res) => {
         if(res.success){
             alert("저장 성공.");
-            location.replace("/inbound")
+            location.replace("/pos")
             return;
         }else{
             alert(JSON.stringify(res.msg));
