@@ -15,7 +15,6 @@ router.get("/adjustment", ctrl.output.adjustment);
 router.get("/stockLog", ctrl.output.stockLog);
 router.get("/analysis", ctrl.output.analysis);
 router.get("/setting", ctrl.output.setting);
-router.get("/pos", ctrl.output.pos);
 router.get("/cafeLogin", ctrl.output.cafeLogin);
 router.get("/cafeRegister", ctrl.output.cafeRegister);
 router.get("/test",ctrl.output.test);
@@ -34,6 +33,7 @@ router.post("/stock_modify", ctrl.process.stock_modify);
 router.post("/material_modify", ctrl.process.material_modify);
 router.post("/delete_product", ctrl.process.delete_product);
 router.post("/delete_material", ctrl.process.delete_material);
+router.post("/sell_logging", ctrl.process.sell_logging);
 
 
 router.get("/logout", ctrl.process.logout)
