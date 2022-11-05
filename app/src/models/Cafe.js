@@ -351,12 +351,13 @@ class Cafe{
         const client = this.body;
         try{
             const buffer = []
-            for (var i = 0; i<client.m_name.length; i++){
+            for (var i = 0; i<client.p_name.length; i++){
                 buffer.push({cafe_id: client.cafe_id, p_name: client.p_name[i], amount: client.amount[i]})
             }
             buffer.forEach(async element=> {
                 try{
                     const mat = await CafeStorage.product_dupcheck(element);    
+                    
                     if(mat){
                         if(mat.p_name = element.p_name){
                             mat.amount = element.amount;
