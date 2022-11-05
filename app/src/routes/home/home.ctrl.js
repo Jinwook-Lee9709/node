@@ -19,6 +19,8 @@ async function RenderIfNotLogin(req, res, path){
         if(user.body.cafe){
             // console.log(user);
             const cafe = new Cafe(req.body);
+            const user1 = new User(req.body);
+            user1.body = req.session.user.body
             cafe.body.cafe_id = req.session.user.body.cafe_id
             const product = await cafe.product_get();
             const material = await cafe.material_get();
@@ -27,6 +29,7 @@ async function RenderIfNotLogin(req, res, path){
             const weeklog = await cafe.get_week_log();
             const stockweeklog = await cafe.get_stock_week_log();
             const weeksumlog = await cafe.get_week_sum_log();
+            const info = await user1.get_cafe_info();
             data = {
                 name: user.body.name
             }
@@ -37,6 +40,8 @@ async function RenderIfNotLogin(req, res, path){
             data.weeklog = weeklog; // <분석> 각 상품 별, 일주일치 각 날짜당 판매량 p_name , in_date, SUM
             data.stockweeklog = stockweeklog;  //
             data.weeksumlog = weeksumlog; // 각 상품별, 일주일치 판매량 합 p_name, SUM
+            data.info = info;
+            console.log(data.info);
             res.render(path,{data});
         }else{
             res.redirect("/cafeLogin");
@@ -112,6 +117,7 @@ const output = {
             res.render("home/login");
         }
     },
+    
     test: (req, res) =>{
         RenderIfNotLogin(req, res, "home/test");
     }
@@ -154,13 +160,25 @@ const process = {
         if (response.success){
             const response1 =  await user.cafe_update();
             console.log(response1);
-            req.session.cafe = true;
+            req.session.user.body.cafe = true;
         }else{
             response.success = false;
         }
         return res.json(response);
-    }
-    ,
+    },
+    cafe_register_by_code: async (req, res) =>{
+        const user = new User(req.body);
+        user.body.id = (req.session.user.body.id)
+        const response = await user.cafe_register_by_code();
+        if (response.success){
+            const response1 =  await user.cafe_update();
+            console.log(response1);
+            req.session.user.body.cafe = true;
+        }else{
+            response.success = false;
+        }
+        return res.json(response);
+    },
     material_register: async (req, res)=>{
         const cafe = new Cafe(req.body);
         cafe.body.cafe_id = req.session.user.body.cafe_id

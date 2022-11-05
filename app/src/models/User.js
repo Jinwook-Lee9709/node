@@ -21,6 +21,15 @@ class User {
             return { success: false , msg: err};
         }
     }
+    async get_cafe_info(){
+        const client = this.body;
+        try{
+            const user = await UserStorage.getCafeInfo(client.id);
+            return user
+        }catch(err){
+            return { success: false , msg: err};
+        }
+    }
 
     async register(){
         const client = this.body;
@@ -48,6 +57,17 @@ class User {
         const client = this.body;
         try{
             const response = await UserStorage.cafe_save(client);
+            return response;
+        }
+        catch (err){
+            const a = { success:false, msg: err};
+            return a;
+        }
+    }
+    async cafe_register_by_code(){
+        const client = this.body;
+        try{
+            const response = await UserStorage.cafe_register_by_code(client);
             return response;
         }
         catch (err){
