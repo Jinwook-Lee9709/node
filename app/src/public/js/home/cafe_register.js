@@ -48,7 +48,7 @@ function cafe_register_by_code(){
     .then((res) => res.json())
     .then((res) => {
         if(res.success){
-            location.href = "/setting";
+            location.href = "/";
         }else{
             alert(res.msg);
         }

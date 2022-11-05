@@ -115,7 +115,7 @@ const process = {
         const response = await user.login();
         if (response.cafe){
             const response1 = await user.cafe_find();
-            if(response.success && response1.success){
+            if(response.success && response1){
                 user.body.name = response.name;
                 user.body.cafe = response.cafe;
                 user.body.cafe_id = response1.cafe_id;
@@ -156,8 +156,14 @@ const process = {
         const response = await user.cafe_register_by_code();
         if (response.success){
             const response1 =  await user.cafe_update();
-            console.log(response1);
             req.session.user.body.cafe = true;
+            const response2 = await user.cafe_find();
+            if(response2){
+                req.session.user.body.cafe_id = response2.cafe_id; 
+            }
+            console.log("====")
+            console.log(req.session.user.body);
+            console.log("====")
         }else{
             response.success = false;
         }
