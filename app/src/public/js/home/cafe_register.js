@@ -76,7 +76,7 @@ function change_cafe_name(){
     .then((res) => res.json())
     .then((res) => {
         if(res.success){
-            location.href = "/";
+            location.href = "/setting";
         }else{
             alert(res.msg);
         }

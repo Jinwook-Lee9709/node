@@ -42,7 +42,7 @@ async function RenderIfNotLogin(req, res, path){
             data.stockweeklog = stockweeklog;  //
             data.weeksumlog = weeksumlog; // 각 상품별, 일주일치 판매량 합 p_name, SUM
             data.info = info;
-            console.log(data.info);
+            console.log(data.material);
             res.render(path,{data});
         }else{
             res.redirect("/cafeLogin");
@@ -161,7 +161,6 @@ const process = {
             if(response2){
                 req.session.user.body.cafe_id = response2.cafe_id; 
             }
-        
         }else{
             response.success = false;
         }
@@ -179,10 +178,11 @@ const process = {
     change_cafe_name: async (req, res) => {
         const user = new User(req, res);
         user.body = user.body.body;
-        user.body.cafe_id = (req.session.user.body.cafe_id);
-        user.body.name = (req.session.user.body.name);
+        user.body.id = req.session.user.body.id
+        user.body.cafe_id = req.session.user.body.cafe_id;
+        user.body.name = req.session.user.body.name;
         const response = await user.change_cafe_name();
-        console.log(response);
+        req.session.user.body.name = user.body.user_name;
         return res.json(response);
     },
     material_register: async (req, res)=>{

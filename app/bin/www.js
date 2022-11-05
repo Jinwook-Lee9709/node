@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () =>{
     const rule = new schedule.RecurrenceRule();
-    rule.hour = 9;
+    rule.hour = 21;
     rule.minute = 0;
     rule.tz = 'Asia/Seoul';
     const job = schedule.scheduleJob(rule, async function(){
