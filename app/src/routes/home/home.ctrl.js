@@ -182,6 +182,7 @@ const process = {
         const cafe = new Cafe(req, res);
         cafe.body = Object.assign(cafe.body.body, req.session.user.body);
         const response = await cafe.product_delete();
+        console.log(response);
         return res.json(response);
     },
     logout: async (req, res) => {

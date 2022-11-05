@@ -20,7 +20,6 @@ function ingredientRegister(i){
     var amountlist = [];
     Array.from(m_name).forEach(element => namelist.push(element.innerText));
     Array.from(amount).forEach(element => amountlist.push(element.value));
-
     const req = {
         pre_p_name: pre_p_name.innerText,
         p_name: pr_name.innerText,
@@ -30,7 +29,7 @@ function ingredientRegister(i){
         m_name: namelist,
         amount: amountlist
     };
-
+ 
     fetch("/ingredient_register", {
         method: "POST",
         headers:{
@@ -54,11 +53,13 @@ function ingredientRegister(i){
 
 }
 function delete_product(i){
-    const p_name = document.querySelector("#p_name" + i)
+    const p_name = document.querySelector("#t_p_name" + i)
+    console.log(p_name);
     if(!p_name.innerText) return alert("바뀌귀 전 제품명 없음");
     const req = {
-        p_name: pre_p_name.innerText,
+        p_name: p_name.innerText,
     };
+    console.log(req);
 
     fetch("/delete_product", {
         method: "POST",
@@ -70,7 +71,7 @@ function delete_product(i){
     .then((res) => res.json())
     .then((res) => {
         if(res.success){
-            alert("저장 성공.");
+            alert("삭제 성공.");
             location.replace("/products")
             return;
         }else{

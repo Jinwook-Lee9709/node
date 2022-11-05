@@ -86,6 +86,17 @@ class Cafe{
             return {success: false, msg:err};
         }
     }
+    async product_delete(){
+        const client = this.body;
+        console.log(client);
+        try{
+            const response = await CafeStorage.product_delete(client);
+            console.log(response);
+            return response;
+        }catch(err){
+            return {success: false, msg:err};
+        }
+    }
     //제품 재료 연결
     async ingredient_register(){
         const client = this.body;
