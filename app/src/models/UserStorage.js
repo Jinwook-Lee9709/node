@@ -155,7 +155,7 @@ class UserStorage{
         });
     }
     static async change_cafe_name(client){
-        return new Promise((resolve, reject)=>{  
+        const response = await new Promise((resolve, reject)=>{  
             const query = "UPDATE cafe SET cafe_name = ? WHERE cafe_id = ?"
             db.query(query,
                 [client.cafe_name, client.cafe_id],
@@ -164,6 +164,19 @@ class UserStorage{
                 resolve({success:true});
             });
         });
+        if(response.success){
+            return new Promise((resolve, reject)=>{  
+                const query = "UPDATE users SET name = ? WHERE id = ?"
+                db.query(query,
+                    [client.user_name, client.id],
+                    (err,data)=>{
+                    if (err) reject(`${err}`);
+                    resolve({success:true});
+                });
+            });
+        }else{
+            return({success:false})
+        }
     }
 }
 

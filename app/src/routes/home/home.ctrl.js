@@ -1,5 +1,6 @@
 const User = require("../../models/User");
 const Cafe = require("../../models/Cafe");
+const UserStorage = require("../../models/UserStorage");
 
 
 // function RenderIfNotLogin(req, res, path){
@@ -183,11 +184,16 @@ const process = {
         const user = new User(req.body);
         user.body = (req.session.user.body)
         const response = await user.cafe_disconnect();
+        if(response.success){
+            req.session.user.body.name = user.body.user_name
+        }
         return res.json(response);
     },
     change_cafe_name: async (req, res) => {
-        const user = new user(req, res);
-        user.body = (req.session.user.body)
+        const user = new User(req, res);
+        user.body = user.body.body;
+        user.body.cafe_id = (req.session.user.body.cafe_id);
+        user.body.name = (req.session.user.body.name);
         const response = await user.change_cafe_name();
         console.log(response);
         return res.json(response);

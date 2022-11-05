@@ -105,8 +105,9 @@ class User {
     }
     async change_cafe_name(){
         const client = this.body;
+        console.log(client);
         try{
-            const user = await UserStorage.changeCafeName(client);
+            const user = await UserStorage.change_cafe_name(client);
             return user
         }
         catch (err){

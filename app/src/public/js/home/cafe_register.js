@@ -2,6 +2,7 @@
 
 const cafe_name = document.querySelector("#name");
 const cafe_code = document.querySelector("#code");
+const user_name = document.querySelector("#user_name");
 const change_name = document.querySelector("#ch_name");
 function cafe_register(){
     if(!cafe_name.value) return alert("카페 이름를 입력해주십시요.");
@@ -33,7 +34,7 @@ function cafe_register(){
 function cafe_register_by_code(){
     if(!cafe_code.value) return alert("카페 이름를 입력해주십시요.");
     const req = {
-        code: cafe_code.value
+        code: cafe_code.value,
     };
     console.log(req);
     
@@ -47,7 +48,7 @@ function cafe_register_by_code(){
     .then((res) => res.json())
     .then((res) => {
         if(res.success){
-            location.href = "/";
+            location.href = "/setting";
         }else{
             alert(res.msg);
         }
@@ -60,11 +61,12 @@ function cafe_register_by_code(){
 function change_cafe_name(){
     if(!change_name.value) return alert("카페 이름를 입력해주십시요.");
     const req = {
-        cafe_name: change_name.value
+        cafe_name: change_name.value,
+        user_name : user_name.value
     };
     console.log(req);
     
-    fetch("/cafe_register_by_code", {
+    fetch("/change_cafe_name", {
         method: "POST",
         headers:{
             "Content-Type": "application/json"
