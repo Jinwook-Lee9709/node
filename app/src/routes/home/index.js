@@ -15,6 +15,8 @@ router.get("/adjustment", ctrl.output.adjustment);
 router.get("/stockLog", ctrl.output.stockLog);
 router.get("/analysis", ctrl.output.analysis);
 router.get("/setting", ctrl.output.setting);
+router.get("/cafeLogin", ctrl.output.cafeLogin);
+router.get("/cafeRegister", ctrl.output.cafeRegister);
 router.get("/test",ctrl.output.test);
 
 router.post("/login", ctrl.process.login);

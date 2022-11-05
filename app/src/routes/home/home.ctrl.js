@@ -15,27 +15,31 @@ const Cafe = require("../../models/Cafe");
 async function RenderIfNotLogin(req, res, path){
     const user = req.session.user;
     if(user !== undefined){
-        // console.log(user);
-        const cafe = new Cafe(req.body);
-        cafe.body.cafe_id = req.session.user.body.cafe_id
-        const product = await cafe.product_get();
-        const material = await cafe.material_get();
-        const ingredient = await cafe.ingredient_get();
-        const stocklog = await cafe.stock_log_get();
-        const weeklog = await cafe.get_week_log();
-        const stockweeklog = await cafe.get_stock_week_log();
-        const weeksumlog = await cafe.get_week_sum_log();
-        data = {
-            name: user.body.name
+        if(user.body.cafe_id){
+            // console.log(user);
+            const cafe = new Cafe(req.body);
+            cafe.body.cafe_id = req.session.user.body.cafe_id
+            const product = await cafe.product_get();
+            const material = await cafe.material_get();
+            const ingredient = await cafe.ingredient_get();
+            const stocklog = await cafe.stock_log_get();
+            const weeklog = await cafe.get_week_log();
+            const stockweeklog = await cafe.get_stock_week_log();
+            const weeksumlog = await cafe.get_week_sum_log();
+            data = {
+                name: user.body.name
+            }
+            data.products = product;
+            data.material = material;
+            data.ingredient = ingredient;
+            data.stocklog = stocklog; // 재고 변경 기록
+            data.weeklog = weeklog; // <분석> 각 상품 별, 일주일치 각 날짜당 판매량 p_name , in_date, SUM
+            data.stockweeklog = stockweeklog;  //
+            data.weeksumlog = weeksumlog; // 각 상품별, 일주일치 판매량 합 p_name, SUM
+            res.render(path,{data});
+        }else{
+            res.redirect("/cafeLogin");
         }
-        data.products = product;
-        data.material = material;
-        data.ingredient = ingredient;
-        data.stocklog = stocklog; // 재고 변경 기록
-        data.weeklog = weeklog; // <분석> 각 상품 별, 일주일치 각 날짜당 판매량 p_name , in_date, SUM
-        data.stockweeklog = stockweeklog;  //
-        data.weeksumlog = weeksumlog; // 각 상품별, 일주일치 판매량 합 p_name, SUM
-        res.render(path,{data});
     }else{
         res.render("home/login");
     }
@@ -90,6 +94,22 @@ const output = {
     },
     setting: (req, res) => {
         RenderIfNotLogin(req, res, "home/setting");
+    },
+    cafeLogin: (req, res) => {
+        const user = req.session.user;
+        if(user !== undefined){
+            res.render("home/cafeLogin");
+        }else{
+            res.render("home/login");
+        }
+    },
+    cafeRegister: (req, res) => {
+        const user = req.session.user;
+        if(user !== undefined){
+            res.render("home/cafeRegister");
+        }else{
+            res.render("home/login");
+        }
     },
     test: (req, res) =>{
         RenderIfNotLogin(req, res, "home/test");

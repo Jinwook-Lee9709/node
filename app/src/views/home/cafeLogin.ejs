@@ -35,7 +35,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Login</title>
+  <title>cafeLogin</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -89,24 +89,18 @@
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-                    <p class="text-center small">Enter your id & password to login</p>
+                    <h5 class="card-title text-center pb-0 fs-4">카페 코드를 입력해주세요</h5>
+                    <p class="text-center small">등록되어 있는 카페가 없습니다. 카페 코드를 입력해주세요.</p>
                   </div>
 
                   <form class="row g-3 needs-validation" novalidate>
 
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">아이디</label>
+                      <label for="yourUsername" class="form-label">카페 코드</label>
                       <div class="input-group has-validation">
-                        <input type="text" name="username" class="form-control" id="id" required>
-                        <div class="invalid-feedback">Please enter your username.</div>
+                        <input type="text" name="username" class="form-control" id="code" required>
+                        <div class="invalid-feedback">Please enter your code.</div>
                       </div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">비밀번호</label>
-                      <input type="password" name="password" class="form-control" id="psword" onkeydown="onEnterLogin()" required>
-                      <div class="invalid-feedback">Please enter your password!</div>
                     </div>
 
                     <!-- <div class="col-12">
@@ -116,10 +110,13 @@
                       </div>
                     </div> -->
                     <div class="col-12">
-                      <p id="button" class="btn btn-primary w-100" type="submit" onclick="login()">Login</p>
+                      <p id="button" class="btn btn-primary w-100" type="submit">입력</p>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">Don't have account? <a href="/register">Create an account</a></p>
+                      <p class="small mb-0">카페를 새로 등록 하시겠습니까? <a href="/cafeRegister">카페 등록하기</a></p>
+                    </div>
+                    <div class="col-12">
+                        <p class="small mb-0"> <a href="/logout">로그인창으로 돌아가기</a></p>
                     </div>
                   </form>
 
