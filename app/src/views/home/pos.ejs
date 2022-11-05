@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCafeManager</title>
+
+    <%-include('./template/head') %><!-- head.ejs -->
+</head>
+
+<body>
+    <%-include('./template/header') %><!-- header.ejs -->
+
+    <main id="main" class="main"><!-- Main -->  
+
+        <div class="pagetitle">
+            <h1 class="pb-3">POS</h1>
+        </div><!-- End Page Title -->
+        
+        <section class="section dashboard">
+            <div class="row">
+            <div class="col-lg-6">
+                
+                <!--왼쪽 재료 선택 부분-->
+                <div class="card top-selling overflow-auto">
+                <div class="card-body">
+                    <h5 class="card-title">제품 선택</h5>
+                    
+                    <div class="col-sm-12 pb-3 d-flex align-items-center">
+                        <input type="text" class="form-control" placeholder="검색">
+                        <a style="margin-left: -30px; color: #012970;"><i class="bi bi-search"></i></a>
+                    </div>
+
+                    <div style="overflow:scroll; height:500px">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                <th scope="col">이미지</th>
+                                <th scope="col">제품이름</th>
+                                <th scope="col">가격</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(let i = 0; i < data.products.length; i++){ %>
+                                <tr onclick=<%= "productSelect("+i+")" %> >
+                                    <th scope="row"><img src="assets/img/No-image-available.png"></a></th>
+                                    <td class="fw-bold" id=<%= "productName"+i %>>
+                                        <%= data.products[i].p_name %>
+                                    </td>
+                                    <td class="fw-bold" id=<%= "productPrice"+i %>>
+                                        <%= data.products[i].price %>
+                                    </td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </div>
+            </div>
+        
+
+            <!--오른쪽 입고 재료 부분-->
+            <div class="col-lg-6">
+                <div class="card top-selling overflow-auto">
+                <div class="card-body">
+                    <h5 class="card-title">선택 상품</h5>
+                    <div style="overflow:scroll; height:500px">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                <th scope="col">이미지</th>
+                                <th scope="col">제품 이름</th>
+                                <th scope="col">개수</th>
+                                <th scope="col">가격</th>
+                                </tr>
+                            </thead>
+                            <tbody id="AddedProduct">
+                                <!--여기에 추가되어야함-->
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 p-4">
+                            <h5>Total</h5>
+                        </div>
+                        <div class="col-lg-5 p-4">
+                            <h5 id="productAmount">품목 수 : 0</h5>
+                        </div>
+                        
+                    </div>
+
+                    <div class="text-end">
+                        <button type="button" class="btn btn-primary me-3 px-4">구입</button>
+                    </div>
+
+                </div>
+                </div>
+        
+            </div>
+            </div>
+        </section>
+        
+        </main><!-- End #main -->
+
+    <%-include('./template/footer') %><!-- footer.ejs -->
+
+    <script src="js/home/pos.js"></script>
+</body>
+
+</html>

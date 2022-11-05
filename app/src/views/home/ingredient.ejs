@@ -137,7 +137,12 @@
                                       <div class="row">
                                         <div class="col-lg-3 col-md-4 label">안전 재고</div>
                                         <div class="col-lg-9 col-md-8"><%= data.material[i].safe_quantity%> <%= data.material[i].unit%></div>
-                                    </div>
+                                      </div>
+
+                                      <div class="row">
+                                        <div class="col-lg-3 col-md-4 label" style="color:red">추천 안전 재고</div>
+                                        <div class="col-lg-9 col-md-8 fw-bold" style="color:red"><%= data.material[i].recommend_safe_quantity%> <%= data.material[i].unit%></div>
+                                      </div>
 
                                   </div>
                               </div>
@@ -151,9 +156,7 @@
 
                                   <div class="row">
                                       <div class="col-lg-3 col-md-4 label ">이름</div>
-                                      <div class="col-lg-9 col-md-8" >
-                                        <input type="text" class="form-control" id="<%= "m_name" + i %>" value="<%= data.material[i].m_name %>" >
-                                      </div>
+                                      <div class="col-lg-9 col-md-8" id="<%= "m_name" + i %>"><%= data.material[i].m_name %></div>
                                   </div>
 
                                   <div class="row">
@@ -173,7 +176,12 @@
                                     <div class="col-lg-9 col-md-8">
                                       <input type="number" class="form-control" id="<%= "safe_quantity" + i %>" value="<%= data.material[i].safe_quantity%>">
                                     </div>
-                                </div>
+                                  </div>
+
+                                  <div class="row">
+                                    <div class="col-lg-3 col-md-4 label " style="color:red">추천 안전 재고</div>
+                                    <div class="col-lg-9 col-md-8 fw-bold" style="color:red"><%= data.material[i].recommend_safe_quantity%> <%= data.material[i].unit%></div>
+                                  </div>
 
                                   <div class="text-center">
                                     <button id="save-button" type="button" class="btn btn-primary" onclick= <%="materialModify("+i+")" %>>Save changes</button>

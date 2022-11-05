@@ -85,6 +85,10 @@ const output = {
     setting: (req, res) => {
         RenderIfNotLogin(req, res, "home/setting");
     },
+    pos: (req, res) => {
+        RenderIfNotLogin(req, res, "home/pos");
+    },
+    
     cafeLogin: (req, res) => {
         const user = req.session.user;
         if(user !== undefined){

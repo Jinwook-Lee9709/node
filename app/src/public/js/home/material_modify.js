@@ -5,14 +5,14 @@ function materialModify(i){
     unit = document.querySelector("#unit" + i), //단위
     safe_quantity = document.querySelector("#safe_quantity" + i); //안전재고
 
-    if(!m_name.value) return alert("바뀌귀 전 제품명 없음");
+    if(!m_name.innerText) return alert("바뀌귀 전 제품명 없음");
     if(!des.value) return alert("제품 설명을 입력해주십시요.");
     if(!unit.value) return alert("제품 가격을 입력해주십시요.");
     if(!safe_quantity.value) return alert("안전재고를 입력해주십시요.");
     
 
     const req = {
-        m_name: m_name.value,
+        m_name: m_name.innerText,
         des: des.value,
         unit: unit.value,
         safe_quantity: safe_quantity.value
