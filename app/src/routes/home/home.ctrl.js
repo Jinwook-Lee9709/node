@@ -161,9 +161,7 @@ const process = {
             if(response2){
                 req.session.user.body.cafe_id = response2.cafe_id; 
             }
-            console.log("====")
-            console.log(req.session.user.body);
-            console.log("====")
+        
         }else{
             response.success = false;
         }
