@@ -172,6 +172,63 @@ class CafeStorage{
             });
         });
     }
+    static async material_delete(product){
+        const get_mid =  await new Promise ((resolve, reject)=>{
+            const query = 
+            "SELECT * FROM material WHERE m_name = ? AND cafe_id = ?";
+            db.query(query,
+                [product.m_name, product.cafe_id],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                 resolve(data[0]);
+            });
+        });
+        if(get_mid){
+            const response1 = await new Promise((resolve, reject) => {
+                const query ="DELETE FROM ingredient WHERE m_name = ? AND cafe_id = ?";
+                db.query(query,
+                    [get_mid.m_name, get_mid.cafe_id],
+                    (err,data)=>{
+                    if (err) reject(`${err}`);
+                    resolve({success:true});
+                });
+            });
+            if(response1.success){
+                const response2 = await new Promise((resolve, reject) => {
+                    const query ="DELETE FROM stock_log WHERE m_name = ? AND cafe_id = ?";
+                    db.query(query,
+                        [get_mid.m_name, get_mid.cafe_id],
+                        (err,data)=>{
+                        if (err) reject(`${err}`);
+                        resolve({success:true});
+                    });
+                });
+                if(response2.success){
+                    const response3 = await new Promise((resolve, reject) => {
+                        const query ="DELETE FROM stock WHERE m_id = ? AND cafe_id = ?";
+                        db.query(query,
+                            [get_mid.m_id, get_mid.cafe_id],
+                            (err,data)=>{
+                            if (err) reject(`${err}`);
+                            resolve({success:true});
+                        });
+                    });
+                    if(response3.success){
+                        return await new Promise((resolve, reject) => {
+                        const query ="DELETE FROM material WHERE m_id = ?";
+                        db.query(query,
+                            [get_mid.m_id],
+                            (err,data)=>{
+                            if (err) reject(`${err}`);
+                            resolve({success:true});
+                            });
+                        });
+                    }
+                }
+            }
+        }
+        
+    }
     static safe_quantity_modify(client){
         return new Promise((resolve, reject)=>{
             const query = 

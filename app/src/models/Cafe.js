@@ -56,6 +56,17 @@ class Cafe{
             return {success: false, msg:err};
         }
     }
+    async material_delete(){
+        const client = this.body;
+        console.log(client);
+        try{
+            const response = await CafeStorage.material_delete(client);
+            console.log(response);
+            return response;
+        }catch(err){
+            return {success: false, msg:err};
+        }
+    }
     //제품 등록
     async product_register(){
         const client = this.body;
