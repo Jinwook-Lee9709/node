@@ -55,7 +55,6 @@ function sell_logging(){
     var amountlist = [];
     Array.from(p_name).forEach(element => namelist.push(element.innerText));
     Array.from(amount).forEach(element => amountlist.push(element.value));
-
     const req = {
         p_name: namelist,
         amount: amountlist
