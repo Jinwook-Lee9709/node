@@ -15,6 +15,7 @@ const Cafe = require("../../models/Cafe");
 async function RenderIfNotLogin(req, res, path){
     const user = req.session.user;
     if(user !== undefined){
+        console.log(user.body);
         if(user.body.cafe_id){
             // console.log(user);
             const cafe = new Cafe(req.body);

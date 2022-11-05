@@ -47,9 +47,9 @@ class UserStorage{
     }
     static async cafe_save(info){
         return new Promise((resolve, reject)=>{  
-            const query = "INSERT INTO cafe(cafe_name, owner_id) VALUES(?, ?)"
+            const query = "INSERT INTO cafe(cafe_name, owner_id, code) VALUES(?, ?, ?)"
             db.query(query,
-                [info.cafe_name, info.id],
+                [info.cafe_name, info.id, info.code],
                 (err,)=>{
                 if (err) reject(`${err}`);
                 resolve({ success: true});
