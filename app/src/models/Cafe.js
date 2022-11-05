@@ -202,6 +202,7 @@ class Cafe{
             return {success:false, msg:err};
         }
     }
+    //Cafe ID에 맞는 재고 로그 전체 불러오기
     async stock_log_get(){
         const client = this.body;
         try{
@@ -211,6 +212,7 @@ class Cafe{
             return {success: false, msg:err};
         }
     }
+    //Cafe ID에 맞는 일주일 날짜 구분해서  판매 로그 전체 불러오기
     async get_week_log(){
         const client = this.body;
         try{
@@ -220,6 +222,7 @@ class Cafe{
             return {success: false, msg:err};
         }
     }
+    //Cafe ID에 맞는 일주일 동안 상품 판매 총합 전체 불러오기
     async get_week_sum_log(){
         const client = this.body;
         try{

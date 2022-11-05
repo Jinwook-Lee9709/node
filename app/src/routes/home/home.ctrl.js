@@ -178,6 +178,12 @@ const process = {
         const response = await cafe.stock_modify();
         return res.json(response);
     },
+    delete_product: async (req, res) => {
+        const cafe = new Cafe(req, res);
+        cafe.body = Object.assign(cafe.body.body, req.session.user.body);
+        const response = await cafe.product_delete();
+        return res.json(response);
+    },
     logout: async (req, res) => {
         try {
             if (req.session.user) { //세션정보가 존재하는 경우

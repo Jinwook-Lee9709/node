@@ -53,3 +53,31 @@ function ingredientRegister(i){
     });
 
 }
+function delete_product(i){
+    const p_name = document.querySelector("#p_name" + i)
+    if(!p_name.innerText) return alert("바뀌귀 전 제품명 없음");
+    const req = {
+        p_name: pre_p_name.innerText,
+    };
+
+    fetch("/delete_product", {
+        method: "POST",
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(req)
+    })
+    .then((res) => res.json())
+    .then((res) => {
+        if(res.success){
+            alert("저장 성공.");
+            location.replace("/products")
+            return;
+        }else{
+            alert(JSON.stringify(res.msg));
+        }
+    })
+    .catch((err) => {
+        console.error(new Error("제품 등록 중 에러 발생"));
+    });
+}

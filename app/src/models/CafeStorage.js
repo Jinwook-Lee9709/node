@@ -233,6 +233,31 @@ class CafeStorage{
             });
         });
     }
+    static product_delete(product){
+        const get_pid =  new Promise((resolve, reject)=>{
+            const query = 
+            "SELECT * FROM product WHERE p_name = ? AND cafe_id = ?";
+            db.query(query,
+                [product.p_name, product.cafe_id],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve(data[0]);
+            });
+        });
+        const response1 = ""
+        if(get_pid){
+            return response1 = new Promise((resolve, reject) => {
+                const query ="DELETE * FROM ingredient WHERE p_name = ? AND cafe_id = ?";
+                db.query(query,
+                    [get_pid.p_name, get_pid.cafe_id],
+                    (err,data)=>{
+                    if (err) reject(`${err}`);
+                    resolve(data[0]);
+                });
+            });
+        }
+        
+    }
     static ingredient_dupcheck(ingredient){{
         return new Promise((resolve, reject)=>{
             const query = 
