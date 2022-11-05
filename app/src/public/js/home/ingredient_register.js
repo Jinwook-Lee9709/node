@@ -20,7 +20,6 @@ function ingredientRegister(i){
     var amountlist = [];
     Array.from(m_name).forEach(element => namelist.push(element.innerText));
     Array.from(amount).forEach(element => amountlist.push(element.value));
-
     const req = {
         pre_p_name: pre_p_name.innerText,
         p_name: pr_name.innerText,
@@ -30,7 +29,7 @@ function ingredientRegister(i){
         m_name: namelist,
         amount: amountlist
     };
-
+ 
     fetch("/ingredient_register", {
         method: "POST",
         headers:{
@@ -52,4 +51,34 @@ function ingredientRegister(i){
         console.error(new Error("제품 등록 중 에러 발생"));
     });
 
+}
+function delete_product(i){
+    const p_name = document.querySelector("#t_p_name" + i)
+    console.log(p_name);
+    if(!p_name.innerText) return alert("바뀌귀 전 제품명 없음");
+    const req = {
+        p_name: p_name.innerText,
+    };
+    console.log(req);
+
+    fetch("/delete_product", {
+        method: "POST",
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(req)
+    })
+    .then((res) => res.json())
+    .then((res) => {
+        if(res.success){
+            alert("삭제 성공.");
+            location.replace("/products")
+            return;
+        }else{
+            alert(JSON.stringify(res.msg));
+        }
+    })
+    .catch((err) => {
+        console.error(new Error("제품 등록 중 에러 발생"));
+    });
 }

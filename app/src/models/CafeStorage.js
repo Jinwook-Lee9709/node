@@ -233,6 +233,52 @@ class CafeStorage{
             });
         });
     }
+    static async product_delete(product){
+        const get_pid =  await new Promise ((resolve, reject)=>{
+            const query = 
+            "SELECT * FROM product WHERE p_name = ? AND cafe_id = ?";
+            db.query(query,
+                [product.p_name, product.cafe_id],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                 resolve(data[0]);
+            });
+        });
+        if(get_pid){
+            const response1 = await new Promise((resolve, reject) => {
+                const query ="DELETE FROM ingredient WHERE p_name = ? AND cafe_id = ?";
+                db.query(query,
+                    [get_pid.p_name, get_pid.cafe_id],
+                    (err,data)=>{
+                    if (err) reject(`${err}`);
+                    resolve({success:true});
+                });
+            });
+            if(response1.success){
+                const response2 = await new Promise((resolve, reject) => {
+                    const query ="DELETE FROM sell_log WHERE p_id = ? AND cafe_id = ?";
+                    db.query(query,
+                        [get_pid.p_id, get_pid.cafe_id],
+                        (err,data)=>{
+                        if (err) reject(`${err}`);
+                        resolve({success:true});
+                    });
+                });
+                if(response2.success){
+                    return await new Promise((resolve, reject) => {
+                        const query ="DELETE FROM product WHERE p_id = ?";
+                        db.query(query,
+                            [get_pid.p_id],
+                            (err,data)=>{
+                            if (err) reject(`${err}`);
+                            resolve({success:true});
+                        });
+                    });
+                }
+            }
+        }
+        
+    }
     static ingredient_dupcheck(ingredient){{
         return new Promise((resolve, reject)=>{
             const query = 

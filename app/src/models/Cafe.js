@@ -86,6 +86,17 @@ class Cafe{
             return {success: false, msg:err};
         }
     }
+    async product_delete(){
+        const client = this.body;
+        console.log(client);
+        try{
+            const response = await CafeStorage.product_delete(client);
+            console.log(response);
+            return response;
+        }catch(err){
+            return {success: false, msg:err};
+        }
+    }
     //제품 재료 연결
     async ingredient_register(){
         const client = this.body;
@@ -202,6 +213,7 @@ class Cafe{
             return {success:false, msg:err};
         }
     }
+    //Cafe ID에 맞는 재고 로그 전체 불러오기
     async stock_log_get(){
         const client = this.body;
         try{
@@ -211,6 +223,7 @@ class Cafe{
             return {success: false, msg:err};
         }
     }
+    //Cafe ID에 맞는 일주일 날짜 구분해서  판매 로그 전체 불러오기
     async get_week_log(){
         const client = this.body;
         try{
@@ -220,6 +233,7 @@ class Cafe{
             return {success: false, msg:err};
         }
     }
+    //Cafe ID에 맞는 일주일 동안 상품 판매 총합 전체 불러오기
     async get_week_sum_log(){
         const client = this.body;
         try{
