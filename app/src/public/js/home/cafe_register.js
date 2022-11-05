@@ -1,6 +1,6 @@
 
 
-const cafe_name = document.querySelector("#cafe_name");
+const cafe_name = document.querySelector("#name");
 
 function cafe_register(){
 if(!cafe_name.value) return alert("카페 이름를 입력해주십시요.");

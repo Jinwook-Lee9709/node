@@ -16,7 +16,7 @@ async function RenderIfNotLogin(req, res, path){
     const user = req.session.user;
     if(user !== undefined){
         console.log(user.body);
-        if(user.body.cafe_id){
+        if(user.body.cafe){
             // console.log(user);
             const cafe = new Cafe(req.body);
             cafe.body.cafe_id = req.session.user.body.cafe_id
@@ -149,6 +149,7 @@ const process = {
     cafe_register: async (req, res) =>{
         const user = new User(req.body);
         user.body.id = (req.session.user.body.id)
+        user.body.code = Math.random().toString(10).slice(2);
         const response = await user.cafe_register();
         if (response.success){
             const response1 =  await user.cafe_update();
