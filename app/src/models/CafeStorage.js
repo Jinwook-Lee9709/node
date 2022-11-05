@@ -493,6 +493,18 @@ class CafeStorage{
             });
         });
     }
+    static sell_logging(client){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "INSERT INTO sell_log(cafe_id, p_id, amount) VALUES(?, ? ,?";
+            db.query(query,
+                [client.cafe_id, client.p_id,client.amount],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve(data);
+            });
+        });
+    }
     
 }
 
