@@ -40,8 +40,8 @@
                         <h5 class="card-title">재고변경기록</h5>
 
                         <div class="col-sm-12 pb-3 d-flex align-items-center">
-                            <input type="text" class="form-control" placeholder="재료 검색">
-                            <a style="margin-left: -30px; color: #012970;"><i class="bi bi-search"></i></a>
+                            <input id="searchValue" type="text" class="form-control" placeholder="재료 검색" onkeydown="onEnterSearch()">
+                            <a href="#" style="margin-left: -30px; color: #012970;" onclick="searchStockLog()"><i class="bi bi-search"></i></a>
                         </div>
     
                         <table class="table table-hover">
@@ -55,22 +55,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% for(let i=20*(data.page -1); i < Math.min(20*data.page, data.stocklog.length); i++) { %>
-                                <% const year = data.stocklog[i].in_date.getFullYear().toString(); %>
-                                <% const month = ("0" + (data.stocklog[i].in_date.getMonth()+1)).slice(-2); %>
-                                <% const day = ("0" + data.stocklog[i].in_date.getDate()).slice(-2); %>
-                                <% const hour = ("0" + data.stocklog[i].in_date.getHours()).slice(-2); %>
-                                <% const minute = ("0" + data.stocklog[i].in_date.getMinutes()).slice(-2); %>
-                                <% const second = ("0" + data.stocklog[i].in_date.getSeconds()).slice(-2); %>
+                            <% let searchedStockLog = [] %>
+                            <% if(!data.search) { %>
+                                <% searchedStockLog = data.stocklog; %>
+                            <% }else{ %>
+                                <% for(let i=0; i<data.stocklog.length; i++) { %>
+                                    <% if(data.stocklog[i].m_name.indexOf(data.search) !== -1) { %>
+                                        <% searchedStockLog.push(data.stocklog[i]); %>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
 
-                                <% const prev_stock = data.stocklog[i].cu_quantity; %>
-                                <% const next_stock = data.stocklog[i].po_quantity; %>
-                                <% let v_amount = next_stock - prev_stock;%>
+                            <% for(let i=20*(data.page -1); i < Math.min(20*data.page, searchedStockLog.length); i++) { %>
+                                <% const year = searchedStockLog[i].in_date.getFullYear().toString(); %>
+                                <% const month = ("0" + (searchedStockLog[i].in_date.getMonth()+1)).slice(-2); %>
+                                <% const day = ("0" + searchedStockLog[i].in_date.getDate()).slice(-2); %>
+                                <% const hour = ("0" + searchedStockLog[i].in_date.getHours()).slice(-2); %>
+                                <% const minute = ("0" + searchedStockLog[i].in_date.getMinutes()).slice(-2); %>
+                                <% const second = ("0" + searchedStockLog[i].in_date.getSeconds()).slice(-2); %>
+
+                                <% const prev_stock = searchedStockLog[i].cu_quantity; %>
+                                <% const next_stock = searchedStockLog[i].po_quantity; %>
+                                <% let v_amount = next_stock - prev_stock; %>
                                 
 
                             <tr>
                                 <th scope="row"><%= year+"-"+month+"-"+day+"/"+hour+":"+minute+":"+second %></th>
-                                <td><a class="text-primary fw-bold"><%= data.stocklog[i].m_name%></a></td>
+                                <td><a class="text-primary fw-bold"><%= searchedStockLog[i].m_name%></a></td>
                                 <td><%= prev_stock %></td>
                                 <td class="fw-bold"><%=next_stock %></td>
                                 <% if (v_amount >= 0) { %>
@@ -94,8 +105,8 @@
             <!-- Basic Pagination -->
             <nav aria-label="Page navigation">
                 <ul class="pagination">
-                    <% for (let i = 0; i < data.stocklog.length / 20; i++) {%>
-                    <li class="page-item"><a class="page-link" href=<%= "stockLog?page="+(i+1)%> ><%= i+1%></a></li>
+                    <% for (let i = 0; i < searchedStockLog.length / 20; i++) {%>
+                    <li class="page-item"><a class="page-link" href= "/stockLog?page=<%=(i+1)%>&search=<%=data.search%>"><%= i+1%></a></li>
                     <% } %>
                 </ul>
             </nav><!-- End Basic Pagination -->
@@ -104,6 +115,8 @@
         </main><!-- End #main -->
 
     <%-include('./template/footer') %><!-- footer.ejs -->
+
+    <script src="js/home/stockLog.js"></script>
 </body>
 
 </html>
