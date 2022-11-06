@@ -504,6 +504,17 @@ class CafeStorage{
                 resolve({success:true});
             });
         });
+    }static sync(){
+        return new Promise((resolve, reject)=>{
+            const query = 
+            "SELECT * FROM users";
+            db.query(query,
+                [],
+                (err,data)=>{
+                if (err) reject(`${err}`);
+                resolve({success:true});
+            });
+        });
     }
     
 }

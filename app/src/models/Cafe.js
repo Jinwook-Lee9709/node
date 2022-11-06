@@ -374,6 +374,14 @@ class Cafe{
             return {success:false, msg:err};
         }
     }
+    async sync(){
+        try{
+            const response = await CafeStorage.sync();
+            return response
+        }catch(err){
+            return {success:false, msg:err};
+        }
+    }
 
 }
 
