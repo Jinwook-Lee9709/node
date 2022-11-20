@@ -6,7 +6,7 @@ function ingredientSelect(i){
         const name = document.querySelector("#ingredientName" + i).innerText;
         const new_tag = `
         <tr id="ingredient${i}">
-            <th scope="row"><img src="assets/img/No-image-available.png"></a></th>
+            <th scope="row"><img src="assets/img/material.png"></a></th>
             <td class="fw-bold m_name">
                 ${name}
             </td>

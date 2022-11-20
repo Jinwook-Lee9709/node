@@ -55,7 +55,7 @@
                         <!-- 상품 불러와서 목록 만드는 부분 -->
                         <% for(let i = 0; i < data.material.length; i++){ %>
                         <tr>
-                          <th scope="row"><a href="#"><img src="assets/img/No-image-available.png" alt=""></a></th>
+                          <th scope="row"><a href="#"><img src="assets/img/material.png" alt=""></a></th>
                           <td>
                             <!-- Modal 링크 -->
                             <a href="#" class="text-primary fw-bold" data-bs-toggle="modal" data-bs-target=<%= "#ExtralargeModal"+i %> >
@@ -94,7 +94,7 @@
                         <div class="col-lg-4">
                             <div class="card profile-card">
                                 <div class="card-body pt-4 d-flex flex-column align-items-center">
-                                    <img src="assets/img/No-image-available.png" alt="image" class="rounded-circle">
+                                    <img src="assets/img/material.png" alt="image" class="rounded-circle">
                                     <h5 class="card-title" id="<%= "t_m_name" + i %>"><%= data.material[i].m_name %></h5>
                                 </div>
                             </div>
@@ -224,10 +224,7 @@
                       <div class="col-lg-4">
                           <div class="card profile-card">
                               <div class="card-body pt-4 d-flex flex-column align-items-center">
-                                  <img src="assets/img/No-image-available.png" alt="image" class="rounded-circle">
-                                  <div class="text-center">
-                                    <button id="save-button" type="button" class="btn btn-primary">이미지 변경/추가</button>
-                                  </div>
+                                  <img src="assets/img/material.png" alt="image" class="rounded-circle">
                               </div>
                           </div>
                       </div>

@@ -7,7 +7,7 @@ function productSelect(i){
         const price = document.querySelector("#productPrice" + i).innerText;
         const new_tag = `
         <tr id="product${i}">
-            <th scope="row"><img src="assets/img/No-image-available.png"></a></th>
+            <th scope="row"><img src="assets/img/product.png"></a></th>
             <td class="fw-bold p_name">
                 ${name}
             </td>
